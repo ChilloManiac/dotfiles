@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/cnor/Code/initiative_tracker/src/shared/redux/reducers'
+let g:netrw_dirhist_9='/home/cnor/Code/Demoes/Tui-rs'
+let g:netrw_dirhist_8='/home/cnor/Code/Demoes'
+let g:netrw_dirhist_7='/home/cnor/Code'
+let g:netrw_dirhist_6='/home/cnor/Code/InterviewCake/MergeMeetings'
+let g:netrw_dirhist_5='/home/cnor/Code/InterviewCake'
+let g:netrw_dirhist_4='/home/cnor/Code'
+let g:netrw_dirhist_3='/home/cnor/.config/nvim'
+let g:netrw_dirhist_2='/home/cnor/Code/initiative_tracker/src/Config'
+let g:netrw_dirhist_1='/home/cnor/.config/nvim'
