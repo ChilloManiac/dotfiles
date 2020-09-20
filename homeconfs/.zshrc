@@ -112,6 +112,7 @@ function mkdircd () {
 
 # Exports
 export PROFILE=/home/cnor/.config/zsh/.zshrc
+export STOW_DIR=/home/cnor/stow
 
 # Set background
 (cat ~/.cache/wal/sequences &)
