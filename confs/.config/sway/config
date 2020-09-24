@@ -214,4 +214,7 @@ bar {
     }
 }
 
+xwayland enable
+
 include @sysconfdir@/sway/config.d/*
+
