@@ -21,7 +21,7 @@ set $term alacritty
 set $menu 'rofi -combi-modi window,drun,ssh,run -show combi -show-icons'
 
 # Colors?
-swaylock \
+set $swaylock swaylock \
 	--screenshots \
 	--clock \
 	--indicator \
