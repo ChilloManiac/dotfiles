@@ -52,6 +52,7 @@ Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'vim-airline/vim-airline'
 Plug 'gruvbox-community/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 Plug 'mcchrish/nnn.vim'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
@@ -85,7 +86,7 @@ let g:go_auto_sameids = 1
 
 let g:vim_be_good_log_file = 1
 
-colorscheme gruvbox
+colorscheme nord
 set background=dark
 
 if executable('rg')
