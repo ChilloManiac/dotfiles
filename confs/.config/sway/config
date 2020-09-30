@@ -76,10 +76,6 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-gaps inner 10
-gaps outer 10
-smart_gaps on
-
 ### Key bindings
 #
 # Basics:
