@@ -98,8 +98,18 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#Completions
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
+#fasd
+eval "$(fasd --init auto)"
+
 # Aliases
 alias vim=nvim
+alias c='fasd_cd -d'
 
 # Functions
 function mkdircd () {
@@ -113,3 +123,5 @@ function mkdircd () {
 # Exports
 export PROFILE=/home/cnor/.zshrc
 export STOW_DIR=/home/cnor/stow
+
+
