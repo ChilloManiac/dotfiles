@@ -20,7 +20,6 @@ set $term kitty
 # on the original workspace that the command was run on.
 set $menu 'rofi -combi-modi window,drun,ssh,run -show combi -show-icons'
 
-# Colors?
 set $swaylock swaylock \
 	--screenshots \
 	--clock \
@@ -214,8 +213,19 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Custom hotkeys
+# Hotkeys
+bindsym $mod+s sticky "toggle"
+
+# Custom launches
 bindsym $mod+Control+l exec '$swaylock'
+bindsym $mod+w exec "firefox"
+
+
+# My looks
+border pixel 1
+smart_borders on
+opacity 0.8
+
 
 #
 # Status Bar:
