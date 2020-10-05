@@ -2,6 +2,7 @@ syntax on
 
 " Dependencies
 source ~/.config/nvim/coc_config.vim
+source ~/.config/nvim/quick-scope.vim
 
 set guicursor=
 set relativenumber
@@ -56,6 +57,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'mcchrish/nnn.vim'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
+Plug 'unblevable/quick-scope'
 
 source ~/.config/nvim/coc-extensions.vim 
 
