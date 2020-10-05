@@ -110,6 +110,9 @@ eval "$(fasd --init auto)"
 # Aliases
 alias vim=nvim
 alias c='fasd_cd -d'
+alias cc='fasd_cd -d -i'
+alias v='f -e vim'
+alias z='f -e zathura'
 
 # Functions
 function mkdircd () {
@@ -117,7 +120,7 @@ function mkdircd () {
         echo "Must supply exactly one argument" >&2
         return 
     fi
-    mkdir $1 && cd $1
+    mkdir -p $1 && cd $1
 }
 
 # Exports
