@@ -224,7 +224,6 @@ bindsym $mod+w exec "firefox"
 # My looks
 default_border pixel 1
 smart_borders on
-opacity 0.8
 
 
 #
