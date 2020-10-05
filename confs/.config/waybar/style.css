@@ -15,18 +15,18 @@ window#waybar {
 #workspaces button {
     padding: 0 5px; 
     background: transparent;
-    color: white;
-    border-bottom: 3px solid transparent;
+    color: #D8DEE9;
 }
 
 #workspaces button.focused {
     background: rgba(216, 222, 233, 0.8);
-    border-bottom: 3px solid #ECEFF4;
+    color: #2E3440;
 }
 
 #mode, #clock, #battery, #media, #pulseaudio, #network, #cpu, #memory, #temperature, #backlight, #tray{
     padding: 0 10px;
     margin: 0 5px;
+    color: #D8DEE9;
 }
 
 #mode {
@@ -34,12 +34,8 @@ window#waybar {
     border-bottom: 3px solid white;
 }
 
-#clock {
-    background-color: #64727D;
-}
 
 #battery {
-    border-bottom: 3px solid rgba(216, 222, 233, 0.8);
     color: #D8DEE9;
 }
 
