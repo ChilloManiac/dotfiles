@@ -219,6 +219,7 @@ bindsym $mod+s sticky "toggle"
 # Custom launches
 bindsym $mod+Control+l exec '$swaylock'
 bindsym $mod+w exec "firefox"
+bindsym $mod+Shift+s exec "grim -g '$(slurp)'"
 
 
 # My looks
