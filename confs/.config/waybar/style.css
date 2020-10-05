@@ -23,17 +23,11 @@ window#waybar {
     color: #2E3440;
 }
 
-#mode, #clock, #battery, #media, #pulseaudio, #network, #cpu, #memory, #temperature, #backlight, #tray{
-    padding: 0 10px;
+#clock, #battery, #media, #pulseaudio, #network, #cpu, #memory, #temperature, #backlight, #tray{
+    padding: 0 5px;
     margin: 0 5px;
     color: #D8DEE9;
 }
-
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid white;
-}
-
 
 #battery {
     color: #D8DEE9;
