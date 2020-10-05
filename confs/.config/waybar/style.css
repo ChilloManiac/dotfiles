@@ -39,7 +39,7 @@ window#waybar {
 }
 
 #battery {
-    background-color: #ffffff;
+    border-bottom: 3px solid rgba(216, 222, 233, 0.8);
     color: black;
 }
 
