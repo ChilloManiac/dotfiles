@@ -28,6 +28,7 @@ window#waybar {
     padding: 0 5px;
     margin: 0 5px;
     color: #D8DEE9;
+    border-bottom: 3px solid transparent;
 }
 
 #battery {
