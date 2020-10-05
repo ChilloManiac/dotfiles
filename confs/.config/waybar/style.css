@@ -24,7 +24,7 @@ window#waybar {
     border-bottom: 3px solid #ECEFF4;
 }
 
-#mode, #clock, #battery {
+#mode, #clock, #battery, #media, #pulseaudio, #network, #cpu, #memory, #temperature, #backlight, #tray{
     padding: 0 10px;
     margin: 0 5px;
 }
