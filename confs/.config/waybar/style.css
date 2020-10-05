@@ -4,6 +4,8 @@
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
     min-height: 0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 window#waybar {
