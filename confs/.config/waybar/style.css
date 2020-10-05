@@ -4,12 +4,12 @@
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
     min-height: 0;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 0 10px;
+    margin: 0 5px;
 }
 
 window#waybar {
-    background: rgba(46, 52, 64, 204);
+    background: rgba(46, 52, 64, 0.8);
     border-bottom: 3px solid rgba(100, 114, 125, 0.5);
     color: white;
 }
@@ -22,8 +22,8 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    background: #64727D;
-    border-bottom: 3px solid white;
+    background: rgba(216, 222, 233, 0.8);
+    border-bottom: 3px solid #ECEFF4;
 }
 
 #mode, #clock, #battery {
