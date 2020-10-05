@@ -4,12 +4,9 @@
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
     min-height: 0;
-}
-
-*:not(#workspaces) {
     padding: 0 10px;
     margin: 0 5px;
- }
+}
 
 window#waybar {
     background: rgba(46, 52, 64, 0.8);
@@ -18,7 +15,8 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 5px !important;
+    margin: 0px !important;
     background: transparent;
     color: white;
     border-bottom: 3px solid transparent;
