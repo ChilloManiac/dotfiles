@@ -40,12 +40,11 @@ window#waybar {
 
 #battery {
     border-bottom: 3px solid rgba(216, 222, 233, 0.8);
-    color: black;
+    color: #D8DEE9;
 }
 
 #battery.charging {
-    color: white;
-    background-color: #26A65B;
+    border-bottom: 3px solid rgba(163, 190, 140, 0.8);
 }
 
 @keyframes blink {
@@ -56,8 +55,7 @@ window#waybar {
 }
 
 #battery.warning:not(.charging) {
-    background: #f53c3c;
-    color: white;
+    border-bottom: 3px solid rgba(191, 97, 106, 0.8);
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
