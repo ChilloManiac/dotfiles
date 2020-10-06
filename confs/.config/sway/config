@@ -40,7 +40,7 @@ set $swaylock swaylock \
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /usr/share/backgrounds/main.jpg fill
 #
 # Example configuration:
 #
