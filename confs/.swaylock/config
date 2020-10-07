@@ -6,7 +6,7 @@ ignore-empty-password
 grace=2
 grace-no-mouse
 fade-in=0.2
-datestr="%a, %d-%m/%y"
+datestr="%a, %d/%m/%y"
 
 
 indicator-radius=80
