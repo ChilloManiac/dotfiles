@@ -10,7 +10,7 @@ datestr="%a, %d/%m/%y"
 
 
 indicator-radius=80
-indicator-thickness=1
+indicator-thickness=2
 
 effect-blur=7x5
 effect-vignette=0.5:0.5
@@ -21,9 +21,19 @@ inside-clear-color=2E344080
 inside-ver-color=2E344080
 inside-wrong-color=BF616A80
 key-hl-color=88C0D0
-ring-color=5E81AC
 line-color=00000000
+line-clear-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+ring-color=5E81AC
+ring-clear-color=5E81AC
+ring-ver-color=5E81AC
+ring-wrong-color=5E81AC
 separator-color=00000000
+text-color=D08770
+text-clear-color=D08770
+text-ver-color=D08770
+text-wrong-color=2E3440
 
 
 
