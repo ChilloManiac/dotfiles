@@ -28,10 +28,10 @@ set $swaylock swaylock \
 	--indicator-thickness 1 \
 	--effect-blur 7x5 \
 	--effect-vignette 0.5:0.5 \
-	--ring-color a5f2f3 \
+	--ring-color 5E81AC \
 	--key-hl-color 000080 \
 	--line-color 00000000 \
-	--inside-color 00000088 \
+	--inside-color 2E344080 \
 	--separator-color 00000000 \
 	--grace 2 \
 	--fade-in 0.2
@@ -215,12 +215,12 @@ bindsym $mod+r mode "resize"
 
 # Hotkeys
 bindsym $mod+s sticky "toggle"
+bindsym $mod+Control+l exec '$swaylock'
+bindsym $mod+Control+Shift+l exec "systemctl suspend"
 
 # Custom launches
-bindsym $mod+Control+l exec '$swaylock'
 bindsym $mod+w exec "firefox"
 bindsym $mod+Shift+s exec "grim -g '$(slurp)'"
-
 
 # My looks
 default_border pixel 1
