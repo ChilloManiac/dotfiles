@@ -20,23 +20,6 @@ set $term kitty
 # on the original workspace that the command was run on.
 set $menu 'rofi -combi-modi window,drun,ssh,run -show combi -show-icons'
 
-set $swaylock swaylock \
-	--screenshots \
-	--clock \
-	--indicator \
-	--indicator-radius 80 \
-	--indicator-thickness 1 \
-	--effect-blur 7x5 \
-	--effect-vignette 0.5:0.5 \
-	--ring-color 5E81AC \
-	--key-hl-color 000080 \
-	--line-color 00000000 \
-	--inside-color 2E344080 \
-	--separator-color 00000000 \
-	--grace 2 \
-	--fade-in 0.2
-
-
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
@@ -53,9 +36,9 @@ output * bg /usr/share/backgrounds/main.jpg fill
 # Example configuration:
 #
  exec swayidle -w \
-          timeout 300 '$swaylock' \
+          timeout 300 'swaylock' \
           timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-          before-sleep '$swaylock'
+          before-sleep 'swaylock'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -215,7 +198,7 @@ bindsym $mod+r mode "resize"
 
 # Hotkeys
 bindsym $mod+s sticky "toggle"
-bindsym $mod+Control+l exec '$swaylock'
+bindsym $mod+Control+l exec 'swaylock'
 bindsym $mod+Control+Shift+l exec "systemctl suspend"
 
 # Custom launches
