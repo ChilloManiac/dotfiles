@@ -206,8 +206,11 @@ bindsym $mod+w exec "firefox"
 bindsym $mod+Shift+s exec "grim -g '$(slurp)'"
 
 # My looks
-default_border pixel 1
+default_border pixel 2
 smart_borders on
+
+# Stuff to run
+exec 'nm-applet --indicator'
 
 
 #
