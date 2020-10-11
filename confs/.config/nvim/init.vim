@@ -49,7 +49,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'vim-airline/vim-airline'
 Plug 'gruvbox-community/gruvbox'
@@ -63,12 +62,6 @@ source ~/.config/nvim/coc-extensions.vim
 
 call plug#end()
 
-let g:gruvbox_contrast_dark = 'hard'
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-let g:gruvbox_invert_selection='0'
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
@@ -88,8 +81,11 @@ let g:go_auto_sameids = 1
 
 let g:vim_be_good_log_file = 1
 
+" ColorScheme
 colorscheme nord
-set background=dark
+highlight LineNr guifg=#D8DEE9
+highlight Comment guifg=#D08770
+
 
 if executable('rg')
     let g:rg_derive_root='true'
@@ -140,15 +136,6 @@ tnoremap <Esc> <C-\><C-n>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap X "_d
-
-" vim TODO
-nmap <Leader>tu <Plug>BujoChecknormal
-nmap <Leader>th <Plug>BujoAddnormal
-let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
-
-" Vim with me
-nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
-nmap <leader>vtm :highlight Pmenu ctermbg=gray guibg=gray
 
 inoremap <C-c> <esc>
 
