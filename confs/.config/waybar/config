@@ -40,11 +40,11 @@
         "tooltip": false
     },
     "disk": {
-        "format": "{path}: {used}/{total} ",
+        "format": "{path}: {percentage_used}% ",
         "path": "/"
     },
     "disk#home": {
-        "format": "{path}: {used}/{total} ",
+        "format": "{path}: {percentage_used}% ",
         "path": "/home"
     },
     "memory": {

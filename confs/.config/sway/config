@@ -91,22 +91,12 @@ output * bg /usr/share/backgrounds/main.jpg fill
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
@@ -184,12 +174,6 @@ mode "resize" {
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
-
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -199,7 +183,15 @@ bindsym $mod+r mode "resize"
 # Hotkeys
 bindsym $mod+s sticky "toggle"
 bindsym $mod+Control+l exec 'swaylock'
-bindsym $mod+Control+Shift+l exec "systemctl suspend"
+bindsym $mod+Control+Shift+l exec "systemctl hibernate"
+bindsym $mod+Shift+p exec 'swaymsg input type:keyboard xkb_layout dk'
+bindsym $mod+Shift+o exec 'swaymsg input type:keyboard xkb_layout us'
+
+# Sound
+bindsym $mod+Up exec 'pamixer -i 5'
+bindsym $mod+Down exec 'pamixer -d 5'
+bindsym $mod+Shift+Down exec 'pamixer -t'
+bindsym $mod+Shift+Up exec 'pamixer -i 5 --allow-boost'
 
 # Custom launches
 bindsym $mod+w exec "firefox"
