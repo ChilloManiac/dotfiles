@@ -47,10 +47,10 @@
         "path": "/home"
     },
     "memory": {
-        "format": "{}% "
+        "format": "{used:0.1f}G/{total:0.1f}G "
     },
     "temperature": {
-        // "thermal-zone": 2,
+        "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
