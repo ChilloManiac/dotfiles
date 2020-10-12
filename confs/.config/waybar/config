@@ -6,12 +6,24 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "custom/media"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "battery", "tray"],
+    "modules-right": ["pulseaudio", "cpu", "memory", "disk", "disk#home", "temperature", "battery", "tray"],
     // Modules configuration
      "sway/workspaces": {
          "disable-scroll": true,
          "all-outputs": false,
          "format": "{name}",
+         "persistent_workspaces": {
+             "1": [],
+             "2": [],
+             "3": [],
+             "4": [],
+             "5": [],
+             "6": [],
+             "7": [],
+             "8": [],
+             "9": [],
+             "10": [],
+         },
      },
     "tray": {
         // "icon-size": 21,
@@ -25,6 +37,14 @@
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
+    },
+    "disk": {
+        "format": "{path}: {used}/{total} ",
+        "path": "/"
+    },
+    "disk#home": {
+        "format": "{path}: {used}/{total} ",
+        "path": "/home"
     },
     "memory": {
         "format": "{}% "

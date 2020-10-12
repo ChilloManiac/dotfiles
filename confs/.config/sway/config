@@ -208,6 +208,8 @@ bindsym $mod+Shift+s exec "grim -g '$(slurp)'"
 # My looks
 default_border pixel 2
 smart_borders on
+gaps inner 6
+gaps outer 2
 
 # Stuff to run
 exec 'nm-applet --indicator'
