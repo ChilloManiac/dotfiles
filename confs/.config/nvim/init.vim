@@ -1,8 +1,5 @@
 syntax on
 
-" Dependencies
-source ~/.config/nvim/coc_config.vim
-source ~/.config/nvim/quick-scope.vim
 
 set guicursor=
 set relativenumber
@@ -154,6 +151,9 @@ fun! TrimWhitespace()
     call winrestview(l:save)
 endfun
 
+" VoidPaste
+vnoremap <leader>p "_dp
+
 " YES
 com! W w
 
@@ -169,3 +169,7 @@ let g:startify_list_order = ["dir", "files", "bookmarks", "sessions"]
 command! EditInit edit ~/.config/nvim/init.vim
 command! EditExt edit ~/.config/nvim/coc-extensions.vim
 command! EditCoc edit ~/.config/nvim/coc_config.vim
+
+" Dependencies
+source ~/.config/nvim/coc_config.vim
+source ~/.config/nvim/quick-scope.vim

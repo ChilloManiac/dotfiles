@@ -37,7 +37,7 @@ output * bg /usr/share/backgrounds/main.jpg fill
 #
  exec swayidle -w \
           timeout 300 'swaylock' \
-          timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
           before-sleep 'swaylock'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -192,14 +192,14 @@ bindsym $mod+Up exec 'pamixer -i 5'
 bindsym $mod+Down exec 'pamixer -d 5'
 bindsym $mod+Shift+Down exec 'pamixer -t'
 bindsym $mod+Shift+Up exec 'pamixer -i 5 --allow-boost'
+bindsym $mod+Shift+m exec 'pamixer --source 1 -t'
 
 # Custom launches
 bindsym $mod+w exec "firefox"
-bindsym $mod+Shift+s exec "grim -g '$(slurp)'"
+bindsym $mod+Shift+s exec "slurp | grim -g - - | wl-copy"
 
 # My looks
 default_border pixel 4
-smart_borders on
 gaps inner 6
 gaps outer 2
 
@@ -209,6 +209,7 @@ client.unfocused #2E3440 #2E3440 #2E3440
 
 # Stuff to run
 exec 'nm-applet --indicator'
+exec 'blueman-applet'
 
 
 #
