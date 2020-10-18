@@ -54,6 +54,8 @@ Plug 'mcchrish/nnn.vim'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'unblevable/quick-scope'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
 
 source ~/.config/nvim/coc-extensions.vim 
 
