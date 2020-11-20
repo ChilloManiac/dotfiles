@@ -126,5 +126,4 @@ function mkdircd () {
 # Exports
 export PROFILE=/home/cnor/.zshrc
 export STOW_DIR=/home/cnor/stow
-
-
+export PATH=/home/cnor/.emacs.d/bin/:$PATH

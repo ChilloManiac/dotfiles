@@ -49,10 +49,17 @@ window#waybar {
     color: #2E3440;
 }
 
-#disk, #clock, #battery, #media, #pulseaudio, #network, #cpu, #memory, #temperature, #backlight, #tray{
+#disk, #clock, #battery, #idle_inhibitor, #media, #pulseaudio, #network, #cpu, #memory, #temperature, #backlight, #tray{
     padding: 0 10px;
     color: #D8DEE9;
     border-bottom: 3px solid transparent;
+}
+
+#idle_inhibitor.activated {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: rgba(216, 222, 233, 0.8);
+    color: #2E3440;
 }
 
 #battery {

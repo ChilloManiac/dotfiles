@@ -6,23 +6,13 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "custom/media"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "cpu", "memory", "disk", "disk#home", "temperature", "battery", "tray"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "cpu", "memory", "disk", "disk#home", "temperature", "battery", "tray"],
     // Modules configuration
      "sway/workspaces": {
          "disable-scroll": true,
          "all-outputs": false,
          "format": "{name}",
          "persistent_workspaces": {
-             "1": [],
-             "2": [],
-             "3": [],
-             "4": [],
-             "5": [],
-             "6": [],
-             "7": [],
-             "8": [],
-             "9": [],
-             "10": [],
          },
      },
     "tray": {
@@ -46,6 +36,13 @@
     "disk#home": {
         "format": "{path}: {percentage_used}% ",
         "path": "/home"
+    },
+   "idle_inhibitor": {
+        "format": "{icon} ",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
     },
     "memory": {
         "format": "{used:0.1f}G/{total:0.1f}G "

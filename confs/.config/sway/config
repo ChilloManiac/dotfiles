@@ -183,9 +183,10 @@ bindsym $mod+r mode "resize"
 # Hotkeys
 bindsym $mod+s sticky "toggle"
 bindsym $mod+Control+l exec 'swaylock'
-bindsym $mod+Control+Shift+l exec "systemctl hibernate"
+bindsym $mod+Control+Shift+l exec "systemctl suspend-then-hibernate"
 bindsym $mod+Shift+p exec 'swaymsg input type:keyboard xkb_layout dk'
 bindsym $mod+Shift+o exec 'swaymsg input type:keyboard xkb_layout us'
+bindsym $mod+Shift+d exec 'swaymsg output eDP-1 toggle'
 
 # Sound
 bindsym $mod+Up exec 'pamixer -i 5'
