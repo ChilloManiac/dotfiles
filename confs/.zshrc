@@ -109,10 +109,12 @@ eval "$(fasd --init auto)"
 
 # Aliases
 alias vim=nvim
+alias em="emacsclient -t"
 alias c='fasd_cd -d'
 alias cc='fasd_cd -d -i'
-alias v='f -e vim'
+alias v='f -e nvim'
 alias z='f -e zathura'
+alias e='f -e "emacsclient -t"'
 
 # Functions
 function mkdircd () {

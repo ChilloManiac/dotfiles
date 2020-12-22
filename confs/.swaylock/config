@@ -3,7 +3,7 @@ screenshots
 clock
 indicator
 ignore-empty-password
-grace=2
+grace=5
 grace-no-mouse
 fade-in=0.2
 datestr="%a, %d/%m/%y"

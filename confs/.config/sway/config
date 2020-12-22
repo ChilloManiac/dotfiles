@@ -187,6 +187,8 @@ bindsym $mod+Control+Shift+l exec "systemctl suspend-then-hibernate"
 bindsym $mod+Shift+p exec 'swaymsg input type:keyboard xkb_layout dk'
 bindsym $mod+Shift+o exec 'swaymsg input type:keyboard xkb_layout us'
 bindsym $mod+Shift+d exec 'swaymsg output eDP-1 toggle'
+bindsym $mod+Shift+z exec 'brillo -A 10'
+bindsym $mod+Shift+x exec 'brillo -U 10'
 
 # Sound
 bindsym $mod+Up exec 'pamixer -i 5'
