@@ -45,16 +45,12 @@ output * bg /usr/share/backgrounds/main.jpg fill
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
+input 1739:30383:CUST0001:00_06CB:76AF_Touchpad {
+      tap enabled
+      dwt enabled
+      natural_scroll enabled
+      scroll_method two_finger
+}
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
