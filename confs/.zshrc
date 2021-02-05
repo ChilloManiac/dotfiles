@@ -107,6 +107,10 @@ kitty + complete setup zsh | source /dev/stdin
 #fasd
 eval "$(fasd --init auto)"
 
+#asdf
+. ~/.asdf/plugins/java/set-java-home.zsh
+
+
 # Aliases
 alias vim=nvim
 alias em="emacsclient -t"
@@ -129,3 +133,20 @@ function mkdircd () {
 export PROFILE=/home/cnor/.zshrc
 export STOW_DIR=/home/cnor/stow
 export PATH=/home/cnor/.emacs.d/bin/:$PATH
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/cnor/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/cnor/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/cnor/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/cnor/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

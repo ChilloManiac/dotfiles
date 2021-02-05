@@ -1,0 +1,21 @@
+set hlsearch
+set relativenumber
+set scrolloff=5
+set incsearch
+set ignorecase smartcase
+
+map Q gq
+nmap <space> <Leader>
+
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-h> <c-w>h
+nnoremap <c-k> <c-w>k
+
+nnoremap <Leader>. :action ShowIntentionActions<CR>
+nnoremap <Leader>p :action GotoFile<CR>
+nnoremap [g :action GotoPreviousError<CR>
+nnoremap ]g :action GotoNextError<CR>
+nnoremap <Leader>rr :action RenameElement<cr>
+vnoremap <Leader>p "_dP
+
