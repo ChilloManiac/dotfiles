@@ -178,11 +178,11 @@ bindsym $mod+r mode "resize"
 
 # Hotkeys
 bindsym $mod+s sticky "toggle"
-bindsym $mod+Control+l exec 'swaylock'
-bindsym $mod+Control+Shift+l exec "systemctl suspend-then-hibernate"
-bindsym $mod+Shift+p exec 'swaymsg input type:keyboard xkb_layout dk'
-bindsym $mod+Shift+o exec 'swaymsg input type:keyboard xkb_layout us'
-bindsym $mod+Shift+d exec 'swaymsg output eDP-1 toggle'
+bindsym $mod+Control+l exec 'swaymsg "output eDP-1 enable" && swaylock'
+bindsym $mod+Control+Shift+l exec 'swaymsg "output eDP-1 enable" && systemctl suspend-then-hibernate'
+bindsym $mod+Shift+p input type:keyboard xkb_layout dk
+bindsym $mod+Shift+o input type:keyboard xkb_layout us
+bindsym $mod+Shift+d output eDP-1 toggle
 bindsym $mod+Shift+z exec 'brillo -A 10'
 bindsym $mod+Shift+x exec 'brillo -U 10'
 bindsym $mod+n layout toggle tabbed split #Swallow hack
@@ -199,9 +199,17 @@ bindsym $mod+w exec "firefox"
 bindsym $mod+Shift+s exec "slurp | grim -g - - | wl-copy"
 
 # My looks
-default_border pixel 4
+default_border pixel 5
 gaps inner 6
 gaps outer 2
+
+# Assignments
+assign [app_id="thunderbird"] 9
+assign [class="Slack"] 8
+assign [class="Steam"] 5
+
+# Application dependent settings
+for_window [class="Steam"] layout tabbed # Stupid steam popups
 
 # Colors
 client.focused #5E81AC #5E81AC #5E81AC
@@ -210,6 +218,9 @@ client.unfocused #2E3440 #2E3440 #2E3440
 # Stuff to run
 exec 'nm-applet --indicator'
 exec 'blueman-applet'
+exec 'thunderbird'
+exec 'slack'
+exec 'steam'
 
 
 #

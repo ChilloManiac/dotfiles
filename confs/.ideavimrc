@@ -4,18 +4,22 @@ set scrolloff=5
 set incsearch
 set ignorecase smartcase
 
-map Q gq
-nmap <space> <Leader>
+let mapleader=" "
+nmap <space> <leader>
 
 nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
 nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
 
-nnoremap <Leader>. :action ShowIntentionActions<CR>
-nnoremap <Leader>p :action GotoFile<CR>
+nnoremap <leader>. :action ShowIntentionActions<CR>
+nnoremap <leader>p :action GotoFile<CR>
 nnoremap [g :action GotoPreviousError<CR>
 nnoremap ]g :action GotoNextError<CR>
-nnoremap <Leader>rr :action RenameElement<cr>
-vnoremap <Leader>p "_dP
+nnoremap <leader>rr :action RenameElement<cr>
+nnoremap <leader>f gggqG<C-o>
+vnoremap <leader>p "_dP
 
+set commentary
+set surround
+set highlightedyank
