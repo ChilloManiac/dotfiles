@@ -197,6 +197,7 @@ bindsym $mod+Shift+m exec 'pamixer --source 1 -t'
 # Custom launches
 bindsym $mod+w exec "firefox"
 bindsym $mod+Shift+s exec "slurp | grim -g - - | wl-copy"
+bindsym $mod+Control+s exec "cnor_ss.sh" #Own screenshot script
 
 # My looks
 default_border pixel 5
@@ -221,6 +222,7 @@ exec 'blueman-applet'
 exec 'thunderbird'
 exec 'slack'
 exec 'steam'
+exec 'mako' # Notifcation Daemon
 
 
 #
