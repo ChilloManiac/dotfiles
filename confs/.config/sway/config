@@ -1,7 +1,6 @@
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
-#
 # Read `man 5 sway` for a complete reference.
 
 ### Variables
@@ -15,6 +14,9 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term kitty
+# Colors
+set $focusedColor #5FB3B3 
+set $unfocusedColor #F99157 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -23,7 +25,7 @@ set $menu 'rofi -combi-modi window,drun,ssh,run -show combi -show-icons'
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg /usr/share/backgrounds/main.jpg fill
+output * bg /home/cnor/Pictures/Wallpapers/oceanic-tech.png fill
 #
 # Example configuration:
 #
@@ -192,17 +194,18 @@ bindsym $mod+Up exec 'pamixer -i 5'
 bindsym $mod+Down exec 'pamixer -d 5'
 bindsym $mod+Shift+Down exec 'pamixer -t'
 bindsym $mod+Shift+Up exec 'pamixer -i 5 --allow-boost'
-bindsym $mod+Shift+m exec 'pamixer --source 1 -t'
+bindsym F1 exec 'toggle_mic.sh'
 
 # Custom launches
 bindsym $mod+w exec "firefox"
 bindsym $mod+Shift+s exec "slurp | grim -g - - | wl-copy"
 bindsym $mod+Control+s exec "cnor_ss.sh" #Own screenshot script
+bindsym $mod+z exec "fasd_zathura.sh" #fasd pdf
 
 # My looks
-default_border pixel 5
-gaps inner 6
-gaps outer 2
+default_border pixel 2
+gaps inner 0
+gaps outer 0
 
 # Assignments
 assign [app_id="thunderbird"] 9
@@ -213,8 +216,8 @@ assign [class="Steam"] 5
 for_window [class="Steam"] layout tabbed # Stupid steam popups
 
 # Colors
-client.focused #5E81AC #5E81AC #5E81AC
-client.unfocused #2E3440 #2E3440 #2E3440
+client.focused $focusedColor $focusedColor $focusedColor
+client.unfocused $unfocusedColor $unfocusedColor $unfocusedColor
 
 # Stuff to run
 exec 'nm-applet --indicator'

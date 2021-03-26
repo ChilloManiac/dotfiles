@@ -1,3 +1,9 @@
+@define-color border #5FB3B3;
+@define-color primary #D8DEE9;
+@define-color dark #1B2B34;
+@define-color success #99C794;
+@define-color danger #EC5F67;
+
 * {
     border: none;
     border-radius: 0;
@@ -8,66 +14,47 @@
 }
 
 window#waybar {
-    background: transparent;
-}
-
-.modules-left, .modules-center, .modules-right {
-    background: rgba(46, 52, 64, 0.6);
-    border: 2px solid #5E81AC;
-    border-radius: 10px;
+    background: @dark;
+    /* border: 2px solid @border; */
     padding: 3px;
-    margin-top: 5px;
-}
-
-.modules-left {
-    margin-left: 5px;
 }
 
 .modules-right {
-    margin-right: 5px;
-}
-
-#workspaces button:first-child {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-#workspaces button:last-child {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-
+    margin-right: 10px;
 }
 
 #workspaces button {
     padding: 0 5px; 
-    background: transparent;
-    color: #D8DEE9;
+    background: @dark;
+    color: @primary;
 }
 
 #workspaces button.focused {
-    background: rgba(216, 222, 233, 0.8);
+    background: @primary;
     color: #2E3440;
+}
+
+#clock {
+    margin-top: 10px;
 }
 
 #disk, #clock, #battery, #idle_inhibitor, #media, #pulseaudio, #network, #cpu, #memory, #temperature, #backlight, #tray{
     padding: 0 10px;
-    color: #D8DEE9;
-    border-bottom: 3px solid transparent;
+    color: @primary;
+    border-bottom: 3px solid @dark;
 }
 
 #idle_inhibitor.activated {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background: rgba(216, 222, 233, 0.8);
-    color: #2E3440;
+    background: @primary;
+    color: @dark;
 }
 
 #battery {
-    color: #D8DEE9;
+    color: @primary;
 }
 
 #battery.charging {
-    border-bottom: 3px solid rgba(163, 190, 140, 0.8);
+    border-bottom: 3px solid @success;
 }
 
 @keyframes blink {
@@ -78,14 +65,15 @@ window#waybar {
 }
 
 #battery.warning:not(.charging) {
-    border-bottom: 3px solid rgba(191, 97, 106, 0.8);
+    border-bottom: 3px solid @danger;
 }
 
 #battery.critical:not(.charging) {
-    border-bottom: 3px solid rgba(191, 97, 106, 0.8);
+    border-bottom: 3px solid @danger;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+

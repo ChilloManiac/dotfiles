@@ -16,5 +16,6 @@
     ],
     "tsserver.formatOnType": true,
     "coc.preferences.formatOnType": true,
-    "coc.preferences.hoverTarget": "float"
+    "coc.preferences.hoverTarget": "float",
+    "signature.target": "float"
 }

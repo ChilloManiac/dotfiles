@@ -1,7 +1,8 @@
-syntax on
+syntax enable
 
 
 set guicursor=
+set mouse=a
 set relativenumber
 set nohlsearch
 set hidden
@@ -13,6 +14,7 @@ set smartindent
 set nu
 set nowrap
 set smartcase
+set ignorecase
 set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
@@ -56,6 +58,7 @@ Plug 'mhinz/vim-startify'
 Plug 'unblevable/quick-scope'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'mhartington/oceanic-next'
 
 source ~/.config/nvim/coc-extensions.vim 
 
@@ -81,7 +84,7 @@ let g:go_auto_sameids = 1
 let g:vim_be_good_log_file = 1
 
 " ColorScheme
-colorscheme nord
+colorscheme OceanicNext
 highlight LineNr guifg=#D8DEE9
 highlight Comment guifg=#D08770
 
@@ -117,10 +120,6 @@ nnoremap <leader>grom :Git rebase origin/master<CR>
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
@@ -136,11 +135,10 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap X "_d
 
-inoremap <C-c> <esc>
+inoremap jj <esc>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 inoremap <silent><expr> <C-space> coc#refresh()
-
 
 " Sweet Sweet FuGITive
 nmap <leader>gj :diffget //3<CR>
@@ -155,6 +153,8 @@ endfun
 
 " VoidPaste
 vnoremap <leader>p "_dp
+" yank to clipboard
+vnoremap <leader>y "+y
 
 " YES
 com! W w
