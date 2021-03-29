@@ -1,3 +1,8 @@
+/** configuration {
+ * modi: "window,run,ssh,combi";
+ * }
+ * @import "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
+ */
  /**
  * ROFI Color theme
  * User: Qball
@@ -71,7 +76,7 @@ configuration {
     highlight:     underline bold #ffffff;
 
     transparent: rgba(0,0,0,0);
-    font: "FiraCode Nerd Font";
+    font: "Fira Code Nerd Font Mono 12";
 }
 #window {
     location: center;
@@ -100,7 +105,7 @@ configuration {
     background-color: @tcyan;
 }
 #message {
-    font: "Terminus 10";
+    font: "Fira Code Nerd Font Mono 10";
     color: @black;
 }
 
@@ -111,7 +116,7 @@ configuration {
 //    border: 2px 2px 2px 2px;
 //    border-radius:  30px 30px 0px 0px;
     border-color: @foreground;
-    font: "Terminus 18";
+    font: "Fira Code Nerd Font Mono 14";
 }
 #entry,prompt,case-indicator {
     text-font: inherit;

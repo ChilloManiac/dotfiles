@@ -15,8 +15,9 @@ set $right l
 # Your preferred terminal emulator
 set $term kitty
 # Colors
-set $focusedColor #5FB3B3 
-set $unfocusedColor #F99157 
+set $focusedColor #F99157 
+set $unfocusedColor #5FB3B3  
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -203,7 +204,8 @@ bindsym $mod+Control+s exec "cnor_ss.sh" #Own screenshot script
 bindsym $mod+z exec "fasd_zathura.sh" #fasd pdf
 
 # My looks
-default_border pixel 2
+smart_borders on
+default_border pixel 1
 gaps inner 0
 gaps outer 0
 
