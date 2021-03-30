@@ -24,7 +24,7 @@ configuration {
     display-drun:                   "";
     // The display name of this browser
     display-window:                 "";
-    display-combi:                  "Exec -> ";
+    display-combi:                  "cnorbook :: ";
     show-icons: true;
 }
 
