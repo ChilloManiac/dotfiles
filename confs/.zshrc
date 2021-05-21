@@ -139,7 +139,7 @@ function mkdircd () {
 # Exports
 export PROFILE=/home/cnor/.zshrc
 export STOW_DIR=/home/cnor/stow
-export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:$PATH
+export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:/home/cnor/.asdf/installs/nodejs/16.0.0/.npm/bin:$PATH
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export PYTHONPATH=~/School/mal/bb #Strictly for ITMAL
 

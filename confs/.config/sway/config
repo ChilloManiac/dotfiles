@@ -182,7 +182,7 @@ bindsym $mod+r mode "resize"
 # Hotkeys
 bindsym $mod+s sticky "toggle"
 bindsym $mod+Control+l exec 'swaymsg "output eDP-1 enable" && swaylock'
-bindsym $mod+Control+Shift+l exec 'swaymsg "output eDP-1 enable" && systemctl suspend-then-hibernate'
+bindsym $mod+Control+Shift+l exec 'swaymsg "output eDP-1 enable" && systemctl hibernate'
 bindsym $mod+Shift+p input type:keyboard xkb_layout dk
 bindsym $mod+Shift+o input type:keyboard xkb_layout us
 bindsym $mod+Shift+d output eDP-1 toggle
@@ -201,6 +201,8 @@ bindsym F1 exec 'toggle_mic.sh'
 bindsym $mod+w exec "firefox"
 bindsym $mod+Shift+s exec "slurp | grim -g - - | wl-copy"
 bindsym $mod+Control+s exec "cnor_ss.sh" #Own screenshot script
+bindsym $mod+Shift+v exec "cnor_sr.sh" # Videio record script
+bindsym $mod+Control+v exec "stop_sr.sh" # Stop recording
 bindsym $mod+z exec "fasd_zathura.sh" #fasd pdf
 
 # My looks
@@ -215,7 +217,7 @@ assign [class="Slack"] 8
 assign [class="Steam"] 5
 
 # Application dependent settings
-for_window [class="Steam"] layout tabbed # Stupid steam popups
+# for_window [class="Steam"] floating enable # Doesnt seem to work for some reason
 
 # Colors
 client.focused $focusedColor $focusedColor $focusedColor

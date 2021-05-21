@@ -39,28 +39,31 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tweekmonster/gofmt.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-utils/vim-man'
-Plug 'mbbill/undotree'
-Plug 'sheerun/vim-polyglot'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
-Plug 'tpope/vim-dispatch'
-Plug 'vim-airline/vim-airline'
-Plug 'gruvbox-community/gruvbox'
-Plug 'arcticicestudio/nord-vim'
-Plug 'mcchrish/nnn.vim'
-Plug 'mattn/emmet-vim'
-Plug 'mhinz/vim-startify'
-Plug 'unblevable/quick-scope'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'mhartington/oceanic-next'
+if !exists('g:vscode')
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'mbbill/undotree'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'stsewd/fzf-checkout.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'gruvbox-community/gruvbox'
+  Plug 'arcticicestudio/nord-vim'
+  Plug 'mcchrish/nnn.vim'
+  Plug 'mattn/emmet-vim'
+  Plug 'tpope/vim-dispatch'
+  Plug 'mhinz/vim-startify'
+  Plug 'tweekmonster/gofmt.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'francoiscabrol/ranger.vim'
+  Plug 'mhartington/oceanic-next'
+  source ~/.config/nvim/coc-extensions.vim 
+endif
 
-source ~/.config/nvim/coc-extensions.vim 
+Plug 'vim-utils/vim-man'
+Plug 'sheerun/vim-polyglot'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'szymonmaszke/vimpyter'
 
 call plug#end()
 
@@ -140,10 +143,11 @@ inoremap jj <esc>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 inoremap <silent><expr> <C-space> coc#refresh()
 
-" Sweet Sweet FuGITive
-nmap <leader>gj :diffget //3<CR>
-nmap <leader>gf :diffget //2<CR>
-nmap <leader>gs :G<CR>
+
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank(timeuout = 200)
+augroup END
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
@@ -156,16 +160,12 @@ vnoremap <leader>p "_dp
 " yank to clipboard
 vnoremap <leader>y "+y
 
-" YES
-com! W w
 
-augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank(timeuout = 200)
-augroup END
 
-" Startify
-let g:startify_list_order = ["dir", "files", "bookmarks", "sessions"]
+" Sneak
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+
 
 " QuickEdits
 command! EditInit edit ~/.config/nvim/init.vim
@@ -173,5 +173,20 @@ command! EditExt edit ~/.config/nvim/coc-extensions.vim
 command! EditCoc edit ~/.config/nvim/coc_config.vim
 
 " Dependencies
-source ~/.config/nvim/coc_config.vim
-source ~/.config/nvim/quick-scope.vim
+if !exists('g:vscode')
+  " Sweet Sweet FuGITive
+  nmap <leader>gj :diffget //3<CR>
+  nmap <leader>gf :diffget //2<CR>
+  nmap <leader>gs :G<CR>
+
+  " Startify
+  let g:startify_list_order = ["dir", "files", "bookmarks", "sessions"]
+
+  " dotnet fsi
+  vnoremap <leader>df :CocCommand fsharp.evaluateSelection<CR>
+
+  " Ranger
+  map fr <Ranger><CR>
+
+  source ~/.config/nvim/coc_config.vim
+endif
