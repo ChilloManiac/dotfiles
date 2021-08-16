@@ -143,21 +143,6 @@ export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:/home/cnor/.asdf/install
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export PYTHONPATH=~/School/mal/bb #Strictly for ITMAL
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/cnor/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/cnor/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/cnor/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/cnor/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
