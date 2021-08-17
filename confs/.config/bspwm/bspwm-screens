@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+
+SCREENS="bspc query -M --names" #This is just an alias of the command
+SCREEN_AMOUNT=$(bspc query -M --names | wc -l) # Amount of screens as a number
+AMOUNT_PER_SCREEN=$[(10 + $SCREEN_AMOUNT - 1) / $SCREEN_AMOUNT] # How many desktops to create per screen
+
+INDEX=1 # Index to keep count of total monitors (Max 10)
+SCREEN_COUNT=1 # Which screen we are adding monitors to
+while [ $INDEX -lt 11 ]
+do
+    TOTAL_MONITORS="" 
+    for i in `seq $INDEX 1 $[$INDEX + $AMOUNT_PER_SCREEN - 1]` # Make a range from current index to index + amount of desktops
+    do 
+        if [ $INDEX -ge 11 ]
+        then
+            break # In some cases when the amount of screens doesnt devide nicely with 10 we have to avoid making more desktops than wanted
+        fi
+
+        TOTAL_MONITORS="$TOTAL_MONITORS $i" # Append string
+        INDEX=$[$INDEX+1]
+    done
+
+    CURRENT_SCREEN=$($SCREENS | sed $SCREEN_COUNT!d) # Sed fetches the specific screen from the query of all screens
+    bspc monitor $CURRENT_SCREEN -d $TOTAL_MONITORS # Send the list of monitors to BSPWM
+
+    SCREEN_COUNT=$[$SCREEN_COUNT+1] 
+done
