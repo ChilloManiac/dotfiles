@@ -476,6 +476,10 @@ awful.rules.rules = {
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
       }, properties = { floating = true }},
+      
+    -- Placement
+    {rule = { class = "Thunderbird"}, properties = { tag = "9"}},
+    {rule_any = { class = {"Slack", "discord"}}, properties = { tag = "8"}},
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
@@ -557,7 +561,10 @@ local autorunApps =
    "pasystray",
    "blueman-applet",
    "xset s 180 120",
-   "zsh -c 'export XSECURELOCK_COMPOSITE_OBSCURER=0; xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock'"
+   "zsh -c 'export XSECURELOCK_COMPOSITE_OBSCURER=0; xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock'",
+   "discord",
+   "slack",
+   "thunderbird"
 }
 if autorun then
    for app = 1, #autorunApps do
