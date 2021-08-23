@@ -7,12 +7,26 @@ super + Return
 	kitty
 
 # program launcher
-super + @space
-	dmenu_run
+super + d
+	rofi -combi-modi window,drun,ssh,run -show combi -show-icons
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+	
+super + {_, ctrl +} F7
+	systemctl {suspend, hibernate}
+
+super + shift + d
+	mons -o
+	
+super + shift + s 
+	scrot -s '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
+	
+super + w
+	firefox
+
+	
 
 #
 # bspwm hotkeys
@@ -23,8 +37,8 @@ super + alt + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
-super + {_,shift + }w
-	bspc node -{c,k}
+super + shift + q
+	bspc node -c
 
 # alternate between the tiled and monocle layout
 super + m
@@ -84,6 +98,16 @@ super + {o,i}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
+
+
+# sound
+super + {Up, Down}
+	pamixer -{i,d} 5
+super + shift + Down 
+	pamixer -t
+super + shift+ Up 
+	pamixer -i 5 --allow-boost
+
 #
 # preselect
 #
@@ -117,5 +141,5 @@ super + alt + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+# super + {Left,Down,Up,Right}
+#	bspc node -v {-20 0,0 20,0 -20,20 0}
