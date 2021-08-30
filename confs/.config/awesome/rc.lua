@@ -136,6 +136,12 @@ local function set_wallpaper(s)
     end
 end
 
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
+local file_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
+local bat_widget = require("awesome-wm-widgets.battery-widget.battery")
+
+
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
@@ -186,6 +192,16 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             s.myclock,
+            s.spacer,
+            cpu_widget(),
+            s.spacer,
+            file_widget({
+                mounts = { '/home', '/'}
+            }),
+            s.spacer,
+            docker_widget(),
+            s.spacer,
+            bat_widget(),
             s.spacer,
             -- mykeyboardlayout,
             wibox.widget.systray(),
@@ -483,7 +499,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
