@@ -116,7 +116,7 @@ eval "$(fasd --init auto)"
 
 #asdf
 . ~/.asdf/plugins/java/set-java-home.zsh
-
+. ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
 
 # Aliases
 alias vim=nvim
@@ -136,15 +136,30 @@ function mkdircd () {
     mkdir -p $1 && cd $1
 }
 
+# Remove beeps
+unsetopt BEEP
+
 # Exports
 export PROFILE=/home/cnor/.zshrc
 export STOW_DIR=/home/cnor/stow
-export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:/home/cnor/.asdf/installs/nodejs/16.0.0/.npm/bin:$PATH
+export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:/home/cnor/.dotnet/tools:/home/cnor/.asdf/installs/nodejs/16.0.0/.npm/bin:$PATH
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export PYTHONPATH=~/School/mal/bb #Strictly for ITMAL
 export XSECURELOCK_COMPOSITE_OBSCURER=0
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+function set-dotnet-vars {
+  DOTNET_BASE=$(dotnet --info | grep "Base Path" | awk '{print $3}')
+  echo "DOTNET_BASE: ${DOTNET_BASE}"
+  
+  DOTNET_ROOT=$(echo $DOTNET_BASE | sed -E "s/^(.*)(\/sdk\/[^\/]+\/)$/\1/")
+  echo "DOTNET_ROOT: ${DOTNET_ROOT}"
+  
+  export MSBuildSDKsPath=${DOTNET_BASE}Sdks/ 
+  export DOTNET_ROOT=$DOTNET_ROOT
+  export PATH=$DOTNET_ROOT:$PATH
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -56,6 +56,7 @@ if !exists('g:vscode')
   Plug 'tpope/vim-fugitive'
   Plug 'francoiscabrol/ranger.vim'
   Plug 'mhartington/oceanic-next'
+  Plug 'unisonweb/unison', { 'branch': 'trunk', 'rtp': 'editor-support/vim' }
   source ~/.config/nvim/coc-extensions.vim 
 endif
 

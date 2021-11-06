@@ -243,8 +243,8 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-    --           {description = "show main menu", group = "awesome"}),
+    awful.key({ modkey,           }, "y", function () mymainmenu:show() end,
+               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -320,11 +320,20 @@ globalkeys = gears.table.join(
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
+
+    -- Screenlayouts
+    awful.key({modkey}, "F9", function() awful.spawn("/home/cnor/.cnorscripts/select-screen-layout.sh" ) end,
+            {description = "Open screnlayout picker", group = "screenlayout"}),
+    awful.key({modkey}, "F10", function() awful.spawn("/home/cnor/.screenlayout/lapOnly.sh" ) end,
+            {description = "lapOnly", group = "screenlayout"}),
+    awful.key({modkey}, "F11", function() awful.spawn("/home/cnor/.screenlayout/Home.sh" ) end,
+            {description = "Home", group = "screenlayout"}),
+
           
     -- Custom launches
     awful.key({ modkey }, "w", function() awful.spawn("firefox") end,
               {description = "Open firefox", group = "launcher"}),
-    awful.key({ modkey }, "d", function() awful.spawn("rofi -combi-modi window,drun,ssh,run -show combi -show-icons") end,
+    awful.key({ modkey }, "d", function() awful.spawn("rofi -combi-modi drun,ssh,run -show combi -show-icons") end,
               {description = "Run Rofi", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "s", function() awful.spawn("scrot -s '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'") end,
               {description = "Take a screenshot", group = "launcher"}),
@@ -572,12 +581,16 @@ end)
 local autorun = true
 local autorunApps = 
 { 
+   "xset s 180 120",
+   "zsh -c 'export XSECURELOCK_COMPOSITE_OBSCURER=0; xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock'",
+}
+
+local autoRunOnceApps = 
+{
    "picom -b -i 1 --backend glx",
    "nm-applet --indicator",
    "pasystray",
    "blueman-applet",
-   "xset s 180 120",
-   "zsh -c 'export XSECURELOCK_COMPOSITE_OBSCURER=0; xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock'",
    "discord",
    "slack",
    "thunderbird"
@@ -586,6 +599,10 @@ if autorun then
    for app = 1, #autorunApps do
        awful.util.spawn(autorunApps[app])
    end
+   for app = 1, #autoRunOnceApps do
+       awful.util.spawn("/home/cnor/.cnorscripts/launch-if-not-running.sh " ..  autoRunOnceApps[app])
+   end
+   
 end
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
