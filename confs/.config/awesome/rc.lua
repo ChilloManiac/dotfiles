@@ -587,7 +587,7 @@ local autorunApps =
 
 local autoRunOnceApps = 
 {
-   "picom -b -i 1 --backend glx",
+   -- "picom -b -i 1 --backend glx",
    "nm-applet --indicator",
    "pasystray",
    "blueman-applet",
