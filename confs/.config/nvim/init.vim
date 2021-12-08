@@ -1,193 +1,73 @@
-syntax enable
+"--------------------------------------------------------------------------
+" General settings
+"--------------------------------------------------------------------------
 
-
-set guicursor=
-set mouse=a
-set relativenumber
-set nohlsearch
-set hidden
-set noerrorbells
-set tabstop=2 softtabstop=2
-set shiftwidth=2
 set expandtab
-set smartindent
-set nu
-set nowrap
-set smartcase
-set ignorecase
-set noswapfile
-set nobackup
-set undodir=~/.vim/undodir
-set undofile
-set incsearch
+set shiftwidth=4
+set tabstop=4
+set signcolumn=yes:2
+set relativenumber
+set number
 set termguicolors
+set spell
+set title
+set ignorecase
+set smartcase
+set nowrap
+set mouse=a
 set scrolloff=8
-set noshowmode
+set sidescrolloff=8
+set splitright
+set clipboard=unnamedplus
+set confirm
+set updatetime=300
+set redrawtime=10000
 
-" Give more space for displaying messages.
-set cmdheight=2
+"--------------------------------------------------------------------------
+" Key maps
+"--------------------------------------------------------------------------
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=50
+let mapleader = "\<space>"
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
+nmap <leader>vc :edit ~/.config/nvim/coc-settings.json<cr>
+nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
 
-set colorcolumn=0
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+nmap <leader>k :nohlsearch<CR>
+map gf :edit <cfile><CR>
 
-call plug#begin('~/.vim/plugged')
+vnoremap y myy`y
+vnoremap Y myY`y
+vnoremap <leader>p "_dP
 
-if !exists('g:vscode')
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'mbbill/undotree'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'stsewd/fzf-checkout.vim'
-  Plug 'vim-airline/vim-airline'
-  Plug 'gruvbox-community/gruvbox'
-  Plug 'arcticicestudio/nord-vim'
-  Plug 'mcchrish/nnn.vim'
-  Plug 'mattn/emmet-vim'
-  Plug 'tpope/vim-dispatch'
-  Plug 'mhinz/vim-startify'
-  Plug 'tweekmonster/gofmt.vim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'francoiscabrol/ranger.vim'
-  Plug 'mhartington/oceanic-next'
-  Plug 'unisonweb/unison', { 'branch': 'trunk', 'rtp': 'editor-support/vim' }
-  source ~/.config/nvim/coc-extensions.vim 
+" Keep it centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+imap jj <esc>
+
+"--------------------------------------------------------------------------
+" Plugins
+"--------------------------------------------------------------------------
+
+" Automatically install vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-Plug 'vim-utils/vim-man'
-Plug 'sheerun/vim-polyglot'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'justinmk/vim-sneak'
-Plug 'szymonmaszke/vimpyter'
-
+call plug#begin(data_dir . '/plugins')
+source ~/.config/nvim/plugins/dracula.vim
+source ~/.config/nvim/plugins/fzf-native.vim
+source ~/.config/nvim/plugins/plenary.vim
+source ~/.config/nvim/plugins/polyglot.vim
+source ~/.config/nvim/plugins/quick-scope.vim
+source ~/.config/nvim/plugins/tree-sitter.vim
+source ~/.config/nvim/plugins/telescope.vim
+source ~/.config/nvim/plugins/whichkey.vim
 call plug#end()
+doautocmd User PlugLoaded " Hook to call code after plugins
 
 
-" --- vim go (polyglot) settings.
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_auto_sameids = 1
-
-let g:vim_be_good_log_file = 1
-
-" ColorScheme
-colorscheme OceanicNext
-highlight LineNr guifg=#D8DEE9
-highlight Comment guifg=#D08770
-
-
-if executable('rg')
-    let g:rg_derive_root='true'
-endif
-
-let loaded_matchparen = 1
-let mapleader = " "
-
-let g:netrw_browse_split = 2
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
-
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
-let $FZF_DEFAULT_OPTS='--reverse'
-let g:fzf_branch_actions = {
-      \ 'track': {
-      \   'prompt': 'Track> ',
-      \   'execute': 'echo system("{git} checkout --track {branch}")',
-      \   'multiple': v:false,
-      \   'keymap': 'ctrl-t',
-      \   'required': ['branch'],
-      \   'confirm': v:false,
-      \ },
-      \}
-
-nnoremap <leader>gc :GBranches<CR>
-nnoremap <leader>ga :Git fetch --all<CR>
-nnoremap <leader>grum :Git rebase upstream/master<CR>
-nnoremap <leader>grom :Git rebase origin/master<CR>
-nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <Leader>ps :Rg<SPACE>
-nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>pf :Files<CR>
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
-nnoremap <Leader>+ :vertical resize +5<CR>
-nnoremap <Leader>- :vertical resize -5<CR>
-nnoremap <Leader>rp :resize 100<CR>
-nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
-tnoremap <Esc> <C-\><C-n>
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-vnoremap X "_d
-
-inoremap jj <esc>
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-inoremap <silent><expr> <C-space> coc#refresh()
-
-
-augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank(timeuout = 200)
-augroup END
-
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
-" VoidPaste
-vnoremap <leader>p "_dp
-" yank to clipboard
-vnoremap <leader>y "+y
-
-
-
-" Sneak
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
-
-
-" QuickEdits
-command! EditInit edit ~/.config/nvim/init.vim
-command! EditExt edit ~/.config/nvim/coc-extensions.vim
-command! EditCoc edit ~/.config/nvim/coc_config.vim
-
-" Dependencies
-if !exists('g:vscode')
-  " Sweet Sweet FuGITive
-  nmap <leader>gj :diffget //3<CR>
-  nmap <leader>gf :diffget //2<CR>
-  nmap <leader>gs :G<CR>
-
-  " Startify
-  let g:startify_list_order = ["dir", "files", "bookmarks", "sessions"]
-
-  " dotnet fsi
-  vnoremap <leader>df :CocCommand fsharp.evaluateSelection<CR>
-
-  " Ranger
-  map fr <Ranger><CR>
-
-  source ~/.config/nvim/coc_config.vim
-endif

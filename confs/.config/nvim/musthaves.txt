@@ -1,0 +1,3 @@
+telescope
+coc
+Projectionist
