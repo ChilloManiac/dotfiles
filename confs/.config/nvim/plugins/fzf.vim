@@ -1,0 +1,1 @@
+Plug 'junegunn/fzf.vim'

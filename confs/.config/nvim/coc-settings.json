@@ -1,4 +1,24 @@
 {
+
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "coc.preferences.formatOnType": true,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.enableMessage": "jump",
+    "diagnostic.errorSign": "✖",
+    "diagnostic.warningSign": "⚠",
+    "diagnostic.infoSign": "•",
+    "diagnostic.hintSign": "•",
+    "diagnostic-languageserver.mergeConfig": true,
+    "git.enableGutters": true,
+    "git.addedSign.text": "┃",
+    "git.changedSign.text": "┃",
+    "git.removedSign.text": "▁",
+    "git.topRemovedSign.text": "▔",
+    "git.changeRemovedSign.text": "▔",
+    "tailwindCSS.validate": true,
+    "tailwindCSS.emmetCompletions": true,
+    "prettier.requireConfig": true,
     "tsserver.npm": "/home/cnor/.asdf/shims/npm",
     "eslint.autoFix": true,
     "eslint.filetypes": [
@@ -15,7 +35,9 @@
         "typescriptreact"
     ],
     "tsserver.formatOnType": true,
-    "coc.preferences.formatOnType": true,
     "coc.preferences.hoverTarget": "float",
-    "signature.target": "float"
+    "signature.target": "float",
+    "omnisharp.version": "v1.37.3",
+    "omnisharp.trace.server": "verbose",
+    "omnisharp.debug.server": true
 }

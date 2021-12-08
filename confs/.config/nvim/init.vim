@@ -8,8 +8,8 @@ set tabstop=4
 set signcolumn=yes:2
 set relativenumber
 set number
+set nospell
 set termguicolors
-set spell
 set title
 set ignorecase
 set smartcase
@@ -22,6 +22,7 @@ set clipboard=unnamedplus
 set confirm
 set updatetime=300
 set redrawtime=10000
+
 
 "--------------------------------------------------------------------------
 " Key maps
@@ -44,6 +45,8 @@ vnoremap <leader>p "_dP
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
+nnoremap <C-d> <C-d>zzzv
+nnoremap <C-u> <C-u>zzzv
 
 imap jj <esc>
 
@@ -60,12 +63,16 @@ endif
 
 call plug#begin(data_dir . '/plugins')
 source ~/.config/nvim/plugins/dracula.vim
+source ~/.config/nvim/plugins/coc.vim
+source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/fzf-native.vim
+source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/plenary.vim
 source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/quick-scope.vim
 source ~/.config/nvim/plugins/tree-sitter.vim
 source ~/.config/nvim/plugins/telescope.vim
+source ~/.config/nvim/plugins/vim-startify.vim
 source ~/.config/nvim/plugins/whichkey.vim
 call plug#end()
 doautocmd User PlugLoaded " Hook to call code after plugins
