@@ -1,7 +1,7 @@
 {
 
     "coc.preferences.extensionUpdateCheck": "daily",
-    "coc.preferences.formatOnType": true,
+    "coc.preferences.formatOnType": false,
     "diagnostic.checkCurrentLine": true,
     "diagnostic.virtualText": true,
     "diagnostic.enableMessage": "jump",
@@ -39,5 +39,12 @@
     "signature.target": "float",
     "omnisharp.version": "v1.37.3",
     "omnisharp.trace.server": "verbose",
-    "omnisharp.debug.server": true
+    "omnisharp.debug.server": true,
+    "languageserver": {
+      "clangd": {
+        "command": "clangd",
+        "rootPatterns": [".ccls","compile_flags.txt", "compile_commands.json"],
+        "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+      }
+    }
 }
