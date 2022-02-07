@@ -1,0 +1,56 @@
+{
+	"name": "phoenix",
+	"displayName": "Phoenix Framework",
+	"homepage": "https://www.phoenixframework.org",
+	"description": "Syntax highlighting support for HEEx",
+	"version": "0.1.1",
+	"author": "Marlus Saraiva",
+	"publisher": "phoenixframework",
+	"license": "MIT",
+	"icon": "images/logo.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/phoenixframework/vscode-phoenix.git"
+	},
+	"engines": {
+		"vscode": "^1.25.1"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "phoenix-heex",
+				"aliases": [
+					"HEEx",
+					"heex"
+				],
+				"extensions": [
+					".heex"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "phoenix-heex",
+				"scopeName": "source.heex",
+				"path": "./syntaxes/heex.json"
+			},
+			{
+				"scopeName": "source.elixir.heex",
+				"path": "./syntaxes/elixir-heex.json",
+				"injectTo": [
+					"source.elixir"
+				]
+			}
+		]
+	},
+	"__metadata": {
+		"id": "47b95e0f-414f-4fee-b6e4-840444ddd9c0",
+		"publisherId": "2e25341c-3e89-4663-8912-3c19401a6bed",
+		"publisherDisplayName": "phoenixframework",
+		"installedTimestamp": 1643880394493
+	}
+}

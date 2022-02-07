@@ -36,7 +36,7 @@ unsetopt BEEP # remove beeps
 
 # Asdf
 # =================================
-. ~/.asdf/plugins/java/set-java-home.zsh
+#. ~/.asdf/plugins/java/set-java-home.zsh
 . ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
 
 # Aliases
@@ -69,3 +69,9 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export XSECURELOCK_COMPOSITE_OBSCURER=0
 export GIT_EDITOR=nvim
 
+
+PATH="/home/cnor/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/cnor/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/cnor/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/cnor/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/cnor/perl5"; export PERL_MM_OPT;

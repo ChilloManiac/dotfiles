@@ -16,6 +16,10 @@
     "git.removedSign.text": "▁",
     "git.topRemovedSign.text": "▔",
     "git.changeRemovedSign.text": "▔",
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "eelixir": "html"
+    },
     "tailwindCSS.validate": true,
     "tailwindCSS.emmetCompletions": true,
     "prettier.requireConfig": true,
@@ -32,7 +36,8 @@
         "javascript",
         "javascriptreact",
         "typescript",
-        "typescriptreact"
+        "typescriptreact",
+        "elixir"
     ],
     "tsserver.formatOnType": true,
     "coc.preferences.hoverTarget": "float",
@@ -46,5 +51,6 @@
         "rootPatterns": [".ccls","compile_flags.txt", "compile_commands.json"],
         "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
       }
-    }
+    },
+    "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh"
 }
