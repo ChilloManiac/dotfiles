@@ -3,8 +3,8 @@
 "--------------------------------------------------------------------------
 
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set signcolumn=yes:2
 set relativenumber
 set number
@@ -24,7 +24,6 @@ set updatetime=300
 set redrawtime=10000
 set encoding=UTF-8
 
-
 "--------------------------------------------------------------------------
 " Key maps
 "--------------------------------------------------------------------------
@@ -33,6 +32,7 @@ let mapleader = "\<space>"
 
 nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
 nmap <leader>vc :edit ~/.config/nvim/coc-settings.json<cr>
+nmap <leader>vl :edit ~/.config/nvim/plugins/nvim-lspconfig.vim<cr>
 nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
 
 nmap <leader>k :nohlsearch<CR>
@@ -82,6 +82,7 @@ source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/vim-airline.vim
 source ~/.config/nvim/plugins/vim-elixir.vim
 source ~/.config/nvim/plugins/vim-startify.vim
+source ~/.config/nvim/plugins/vim-surround.vim
 source ~/.config/nvim/plugins/whichkey.vim
 call plug#end()
 doautocmd User PlugLoaded " Hook to call code after plugins

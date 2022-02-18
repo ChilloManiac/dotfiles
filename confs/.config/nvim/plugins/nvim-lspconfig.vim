@@ -7,6 +7,9 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'folke/lsp-colors.nvim'
+
+
 
 
 function LoadLspConfig()
@@ -14,6 +17,8 @@ lua << EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
+local lsp_installer_servers = require('nvim-lsp-installer.servers')
+
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
@@ -39,25 +44,42 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>fb', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
+
+
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
 
-require'lspconfig'.elixirls.setup {
-    on_attach = on_attach,
-    cmd = {"/home/cnor/.local/share/nvim/lsp_servers/elixir/elixir-ls/language_server.sh"}
-}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local servers = { 'tsserver', 'fsautocomplete', 'eslint', 'omnisharp', 'elixirls', 'tailwindcss', 'vimls', 'lua', 'efm'}
+local root_path = '/home/cnor/.local/share/nvim/lsp-servers/'
 
+for _, server_name in pairs(servers) do
+    local server_available, server = lsp_installer_servers.get_server(server_name)
+    if server_available then
+        server:on_ready(function ()
+            local opts = {
+              on_attach = on_attach,
+              capabilities = capabilities,
+              init_options = {documentFormatting = true, codeAction = true},
+            }
+            server:setup(opts)
+        end)
+        if not server:is_installed() then
+            server:install()
+        end
+    end
+end
 
-require'lspconfig'.tailwindcss.setup {
-    on_attach = on_attach,
-    cmd = {"/home/cnor/.local/share/nvim/lsp_servers/tailwindcss_npm/node_modules/@tailwindcss/language-server/bin/tailwindcss-language-server"}
-}
+--local pid = vim.fn.getpid()
+--require'lspconfig'.omnisharp.setup{
+--    on_attach = on_attach,
+--   cmd = { "/home/cnor/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run", "--languageserver", "--hostPID", tostring(pid) }
+--}
 
 -- luasnip setup
 local luasnip = require 'luasnip'
+require('luasnip.loaders.from_snipmate').load()
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -102,6 +124,8 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+require("lsp-colors").setup({})
 
 EOF
 endfunction
