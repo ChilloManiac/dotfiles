@@ -51,7 +51,7 @@ end
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local servers = { 'tsserver', 'fsautocomplete', 'eslint', 'omnisharp', 'elixirls', 'tailwindcss', 'vimls', 'lua', 'efm'}
+local servers = { 'tsserver', 'fsautocomplete', 'eslint', 'omnisharp', 'elixirls', 'tailwindcss', 'vimls', 'lua', 'efm', 'pylsp', 'sqlls'}
 local root_path = '/home/cnor/.local/share/nvim/lsp-servers/'
 
 for _, server_name in pairs(servers) do
@@ -61,7 +61,6 @@ for _, server_name in pairs(servers) do
             local opts = {
               on_attach = on_attach,
               capabilities = capabilities,
-              init_options = {documentFormatting = true, codeAction = true},
             }
             server:setup(opts)
         end)
@@ -125,9 +124,13 @@ cmp.setup {
   },
 }
 
+
 require("lsp-colors").setup({})
 
 EOF
+let g:LanguageClient_serverCommands = {
+    \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
+    \ }
 endfunction
 
 augroup LoadLspConfig

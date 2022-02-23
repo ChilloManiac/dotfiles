@@ -81,6 +81,8 @@ source ~/.config/nvim/plugins/tree-sitter.vim
 source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/vim-airline.vim
 source ~/.config/nvim/plugins/vim-elixir.vim
+source ~/.config/nvim/plugins/vim-fugitive.vim
+source ~/.config/nvim/plugins/vim-rest-console.vim
 source ~/.config/nvim/plugins/vim-startify.vim
 source ~/.config/nvim/plugins/vim-surround.vim
 source ~/.config/nvim/plugins/whichkey.vim
