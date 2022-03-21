@@ -1,6 +1,12 @@
 version: 2
+root-markers:
+  - .git/
 
 tools:
+  # prettier: &prettier
+  #   format-command: 'prettierd ${INPUT}'
+  #   format-stdin: true
+
   mix_credo: &mix_credo
     lint-command: "MIX_ENV=test mix credo suggest --format=flycheck --read-from-stdin ${INPUT}"
     lint-stdin: true
@@ -19,3 +25,11 @@ tools:
 languages:
   elixir:
     - <<: *mix_credo
+  # javascript:
+  #   - <<: *prettier
+  # typescript:
+  #   - <<: *prettier
+  # javascriptreact:
+  #   - <<: *prettier
+  # typescriptreact:
+  #   - <<: *prettier

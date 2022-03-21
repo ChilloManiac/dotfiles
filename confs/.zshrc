@@ -2,7 +2,7 @@
 # ================================== 
 source <(antibody init)
 export ZSH="$(antibody path ohmyzsh/ohmyzsh)"
-  
+   
 antibody bundle ohmyzsh/ohmyzsh
 antibody bundle ohmyzsh/ohmyzsh path:plugins/asdf
 antibody bundle ohmyzsh/ohmyzsh path:plugins/docker
@@ -31,13 +31,13 @@ bindkey '^R' history-incremental-search-backward
 autoload -Uz compinit
 compinit
 kitty + complete setup zsh | source /dev/stdin # Kitty autocomplete
-eval "$(fasd --init auto)" #fasd initialized
+# eval "$(fasd --init auto)" #fasd initialized
 unsetopt BEEP # remove beeps
 
 # Asdf
 # =================================
 #. ~/.asdf/plugins/java/set-java-home.zsh
-. ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
+# . ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
 
 # Aliases
 # =================================
@@ -65,7 +65,7 @@ function set-dotnet-vars {
 export PROFILE=/home/cnor/.zshrc
 export STOW_DIR=/home/cnor/stow
 export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:/home/cnor/.dotnet/tools:/home/cnor/.asdf/installs/nodejs/16.0.0/.npm/bin:$PATH
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+# export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export XSECURELOCK_COMPOSITE_OBSCURER=0
 export GIT_EDITOR=nvim
 

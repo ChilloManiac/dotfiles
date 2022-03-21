@@ -64,15 +64,16 @@ endif
 
 call plug#begin(data_dir . '/plugins')
 source ~/.config/nvim/plugins/dracula.vim
-" source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/floatterm.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/fzf-native.vim
 source ~/.config/nvim/plugins/nerdtree.vim
+source ~/.config/nvim/plugins/neoformat.vim
+source ~/.config/nvim/plugins/null-ls.vim
 source ~/.config/nvim/plugins/nvim-comment.vim
+source ~/.config/nvim/plugins/nvim-dap.vim
 source ~/.config/nvim/plugins/nvim-lspconfig.vim
 source ~/.config/nvim/plugins/nvim-markdown-preview.vim
-" source ~/.config/nvim/plugins/omnisharp-vim.vim
 source ~/.config/nvim/plugins/plantuml.vim
 source ~/.config/nvim/plugins/plenary.vim
 source ~/.config/nvim/plugins/polyglot.vim
