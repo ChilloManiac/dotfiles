@@ -85,57 +85,6 @@ require('dapui').setup()
 EOF
 endfunction
 
-"   {
-"     type = 'pythonWorker'; 
-"     request = 'attach';
-"     name = "Python: Worker";
-"     pathMappings = {
-"           {
-"             localRoot = "${workspaceFolder}",
-"             remoteRoot = "/opt/lama"
-"           }
-"       }
-"   },
-"   {
-"     type = 'pythonPanorama'; 
-"     request = 'attach';
-"     name = "Python: Panorama";
-"     pathMappings = {
-"           {
-"             localRoot = "${workspaceFolder}",
-"             remoteRoot = "/opt/lama"
-"           }
-"       }
-"   },
-"   {
-"     type = 'pythonFlower'; 
-"     request = 'attach';
-"     name = "Python: Flower";
-"     pathMappings = {
-"           {
-"             localRoot = "${workspaceFolder}",
-"             remoteRoot = "/opt/lama"
-"           }
-"       }
-"   },
-" 
-    " pythonWorker = {
-    "     type = 'server';
-    "     host = 'localhost';
-    "     port = 6968;
-    " },
-    " pythonPanorama = {
-    "     type = 'server';
-    "     host = 'localhost';
-    "     port = 6967;
-    " },
-    " pythonFlower = {
-    "     type = 'server';
-    "     host = 'localhost';
-    "     port = 6961;
-    " },
-"
-"
 augroup LoadNvimDap
     autocmd!
     autocmd User PlugLoaded call LoadNvimDap()
