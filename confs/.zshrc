@@ -46,6 +46,7 @@ alias c='fasd_cd -d'
 alias cc='fasd_cd -d -i'
 alias v='f -e nvim'
 alias z='f -e zathura'
+alias k='kubectl'
 
 # Functions
 # =================================
@@ -68,6 +69,9 @@ export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:/home/cnor/.dotnet/tools
 # export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export XSECURELOCK_COMPOSITE_OBSCURER=0
 export GIT_EDITOR=nvim
+export GPG_TTY=$(tty)
+
+source <(kubectl completion zsh)
 
 
 PATH="/home/cnor/perl5/bin${PATH:+:${PATH}}"; export PATH;

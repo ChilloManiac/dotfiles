@@ -1,8 +1,0 @@
-{
-    "Lua.diagnostics.globals": [
-        "awesome",
-        "modkey",
-        "autorun",
-        "autorunApps"
-    ]
-}

@@ -3,9 +3,9 @@ root-markers:
   - .git/
 
 tools:
-  # prettier: &prettier
-  #   format-command: 'prettierd ${INPUT}'
-  #   format-stdin: true
+  prettier: &prettier
+    format-command: '/Users/dk8ChNoe/.asdf/installs/nodejs/17.6.0/bin/node /Users/dk8ChNoe/.asdf/installs/nodejs/17.6.0/.npm/bin/prettierd ${INPUT}'
+    format-stdin: true
 
   mix_credo: &mix_credo
     lint-command: "MIX_ENV=test mix credo suggest --format=flycheck --read-from-stdin ${INPUT}"
@@ -25,11 +25,13 @@ tools:
 languages:
   elixir:
     - <<: *mix_credo
-  # javascript:
-  #   - <<: *prettier
-  # typescript:
-  #   - <<: *prettier
-  # javascriptreact:
-  #   - <<: *prettier
-  # typescriptreact:
-  #   - <<: *prettier
+  javascript:
+    - <<: *prettier
+  typescript:
+    - <<: *prettier
+  javascriptreact:
+    - <<: *prettier
+  typescriptreact:
+    - <<: *prettier
+  json: 
+    - <<: *prettier

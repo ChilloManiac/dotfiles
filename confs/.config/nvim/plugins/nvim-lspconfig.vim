@@ -13,12 +13,13 @@ Plug 'folke/lsp-colors.nvim'
 
 
 function LoadLspConfig()
+autocmd BufWritePre *.js,*.ts,*.tsx,*.jsx lua vim.lsp.buf.formatting_seq_sync({}, 5000)
+
 lua << EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 local lsp_installer_servers = require('nvim-lsp-installer.servers')
-
 
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
@@ -45,14 +46,15 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>fb', '<cmd>lua vim.lsp.buf.formatting_sync({}, 5000)<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>fb', '<cmd>lua vim.lsp.buf.formatting_seq_sync({}, 5000)<CR>', opts)
+
 
 
 end
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local servers = { 'tsserver', 'fsautocomplete', 'eslint', 'omnisharp', 'elixirls', 'tailwindcss', 'vimls', 'efm', 'lua', 'sqlls', 'cssls', 'pylsp'}
+local servers = { 'dockerls', 'jsonls', 'sumneko_lua', 'tsserver', 'fsautocomplete', 'eslint', 'omnisharp', 'elixirls', 'tailwindcss', 'vimls', 'efm', 'lua', 'sqlls', 'cssls', 'pylsp', 'bashls', 'gopls'}
 local root_path = '/home/cnor/.local/share/nvim/lsp-servers/'
 
 for _, server_name in pairs(servers) do
