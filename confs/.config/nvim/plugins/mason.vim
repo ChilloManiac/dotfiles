@@ -1,21 +1,16 @@
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+Plug 'neovim/nvim-lspconfig'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'folke/lsp-colors.nvim'
 
-
-
-
-function LoadLspConfig()
+function LoadMason()
 lua << EOF
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
@@ -44,74 +39,28 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>fb', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
-
-
 end
-
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-local servers = { 'tsserver', 'fsautocomplete', 'eslint', 'elixirls', 'tailwindcss', 'vimls', 'lua', 'pyright', 'sqlls', 'omnisharp', 'terraformls', 'tflint'}
-local root_path = '/home/cnor/.local/share/nvim/lsp-servers/'
-
-for _, server_name in pairs(servers) do
-    local server_available, server = lsp_installer_servers.get_server(server_name)
-    if server_available then
-        server:on_ready(function ()
-            local opts = {
-              on_attach = on_attach,
-              capabilities = capabilities,
-            }
-
-    --        if server.name == "terraformls" then
-   --             opts.cmd = {"/home/cnor/.local/share/nvim/lsp_servers/terraform/terraform-ls/terraform-ls", "serve"}
-  --          end
---
- --           if server.name == "tflint" then
---                opts.cmd = {"/home/cnor/.local/share/nvim/lsp_servers/tflint/tflint", "--langserver"}
---            end
-
-            if server.name == "omnisharp" then
-                 local pid = vim.fn.getpid()
-                 opts.cmd = { "dotnet", "/home/cnor/.local/share/nvim/lsp_servers/omnisharp/omnisharp/OmniSharp.dll", "--languageserver" , "--hostPID", tostring(pid) }
-                 opts.filetypes = { "cs", "aspnetcorerazor", "razor" }
-            end
-            server:setup(opts)
-        end)
-        if not server:is_installed() then
-            server:install()
-        end
-    end
-end
-
---require'lspconfig'.setup{
---    on_attach = on_attach,
---   
---}
 
 -- luasnip setup
 local luasnip = require 'luasnip'
-require('luasnip.loaders.from_snipmate').load()
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
+  mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = function(fallback)
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -119,8 +68,8 @@ cmp.setup {
       else
         fallback()
       end
-    end,
-    ['<S-Tab>'] = function(fallback)
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -128,24 +77,41 @@ cmp.setup {
       else
         fallback()
       end
-    end,
-  },
+    end, { 'i', 's' }),
+  }),
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
+    { name = 'luasnip' },      
+    { name = 'buffer' },
   },
 }
+
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+local servers = { 'tsserver', 'eslint', 'elixirls', 'tailwindcss', 'vimls', 'pyright', 'sqlls', 'terraformls', 'tflint', 'sumneko_lua' }
+
+require("mason").setup {}
+require("mason-lspconfig").setup {
+    ensure_installed = servers,
+    automatic_installation = true
+}
+
+for _, server_name in pairs(servers) do
+      require('lspconfig')[server_name].setup{
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+end
 
 
 require("lsp-colors").setup({})
 
 EOF
-let g:LanguageClient_serverCommands = {
-    \ 'sql': ['sql-language-server', 'up', '--method', 'stdio'],
-    \ }
 endfunction
 
-augroup LoadLspConfig
+
+augroup LoadMason
     autocmd!
-    autocmd User PlugLoaded call LoadLspConfig()
+    autocmd User PlugLoaded call LoadMason()
 augroup END

@@ -32,7 +32,7 @@ let mapleader = "\<space>"
 
 nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
 nmap <leader>vc :edit ~/.config/nvim/coc-settings.json<cr>
-nmap <leader>vl :edit ~/.config/nvim/plugins/nvim-lspconfig.vim<cr>
+nmap <leader>vl :edit ~/.config/nvim/plugins/mason.vim<cr>
 nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
 
 nmap <leader>k :nohlsearch<CR>
@@ -69,10 +69,10 @@ source ~/.config/nvim/plugins/floatterm.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/fzf-native.vim
 source ~/.config/nvim/plugins/nerdtree.vim
+source ~/.config/nvim/plugins/mason.vim
 source ~/.config/nvim/plugins/nvim-comment.vim
-source ~/.config/nvim/plugins/nvim-lspconfig.vim
+" source ~/.config/nvim/plugins/nvim-lspconfig.vim
 source ~/.config/nvim/plugins/nvim-markdown-preview.vim
-" source ~/.config/nvim/plugins/omnisharp-vim.vim
 source ~/.config/nvim/plugins/plantuml.vim
 source ~/.config/nvim/plugins/plenary.vim
 source ~/.config/nvim/plugins/polyglot.vim

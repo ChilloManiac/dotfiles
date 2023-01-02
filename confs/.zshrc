@@ -10,6 +10,7 @@ antibody bundle ohmyzsh/ohmyzsh path:plugins/fzf
 antibody bundle ohmyzsh/ohmyzsh path:plugins/git
 
 antibody bundle zsh-users/zsh-syntax-highlighting
+antibody bundle zsh-users/zsh-completions
 antibody bundle dracula/zsh
 
 
