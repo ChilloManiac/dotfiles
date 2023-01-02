@@ -75,6 +75,12 @@ dap.configurations.python = {
   {
     type = 'pythonFile';
     request = 'launch';
+    name = "Python File";
+    program = "${file}";
+  },
+  {
+    type = 'pythonFile';
+    request = 'launch';
     name = 'Python Unit Test';
     module = "pytest";
     args = {'-s', '${file}'};

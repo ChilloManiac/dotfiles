@@ -28,9 +28,14 @@ bindkey '^R' history-incremental-search-backward
 
 # Misc
 # ==================================
+autoload bashcompinit 
+bashcompinit
 autoload -Uz compinit
 compinit
 kitty + complete setup zsh | source /dev/stdin # Kitty autocomplete
+complete -C '/usr/local/bin/aws_completer' aws
+
+
 # eval "$(fasd --init auto)" #fasd initialized
 unsetopt BEEP # remove beeps
 

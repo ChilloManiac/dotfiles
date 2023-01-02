@@ -13,7 +13,7 @@ Plug 'folke/lsp-colors.nvim'
 
 
 function LoadLspConfig()
-autocmd BufWritePre *.js,*.ts,*.tsx,*.jsx lua vim.lsp.buf.formatting_seq_sync({}, 5000)
+autocmd BufWritePre *.js,*.ts,*.tsx,*.jsx lua vim.lsp.buf.format({}, 5000)
 
 lua << EOF
 -- Mappings.
@@ -39,14 +39,12 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'v', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>fb', '<cmd>lua vim.lsp.buf.formatting_seq_sync({}, 5000)<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>fb', '<cmd>lua vim.lsp.buf.format({}, 5000)<CR>', opts)
 
 
 
@@ -54,7 +52,7 @@ end
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local servers = { 'dockerls', 'jsonls', 'sumneko_lua', 'tsserver', 'fsautocomplete', 'eslint', 'omnisharp', 'elixirls', 'tailwindcss', 'vimls', 'efm', 'lua', 'sqlls', 'cssls', 'pylsp', 'bashls', 'gopls'}
+local servers = { 'dockerls', 'jsonls', 'sumneko_lua', 'tsserver', 'fsautocomplete', 'eslint', 'omnisharp', 'elixirls', 'tailwindcss', 'vimls', 'efm', 'lua', 'sqlls', 'cssls', 'pylsp', 'bashls', 'gopls', 'yamlls'}
 local root_path = '/home/cnor/.local/share/nvim/lsp-servers/'
 
 for _, server_name in pairs(servers) do
