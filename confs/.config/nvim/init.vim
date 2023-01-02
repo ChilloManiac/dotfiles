@@ -71,6 +71,7 @@ source ~/.config/nvim/plugins/fzf-native.vim
 source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/mason.vim
 source ~/.config/nvim/plugins/nvim-comment.vim
+source ~/.config/nvim/plugins/nvim-dap.vim
 " source ~/.config/nvim/plugins/nvim-lspconfig.vim
 source ~/.config/nvim/plugins/nvim-markdown-preview.vim
 source ~/.config/nvim/plugins/plantuml.vim
