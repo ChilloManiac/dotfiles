@@ -29,6 +29,8 @@ bindkey '^R' history-incremental-search-backward
 
 # Misc
 # ==================================
+autoload bashcompinit
+bashcompinit
 autoload -Uz compinit
 compinit
 kitty + complete setup zsh | source /dev/stdin # Kitty autocomplete
@@ -38,7 +40,7 @@ unsetopt BEEP # remove beeps
 # Asdf
 # =================================
 #. ~/.asdf/plugins/java/set-java-home.zsh
-. ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
+# . ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
 
 # Aliases
 # =================================
@@ -47,6 +49,7 @@ alias c='fasd_cd -d'
 alias cc='fasd_cd -d -i'
 alias v='f -e nvim'
 alias z='f -e zathura'
+alias k='kubectl'
 
 # Functions
 # =================================
@@ -69,6 +72,7 @@ export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:/home/cnor/.dotnet/tools
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export XSECURELOCK_COMPOSITE_OBSCURER=0
 export GIT_EDITOR=nvim
+export GPG_TTY=$(tty)
 
 
 PATH="/home/cnor/perl5/bin${PATH:+:${PATH}}"; export PATH;
