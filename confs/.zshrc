@@ -1,3 +1,4 @@
+export PATH=/opt/homebrew/bin:$PATH
 # Plugins 
 # ================================== 
 source <(antibody init)
@@ -33,9 +34,6 @@ autoload bashcompinit
 bashcompinit
 autoload -Uz compinit
 compinit
-kitty + complete setup zsh | source /dev/stdin # Kitty autocomplete
-complete -C '/home/cnor/.asdf/shims/aws_completer' aws
-eval "$(fasd --init auto)" #fasd initialized
 unsetopt BEEP # remove beeps
 
 # Asdf
@@ -46,10 +44,6 @@ unsetopt BEEP # remove beeps
 # Aliases
 # =================================
 alias vim=nvim
-alias c='fasd_cd -d'
-alias cc='fasd_cd -d -i'
-alias v='f -e nvim'
-alias z='f -e zathura'
 alias k='kubectl'
 
 # Functions
