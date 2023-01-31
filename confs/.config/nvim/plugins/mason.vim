@@ -4,6 +4,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'neovim/nvim-lspconfig'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
@@ -80,13 +81,14 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },      
     { name = 'buffer' },
+    { name = 'nvim_lua' }
   },
 }
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'tsserver', 'eslint', 'elixirls', 'tailwindcss', 'vimls', 'pyright', 'sqlls', 'terraformls', 'tflint', 'sumneko_lua' }
+local servers = { 'tsserver', 'eslint', 'elixirls', 'tailwindcss', 'vimls', 'pyright', 'sqlls', 'terraformls', 'tflint', 'sumneko_lua', 'jsonls', 'dockerls'}
 
 require("mason").setup {}
 require("mason-lspconfig").setup {

@@ -19,6 +19,6 @@ symbol_map U+2714 DejaVu Sans Mono for Powerline
 
 
 # BEGIN_KITTY_THEME
-# Solarized Dark Higher Contrast
+# GitHub Dark High Contrast
 include current-theme.conf
 # END_KITTY_THEME

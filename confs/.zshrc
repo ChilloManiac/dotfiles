@@ -34,6 +34,7 @@ bashcompinit
 autoload -Uz compinit
 compinit
 kitty + complete setup zsh | source /dev/stdin # Kitty autocomplete
+complete -C '/home/cnor/.asdf/shims/aws_completer' aws
 eval "$(fasd --init auto)" #fasd initialized
 unsetopt BEEP # remove beeps
 
