@@ -1,11 +1,5 @@
-include dracula.conf
-
 font_family JetBrainsMono Nerd Font
-<<<<<<< Updated upstream
-font_size 14
-=======
 font_size 15
->>>>>>> Stashed changes
 adjust_line_height 125%
 
 cursor_blink_interval 0
@@ -20,16 +14,11 @@ enabled_layouts tall
 
 sync_to_monitor no
 
-<<<<<<< Updated upstream
-# symbol_map U+2714 DejaVu Sans Mono for Powerline
-
-=======
 #symbol_map U+2714 DejaVu Sans Mono for Powerline
 
 
 
 # BEGIN_KITTY_THEME
-# Dracula
+# Cobalt Neon
 include current-theme.conf
 # END_KITTY_THEME
->>>>>>> Stashed changes

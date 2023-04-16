@@ -1,0 +1,24 @@
+Plug 'lukas-reineke/indent-blankline.nvim'
+
+
+
+function LoadIndentBlankLine()
+lua << EOF
+
+vim.opt.list = true
+vim.opt.listchars:append "space:⋅"
+vim.opt.listchars:append "eol:↴"
+
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    show_current_context = true,
+    show_current_context_start = true,
+}
+
+EOF
+endfunction
+
+augroup LoadIndentBlankLine
+    autocmd!
+    autocmd User PlugLoaded call LoadIndentBlankLine()
+augroup END
