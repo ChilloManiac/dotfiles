@@ -1,5 +1,6 @@
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'mxsdev/nvim-dap-vscode-js'
 
 
 nnoremap <leader>dc <cmd>lua require"dap".continue()<CR>

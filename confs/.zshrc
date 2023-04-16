@@ -5,7 +5,7 @@ source <(antibody init)
 export ZSH="$(antibody path ohmyzsh/ohmyzsh)"
   
 antibody bundle ohmyzsh/ohmyzsh
-antibody bundle ohmyzsh/ohmyzsh path:plugins/asdf
+#antibody bundle ohmyzsh/ohmyzsh path:plugins/asdf
 antibody bundle ohmyzsh/ohmyzsh path:plugins/docker
 antibody bundle ohmyzsh/ohmyzsh path:plugins/fzf
 antibody bundle ohmyzsh/ohmyzsh path:plugins/git
@@ -35,6 +35,10 @@ bashcompinit
 autoload -Uz compinit
 compinit
 unsetopt BEEP # remove beeps
+
+# Rtx
+# ================================
+eval "$(rtx activate -s zsh)"
 
 # Asdf
 # =================================
@@ -68,6 +72,8 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export XSECURELOCK_COMPOSITE_OBSCURER=0
 export GIT_EDITOR=nvim
 export GPG_TTY=$(tty)
+
+export PATH="/Users/dk8ChNoe/.local/bin:$PATH"
 
 
 PATH="/home/cnor/perl5/bin${PATH:+:${PATH}}"; export PATH;

@@ -1,16 +1,9 @@
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'neovim/nvim-lspconfig'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'folke/lsp-colors.nvim'
 
-function LoadMason()
+
+function MasonConfig()
 lua << EOF
 local opts = { noremap=true, silent=true }
 
@@ -88,7 +81,7 @@ cmp.setup {
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'tsserver', 'eslint', 'elixirls', 'tailwindcss', 'vimls', 'pyright', 'sqlls', 'terraformls', 'tflint', 'sumneko_lua', 'jsonls', 'dockerls'}
+local servers = { 'tsserver', 'eslint', 'elixirls', 'tailwindcss', 'vimls', 'pyright', 'sqlls', 'terraformls', 'tflint', 'sumneko_lua', 'jsonls', 'dockerls', "powershell_es", "marksman"}
 
 require("mason").setup {}
 require("mason-lspconfig").setup {
@@ -97,10 +90,30 @@ require("mason-lspconfig").setup {
 }
 
 for _, server_name in pairs(servers) do
-      require('lspconfig')[server_name].setup{
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
+    if server_name == "eslint" then 
+        require('lspconfig')[server_name].setup({
+          capabilities = capabilities,
+          flags = { debounce_text_changes = 500 },
+          on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = true
+            if client.server_capabilities.documentFormattingProvider then
+              local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*",
+                callback = function()
+                  vim.lsp.buf.format({ async = true })
+                end,
+                group = au_lsp,
+              })
+            end
+          end,
+        })
+        else    
+        require('lspconfig')[server_name].setup{
+            on_attach = on_attach,
+            capabilities = capabilities,
+        }
+    end
 end
 
 
@@ -109,8 +122,7 @@ require("lsp-colors").setup({})
 EOF
 endfunction
 
-
-augroup LoadMason
+augroup MasonConfig
     autocmd!
-    autocmd User PlugLoaded call LoadMason()
+    autocmd User PlugLoaded call MasonConfig()
 augroup END
