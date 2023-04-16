@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
-=======
 export PATH="/opt/homebrew/bin:$PATH"
->>>>>>> Stashed changes
 # Plugins 
 # ================================== 
 source <(antibody init)
@@ -78,16 +75,7 @@ function set-dotnet-vars {
 }
 # Exports
 # =================================
-<<<<<<< Updated upstream
-export PROFILE=/home/cnor/.zshrc
-export STOW_DIR=/home/cnor/stow
-export PATH=/home/cnor/.emacs.d/bin/:/home/cnor/.dotnet:/home/cnor/.dotnet/tools:/home/cnor/.asdf/installs/nodejs/16.0.0/.npm/bin:$PATH
-# export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
-=======
-export PROFILE="/home/cnor/.zshrc"
-export STOW_DIR="/home/cnor/stow"
-#export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
->>>>>>> Stashed changes
+
 export XSECURELOCK_COMPOSITE_OBSCURER=0
 export GIT_EDITOR="nvim"
 export GPG_TTY="$(tty)"
