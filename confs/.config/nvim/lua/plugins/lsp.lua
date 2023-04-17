@@ -20,6 +20,9 @@ local M = {
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-nvim-lua" },
+
+    -- Neodev
+    { "folke/neodev.nvim" },
 	},
 }
 
@@ -38,8 +41,6 @@ M.config = function()
 		"tsserver",
 		"tailwindcss",
 		"yamlls",
-		"graphql",
-		"fsautocomplete",
 		"eslint",
 		"lua_ls",
 		"jsonls",
