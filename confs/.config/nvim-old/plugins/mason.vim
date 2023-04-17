@@ -1,6 +1,14 @@
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'L3MON4D3/LuaSnip' 
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 function MasonConfig()
 lua << EOF
@@ -31,6 +39,30 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>fb', '<cmd>lua vim.lsp.buf.format({}, 5000)<CR>', opts)
 end
 
+-- luasnip setup
+local luasnip = require 'luasnip'
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+  }),
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
+    { { name = 'buffer' } }
+  },
+}
+
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local servers = { 'tsserver', 'eslint', 'elixirls', 'tailwindcss', 'vimls', 'pyright', 'sqlls', 'terraformls', 'tflint', 'sumneko_lua', 'jsonls', 'dockerls', "powershell_es", "marksman"}
 
