@@ -13,9 +13,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- this just needs to be fore lazy
-vim.g.mapleader = " "
-
 require("lazy").setup({
 	{ import = "plugins" },
 	"github/copilot.vim",

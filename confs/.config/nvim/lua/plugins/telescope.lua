@@ -5,7 +5,8 @@ local M = {
 		{ "nvim-lua/plenary.nvim" },
 		{ 'nvim-telescope/telescope-ui-select.nvim' },
 		{ 'nvim-telescope/telescope-dap.nvim' },
-		{ 'nvim-tree/nvim-web-devicons' }
+		{ 'nvim-tree/nvim-web-devicons' },
+    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 	},
 }
 
@@ -16,6 +17,7 @@ M.config = function ()
 
 	vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files hidden=true<cr>', opts)
 	vim.keymap.set('n', '<leader>fg', '<cmd>Telescope git_files<cr>', opts)
+	vim.keymap.set('n', '<leader>rg', '<cmd>Telescope live_grep<cr>', opts)
 	vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
 	vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
 

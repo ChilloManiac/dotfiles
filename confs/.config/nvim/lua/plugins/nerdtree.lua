@@ -11,7 +11,7 @@ local M = {
     vim.g.NERDTreeDirArrowCollapsible = '▿'
     vim.g.NERDTreeIgnore = { '__pycache__$', '^__init__.py$' }
 
-    vim.keymap.set('n', '<leader>n', ':NERDTreeToggle<CR>', { silent = true, noremap = true})
+    vim.keymap.set('n', '<leader>n', ':NERDTreeFind<CR>', { silent = true, noremap = true})
     vim.keymap.set('n', '<leader>N', ':NERDTreeFocus<CR>', { silent = true, noremap = true})
 
     vim.g.WebDevIconsUnicodeDecorateFolderNodes = 1
