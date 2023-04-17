@@ -1,68 +1,55 @@
--- Enable syntax highlighting
-vim.cmd("syntax on")
-
--- Disable the GUI cursor
-vim.opt.guicursor = ""
-
--- Disable highlighting the current matching parentheses or bracket
-vim.opt.showmatch = false
-
--- Use relative line numbering
-vim.opt.relativenumber = true
-
--- Enable hidden buffers
-vim.opt.hidden = true
-
--- Disable error bells
-vim.opt.errorbells = false
-
--- Set the width of a tab to 2 spaces and enable automatic indentation
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+--------------------------------------------------------------------------
+-- General settings
+----------------------------------------------------------------------------
 vim.opt.expandtab = true
-vim.opt.smartindent = true
-
--- Enable line numbering
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.signcolumn = "yes:2"
+vim.opt.relativenumber = true
 vim.opt.number = true
-
--- Disable line wrapping
-vim.opt.wrap = false
-
--- Enable smart case sensitivity
-vim.opt.smartcase = true
-
--- Disable swap files and backups
-vim.opt.swapfile = false
-vim.opt.backup = false
-
--- Set the directory where undo files are stored and enable undo persistence
-vim.opt.undodir = vim.fn.expand("~/.vim/undodir")
-vim.opt.undofile = true
-
--- Enable incremental search
-vim.opt.incsearch = true
-
--- Enable true color support in the terminal
+vim.opt.nospell = true
 vim.opt.termguicolors = true
-
--- Set the number of lines to keep visible above and below the cursor
+vim.opt.title = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.wrap = false
+vim.opt.mouse = "a"
 vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+vim.opt.splitright = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.confirm = true
+vim.opt.updatetime = 300
+vim.opt.redrawtime = 10000
+vim.opt.encoding = "UTF-8"
 
--- Hide the mode indicator in the command line
-vim.opt.showmode = false
 
--- Set the options for text completion
-vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 
--- Set the default shell to Bash
-vim.opt.shell = "/bin/bash"
+--------------------------------------------------------------------------
+-- Key maps
+--------------------------------------------------------------------------
+vim.g.mapleader = " "
 
--- Give more space for displaying messages
-vim.opt.cmdheight = 2
+vim.api.nvim_set_keymap("n", "<leader>ve", ":edit ~/.config/nvim/init.lua<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>vl", ":edit ~/.config/nvim/lua/plugins/lsp.lua<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>vr", ":luafile ~/.config/nvim/init.lua<CR>", { noremap = true })
 
--- Reduce the updatetime to 50ms to reduce lag
-vim.opt.updatetime = 50
+vim.api.nvim_set_keymap("n", "<leader>k", ":nohlsearch<CR>", { noremap = true })
+vim.api.nvim_set_keymap("", "gf", ":edit <cfile><CR>", { noremap = true })
 
--- Don't show messages in the completion menu
-vim.opt.shortmess:append("c")
+vim.api.nvim_set_keymap("v", "y", "myy`y", { noremap = true })
+vim.api.nvim_set_keymap("v", "Y", "myY`y", { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>p", "\"_dP", { noremap = true })
+
+vim.api.nvim_set_keymap("n", "n", "nzzzv", { noremap = true })
+vim.api.nvim_set_keymap("n", "N", "Nzzzv", { noremap = true })
+vim.api.nvim_set_keymap("n", "J", "mzJ`z", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zzzv", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zzzv", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>", { noremap = true })
+
+vim.api.nvim_set_keymap("i", "jj", "<esc>", { noremap = true })
+vim.api.nvim_set_keymap("i", "KK", "<esc>>>A", { noremap = true })
+vim.api.nvim_set_keymap("i", "HH", "<esc><<A", { noremap = true })
+
+

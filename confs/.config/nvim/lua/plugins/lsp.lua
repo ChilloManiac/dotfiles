@@ -1,7 +1,7 @@
 local M = {
 	"VonHeikemen/lsp-zero.nvim",
 	branch = "v2.x",
-  events = { "BufReadPre" },
+	events = { "BufReadPre" },
 	dependencies = {
 		-- LSP Support
 		{ "neovim/nvim-lspconfig" },
@@ -21,8 +21,8 @@ local M = {
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-nvim-lua" },
 
-    -- Neodev
-    { "folke/neodev.nvim" },
+		-- Neodev
+		{ "folke/neodev.nvim" },
 	},
 }
 
@@ -33,19 +33,24 @@ M.config = function()
 	local lspconfig = require("lspconfig")
 
 	lsp.ensure_installed({
-		"cssls",
-		"html",
-		"vimls",
-		"pyright",
-		"rust_analyzer",
-		"tsserver",
-		"tailwindcss",
-		"yamlls",
-		"eslint",
-		"lua_ls",
-		"jsonls",
-		"terraformls",
-		"clangd",
+		'cssls',
+		'dockerls',
+		'elixirls',
+		'eslint',
+		'html',
+		'jsonls',
+		'lua_ls',
+		'marksman',
+		'powershell_es',
+		'pyright',
+		'sqlls',
+		'sumneko_lua',
+		'tailwindcss',
+		'terraformls',
+		'tflint',
+		'tsserver',
+		'vimls',
+		'yamlls',
 	})
 
 	-- Fix Undefined global 'vim'
@@ -93,7 +98,7 @@ M.config = function()
 	local cmp_mappings = lsp.defaults.cmp_mappings({
 		["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 		["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-		["<C-y>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<C-Space>"] = cmp.mapping.complete(),
 	})
 
@@ -122,35 +127,32 @@ M.config = function()
 		vim.keymap.set("n", "gd", function()
 			vim.lsp.buf.definition()
 		end, opts)
-		vim.keymap.set("n", "<leader>f", function()
+		vim.keymap.set("n", "gi", function()
+			vim.lsp.buf.implementation()
+		end, opts)
+		vim.keymap.set("n", "gr", function()
+			vim.lsp.buf.references()
+		end, opts)
+		vim.keymap.set("n", "<leader>fb", function()
 			vim.lsp.buf.format()
 		end, opts)
 		vim.keymap.set("n", "K", function()
 			vim.lsp.buf.hover()
 		end, opts)
-		vim.keymap.set("n", "<leader>vws", function()
-			vim.lsp.buf.workspace_symbol()
-		end, opts)
-		vim.keymap.set("n", "<leader>vd", function()
-			vim.diagnostic.open_float()
-		end, opts)
-		vim.keymap.set("n", "[d", function()
-			vim.diagnostic.goto_next()
-		end, opts)
-		vim.keymap.set("n", "]d", function()
-			vim.diagnostic.goto_prev()
-		end, opts)
-		vim.keymap.set("n", "<leader>vca", function()
-			vim.lsp.buf.code_action()
-		end, opts)
-		vim.keymap.set("n", "<leader>vrr", function()
-			vim.lsp.buf.references()
-		end, opts)
-		vim.keymap.set("n", "<leader>vrn", function()
+		vim.keymap.set("n", "<leader>rn", function()
 			vim.lsp.buf.rename()
 		end, opts)
-		vim.keymap.set("i", "<C-h>", function()
-			vim.lsp.buf.signature_help()
+		vim.keymap.set("n", "<leader>ca", function()
+			vim.lsp.buf.code_action()
+		end, opts)
+		vim.keymap.set("n", "<leader>e", function()
+			vim.diagnostic.open_float()
+		end, opts)
+		vim.keymap.set("n", "]g", function()
+			vim.diagnostic.goto_next()
+		end, opts)
+		vim.keymap.set("n", "[g", function()
+			vim.diagnostic.goto_prev()
 		end, opts)
 	end)
 
