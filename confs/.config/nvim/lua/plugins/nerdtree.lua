@@ -1,6 +1,6 @@
 local M = {
   'preservim/nerdtree',
-  depends = { 'Xuyuanp/nerdtree-git-plugin', 'tiagofumo/vim-nerdtree-syntax-highlight' },
+  dependencies = { 'Xuyuanp/nerdtree-git-plugin' },
   config = function()
 
     vim.g.NERDTreeShowHidden = 1

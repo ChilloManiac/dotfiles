@@ -18,11 +18,16 @@ local M = {
 
     -- Neodev
     { "folke/neodev.nvim" },
+
+    -- Snippet engine
+    { "L3MON4D3/LuaSnip" },
+    { "rafamadriz/friendly-snippets" },
   },
 }
 
 M.config = function()
   require("neodev").setup()
+  require("luasnip").setup({})
 
   local lsp = require("lsp-zero").preset({})
   local lspconfig = require("lspconfig")
@@ -38,13 +43,13 @@ M.config = function()
     'marksman',
     'powershell_es',
     'pyright',
+    'spectral',
     'sqlls',
     'tailwindcss',
     'terraformls',
     'tflint',
     'tsserver',
     'vimls',
-    'yamlls',
   })
 
   -- Fix Undefined global 'vim'
@@ -61,30 +66,13 @@ M.config = function()
     },
   })
 
+
   lsp.configure("graphql", {
     root_dir = lspconfig.util.root_pattern(
       "package.json",
       "yarn.lock",
       ".git"
     ),
-  })
-
-  lsp.configure("eslint", {
-    root_dir = lspconfig.util.root_pattern(
-      "package.json",
-      "yarn.lock",
-      ".git"
-    ),
-  })
-
-  lsp.configure("efm", {
-    filetypes = {
-      "elixir",
-      "javascript",
-      "typescript",
-      "lua",
-      "sql",
-    },
   })
 
   local cmp = require("cmp")
@@ -149,6 +137,30 @@ M.config = function()
       vim.diagnostic.goto_prev()
     end, opts)
   end)
+
+  lsp.configure("eslint", {
+    root_dir = lspconfig.util.root_pattern(
+      "package.json",
+      "yarn.lock",
+      ".git"
+    ),
+    flags = {
+      debounce_text_changes = 500,
+    },
+    on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = true
+      if client.server_capabilities.documentFormattingProvider then
+        local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          pattern = "*",
+          callback = function()
+            vim.lsp.buf.format({ async = true })
+          end,
+          group = au_lsp,
+        })
+      end
+    end
+  })
 
   -- (Optional) Configure lua language server for neovim
   require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())

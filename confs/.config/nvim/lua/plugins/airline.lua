@@ -1,9 +1,9 @@
 local M = {
   'vim-airline/vim-airline',
-  depends = 'vim-airline/vim-airline-themes',
+  dependencies = 'vim-airline/vim-airline-themes',
   config = function ()
-    vim.g.airline_theme = 'dracula'
     vim.g.airline_powerline_fonts = 1
+    vim.g.airline_theme = 'base16_dracula'
   end
 }
 
