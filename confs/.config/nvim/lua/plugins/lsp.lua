@@ -9,7 +9,7 @@ local M = {
     { "williamboman/mason.nvim" },
 
     -- Autocompletion
-    { "hrsh7th/nvim-cmp", events = { "InsertEnter" } },
+    { "hrsh7th/nvim-cmp",                 events = { "InsertEnter" } },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-path" },
     { "saadparwaiz1/cmp_luasnip" },
@@ -22,10 +22,18 @@ local M = {
     -- Snippet engine
     { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" },
+
   },
 }
 
 M.config = function()
+  require("mason").setup({
+    ui = {
+      keymaps = {
+        apply_language_filter = "<C-l>",
+      },
+    }
+  })
   require("neodev").setup()
   require("luasnip").setup({})
 
@@ -154,7 +162,7 @@ M.config = function()
         vim.api.nvim_create_autocmd("BufWritePre", {
           pattern = "*",
           callback = function()
-            vim.lsp.buf.format({ async = true })
+            vim.lsp.buf.format({ async = false })
           end,
           group = au_lsp,
         })

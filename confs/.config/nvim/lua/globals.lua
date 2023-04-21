@@ -22,6 +22,7 @@ vim.opt.confirm = true
 vim.opt.updatetime = 300
 vim.opt.redrawtime = 10000
 vim.opt.encoding = "UTF-8"
+vim.opt.swapfile = false
 
 
 
@@ -51,5 +52,3 @@ vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>", { noremap = true })
 vim.api.nvim_set_keymap("i", "jj", "<esc>", { noremap = true })
 vim.api.nvim_set_keymap("i", "KK", "<esc>>>A", { noremap = true })
 vim.api.nvim_set_keymap("i", "HH", "<esc><<A", { noremap = true })
-
-
