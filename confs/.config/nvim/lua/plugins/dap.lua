@@ -118,13 +118,26 @@ M.config = function()
       {
         type = "pwa-node",
         request = "launch",
-        name = "Debug Jest Tests",
-        -- trace = true, -- include debugger info
+        name = "Debug Jest Test file",
         runtimeExecutable = "node",
         runtimeArgs = {
           "./node_modules/jest/bin/jest.js",
           "--runInBand",
           "${file}",
+        },
+        rootPath = "${workspaceFolder}",
+        cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
+        internalConsoleOptions = "neverOpen",
+      },
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Debug Jest Tests",
+        runtimeExecutable = "node",
+        runtimeArgs = {
+          "./node_modules/jest/bin/jest.js",
+          "--runInBand",
         },
         rootPath = "${workspaceFolder}",
         cwd = "${workspaceFolder}",
