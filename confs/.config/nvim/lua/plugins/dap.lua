@@ -2,16 +2,7 @@ local M = {
   "mfussenegger/nvim-dap",
   dependencies = {
     { "rcarriga/nvim-dap-ui" },
-    {
-      "mxsdev/nvim-dap-vscode-js",
-      tag = "v1.1.0",
-    },
-    {
-      "microsoft/vscode-js-debug",
-      tag = "v1.74.1",
-      build =
-      "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
-    },
+    { "jay-babu/mason-nvim-dap.nvim" },
   },
   keys = {
     {
@@ -107,9 +98,11 @@ local M = {
 }
 
 M.config = function()
-  require('dap-vscode-js').setup({
-    debugger_path = vim.fn.stdpath('data') .. '/lazy/vscode-js-debug',
-    adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+  require("mason-nvim-dap").setup({
+    ensure_installed = {
+      "js",
+      "python",
+    }
   })
 
   local dap = require('dap')
@@ -117,7 +110,18 @@ M.config = function()
 
   vim.fn.sign_define('DapBreakpoint', { text = '👉', texthl = '', linehl = '', numhl = '' })
 
-  -- language config
+  -- Adapters
+  dap.adapters["pwa-node"] = {
+    type = "server",
+    host = "localhost",
+    port = "${port}",
+    executable = {
+      command = "js-debug-adapter",
+      args = { "${port}" },
+    }
+  }
+
+  -- js/ts config
   for _, language in ipairs({ 'typescript', 'javascript' }) do
     dap.configurations[language] = {
       {
