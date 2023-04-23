@@ -39,7 +39,7 @@ local M = {
       "Step Out"
     },
     {
-      "<leader>db",
+      "<leader>b",
       function() require("dap").toggle_breakpoint() end,
       desc =
       "Toggle Breakpoint"
@@ -98,17 +98,24 @@ local M = {
       desc =
       "Run Last"
     },
+    {
+      "<leader>dui",
+      function() require("dapui").toggle() end,
+      desc = "Toggle Dap UI"
+    }
   }
 }
 
 M.config = function()
   require('dap-vscode-js').setup({
-    debugger_path = vim.fn.stdpath('data') .. '/lazy/packages/vscode-js-debug',
-    debugger_cmd = { 'js-debug-adapter' },
+    debugger_path = vim.fn.stdpath('data') .. '/lazy/vscode-js-debug',
     adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
   })
 
   local dap = require('dap')
+  require('dapui').setup()
+
+  vim.fn.sign_define('DapBreakpoint', { text = '👉', texthl = '', linehl = '', numhl = '' })
 
   -- language config
   for _, language in ipairs({ 'typescript', 'javascript' }) do
@@ -122,13 +129,20 @@ M.config = function()
         runtimeArgs = {
           "./node_modules/jest/bin/jest.js",
           "--runInBand",
+          "${file}",
         },
         rootPath = "${workspaceFolder}",
         cwd = "${workspaceFolder}",
         console = "integratedTerminal",
         internalConsoleOptions = "neverOpen",
-        port = 8123,
-      }
+      },
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Launch file",
+        program = "${file}",
+        cwd = "${workspaceFolder}",
+      },
     }
   end
 end
