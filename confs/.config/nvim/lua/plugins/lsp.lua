@@ -24,6 +24,8 @@ local M = {
     { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" },
 
+    -- Dap
+    { "jay-babu/mason-nvim-dap.nvim" },
   },
 }
 
@@ -60,6 +62,14 @@ M.config = function()
     'tsserver',
     'vimls',
   })
+
+  require("mason-nvim-dap").setup({
+    ensure_installed = {
+      "js",
+      "python",
+    }
+  })
+
 
   -- Fix Undefined global 'vim'
   lsp.configure("lua_ls", {

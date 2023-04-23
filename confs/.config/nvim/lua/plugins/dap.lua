@@ -2,7 +2,6 @@ local M = {
   "mfussenegger/nvim-dap",
   dependencies = {
     { "rcarriga/nvim-dap-ui" },
-    { "jay-babu/mason-nvim-dap.nvim" },
   },
   keys = {
     {
@@ -98,16 +97,8 @@ local M = {
 }
 
 M.config = function()
-  require("mason-nvim-dap").setup({
-    ensure_installed = {
-      "js",
-      "python",
-    }
-  })
-
   local dap = require('dap')
   require('dapui').setup()
-
   vim.fn.sign_define('DapBreakpoint', { text = '👉', texthl = '', linehl = '', numhl = '' })
 
   -- Adapters
