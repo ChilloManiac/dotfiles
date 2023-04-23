@@ -2,7 +2,10 @@ local M = {
   "mfussenegger/nvim-dap",
   dependencies = {
     { "rcarriga/nvim-dap-ui" },
-    { "mxsdev/nvim-dap-vscode-js" },
+    {
+      "mxsdev/nvim-dap-vscode-js",
+      tag = "v1.1.0",
+    },
     {
       "microsoft/vscode-js-debug",
       tag = "v1.74.1",
@@ -110,25 +113,6 @@ M.config = function()
   -- language config
   for _, language in ipairs({ 'typescript', 'javascript' }) do
     dap.configurations[language] = {
-      {
-        name = 'Launch',
-        type = 'pwa-node',
-        request = 'launch',
-        program = '${file}',
-        rootPath = '${workspaceFolder}',
-        cwd = '${workspaceFolder}',
-        sourceMaps = true,
-        skipFiles = { '<node_internals>/**' },
-        protocol = 'inspector',
-        console = 'integratedTerminal',
-      },
-      {
-        name = 'Attach to node process',
-        type = 'pwa-node',
-        request = 'attach',
-        rootPath = '${workspaceFolder}',
-        processId = require('dap.utils').pick_process,
-      },
       {
         type = "pwa-node",
         request = "launch",
