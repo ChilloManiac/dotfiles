@@ -11,7 +11,7 @@ local M = {
   keys = {
     { '<leader>ff', '<cmd>Telescope find_files hidden=true<cr>', desc = "Find Files" },
     { '<leader>fg', '<cmd>Telescope git_files<cr>',              desc = "Find Git Files" },
-    { '<leader>rg', '<cmd>Telescope live_grep<cr>',              desc = "Grep" },
+    { '<leader>rg', '<cmd>Telescope live_grep hidden=true<cr>',  desc = "Grep" },
     { '<leader>fb', '<cmd>Telescope buffers<cr>',                desc = "Buffers" },
     { '<leader>fh', '<cmd>Telescope help_tags<cr>',              desc = "Find Help" },
     { '<leader>fu', '<cmd>Telescope undo<cr>',                   desc = "Undo" },
