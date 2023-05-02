@@ -34,7 +34,6 @@ vim.api.nvim_set_keymap("n", "<leader>vl", ":edit ~/.config/nvim/lua/plugins/lsp
 vim.api.nvim_set_keymap("n", "<leader>vr", ":luafile ~/.config/nvim/init.lua<CR>", { noremap = true })
 
 vim.api.nvim_set_keymap("n", "<leader>k", ":nohlsearch<CR>", { noremap = true })
-vim.api.nvim_set_keymap("", "gf", ":edit <cfile><CR>", { noremap = true })
 
 vim.api.nvim_set_keymap("v", "y", "myy`y", { noremap = true })
 vim.api.nvim_set_keymap("v", "Y", "myY`y", { noremap = true })
