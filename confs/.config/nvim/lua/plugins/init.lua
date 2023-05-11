@@ -1,5 +1,7 @@
 local M = {
-	"tpope/vim-surround",
+  "tpope/vim-repeat",
+  "tpope/vim-surround",
+  "tpope/vim-unimpaired",
   'davidgranstrom/nvim-markdown-preview',
 }
 
