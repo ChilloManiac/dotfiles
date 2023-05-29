@@ -24,6 +24,9 @@ M.config = function()
   local actions = require('telescope.actions')
 
   telescope.setup({
+    defaults = {
+      preview = false,
+    },
     extensions = {
       ["ui-select"] = {
         require("telescope.themes").get_dropdown {}

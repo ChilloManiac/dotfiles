@@ -1,8 +1,7 @@
 local M = {
   "VonHeikemen/lsp-zero.nvim",
   branch = "v2.x",
-  event =  "BufReadPre",
-  lazy = true,
+  lazy = false,
   dependencies = {
     -- LSP Support
     { "neovim/nvim-lspconfig" },
@@ -10,7 +9,7 @@ local M = {
     { "williamboman/mason.nvim" },
 
     -- Autocompletion
-    { "hrsh7th/nvim-cmp",                 events = { "InsertEnter" } },
+    { "hrsh7th/nvim-cmp", },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-path" },
     { "saadparwaiz1/cmp_luasnip" },
@@ -26,8 +25,17 @@ local M = {
 
     -- Dap
     { "jay-babu/mason-nvim-dap.nvim" },
+
+    -- -- Lint
+    -- { "mfussenegger/nvim-lint" },
+
+    -- -- Formatter
+    -- { "mhartington/formatter.nvim" },
   },
 }
+
+
+
 
 M.config = function()
   require("mason").setup({
@@ -47,7 +55,7 @@ M.config = function()
     'cssls',
     'dockerls',
     'elixirls',
-    'eslint',
+    --'eslint',
     'html',
     'jsonls',
     'lua_ls',
@@ -109,6 +117,8 @@ M.config = function()
   lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
   })
+
+
 
   lsp.set_preferences({
     set_lsp_keymaps = true,
@@ -185,6 +195,38 @@ M.config = function()
   require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 
   lsp.setup()
+
+  -- -- Lint
+  -- require("lint").linters_by_ft = {
+  --   markdown = { "markdownlint" },
+  -- }
+  --
+  -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  --   callback = function()
+  --     require("lint").try_lint()
+  --   end,
+  -- })
+
+  -- -- Formatter
+  -- require('formatter').setup({
+  --   filetype = {
+  --     ["*"] = {
+  --       -- "formatter.filetypes.any" defines default configurations for any
+  --       -- filetype
+  --       require("formatter.filetypes.any").remove_trailing_whitespace
+  --     }
+  --   }
+  -- })
+  --
+  -- vim.keymap.set("n", "<leader>fb", function()
+  --   vim.cmd("FormatWrite")
+  -- end, { remap = false })
+  --
+  -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  --   callback = function()
+  --     vim.cmd("FormatWrite")
+  --   end,
+  -- })
 end
 
 return M
