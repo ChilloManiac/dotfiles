@@ -26,8 +26,8 @@ local M = {
     -- Dap
     { "jay-babu/mason-nvim-dap.nvim" },
 
-    -- -- Lint
-    -- { "mfussenegger/nvim-lint" },
+    -- Lint
+    { "mfussenegger/nvim-lint" },
 
     -- -- Formatter
     -- { "mhartington/formatter.nvim" },
@@ -196,16 +196,16 @@ M.config = function()
 
   lsp.setup()
 
-  -- -- Lint
-  -- require("lint").linters_by_ft = {
-  --   markdown = { "markdownlint" },
-  -- }
-  --
-  -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  --   callback = function()
-  --     require("lint").try_lint()
-  --   end,
-  -- })
+  -- Lint
+  require("lint").linters_by_ft = {
+    markdown = { "markdownlint" },
+  }
+  
+  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    callback = function()
+      require("lint").try_lint()
+    end,
+  })
 
   -- -- Formatter
   -- require('formatter').setup({

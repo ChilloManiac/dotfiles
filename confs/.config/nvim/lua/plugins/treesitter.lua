@@ -1,13 +1,10 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPost", "BufNewFile" },
-  version = false,
-  build = ":TSUpdate:",
-  ---@type TSConfig
+  build = ":TSUpdate",
   opts = {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {
-      enable = true,          -- false will disable the whole extension
+      enable = true, -- false will disable the whole extension
     },
     incremental_selection = {
       enable = true,
@@ -19,7 +16,6 @@ local M = {
       },
     },
   },
-  ---@param opts TSConfig
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
 

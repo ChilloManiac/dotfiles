@@ -7,6 +7,7 @@ local M = {
     { 'nvim-tree/nvim-web-devicons' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'debugloop/telescope-undo.nvim' },
+    { 'nvim-telescope/telescope-project.nvim' },
   },
   keys = {
     { '<leader>ff', '<cmd>Telescope find_files hidden=true<cr>', desc = "Find Files" },
@@ -15,6 +16,9 @@ local M = {
     { '<leader>rg', '<cmd>Telescope live_grep hidden=true<cr>',  desc = "Grep" },
     { '<leader>fh', '<cmd>Telescope help_tags<cr>',              desc = "Find Help" },
     { '<leader>fu', '<cmd>Telescope undo<cr>',                   desc = "Undo" },
+    { '<leader>tr', '<cmd>Telescope resume<cr>',                 desc = "Telescope Resume" },
+    { '<leader>fp', '<cmd>Telescope project<cr>',                desc = "Find Projects" },
+    { '<leader>fr', '<cmd>Telescope oldfiles<cr>',               desc = "Find Recent files" },
   },
   lazy = false,
 }
@@ -48,6 +52,7 @@ M.config = function()
   telescope.load_extension('ui-select')
   telescope.load_extension('fzf')
   telescope.load_extension('undo')
+  telescope.load_extension('project')
 end
 
 return M
