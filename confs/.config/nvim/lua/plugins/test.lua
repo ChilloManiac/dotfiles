@@ -57,11 +57,12 @@ M.config = function()
       running_animated = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
     },
     consumers = {
-      overseet = require("neotest.consumers.overseer"), 
+      overseer = require("neotest.consumers.overseer"), 
     },
     adapters = {
       require('neotest-jest')({
         jestCommand = 'yarn test',
+        -- jestConfigFile = 'jest.integration.config.js',
         cwd = function(path)
           return vim.fn.getcwd()
         end,

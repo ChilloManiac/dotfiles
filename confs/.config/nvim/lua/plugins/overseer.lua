@@ -3,8 +3,8 @@ local M = {
   opts = {},
   keys = {
     { '<leader>ot', ':OverseerToggle<CR>', desc = "Overseer Toggle" },
-    { '<leader>or', ':OverseerRun<CR>', desc = "Overseer Run" },
-    { '<leader>oc', ':OverseerRunCmd', desc = "Overseer Run CMD" },
+    { '<leader>orr', ':OverseerRun<CR>', desc = "Overseer Run" },
+    { '<leader>orc', ':OverseerRunCmd', desc = "Overseer Run CMD" },
   },
 }
 
