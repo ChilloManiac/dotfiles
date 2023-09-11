@@ -10,7 +10,8 @@ local M = {
     { '<leader>ot', ':ObsidianToday<CR>', desc = "ObsidianToday" },
     { '<leader>oy', ':ObsidianYesterday<CR>', desc = "ObsidianToday" },
     { '<leader>on', ':ObsidianNew', desc = "ObsidianNew" },
-  }
+  },
+  cond = false,
 }
 
 M.config = function()

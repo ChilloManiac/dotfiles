@@ -22,11 +22,26 @@ local M = {
     'nvim-neotest/neotest-jest',
   },
   keys = {
-    { '<leader>tn', '<cmd>lua require("neotest").run.run()<CR>',                   desc = 'Test Nearest', { noremap = true } },
-    { '<leader>tf', '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', desc = 'Test File',    { noremap = true } },
-    { '<leader>tl', '<cmd>lua require("neotest").run.run_last()<CR>',              desc = 'Test Last',    { noremap = true } },
-    { '<leader>td', '<cmd>lua require("neotest").run.run({strategy = "dap"})<CR>', desc = 'Test File with Debug',    { noremap = true } },
-    { '<leader>ts', '<cmd>lua require("neotest").summary.toggle()<CR>',            desc = 'Test Summary', { noremap = true } },
+    {
+      '<leader>tn',
+      '<cmd>lua require("neotest").run.run()<CR>',
+      desc = 'Test Nearest',
+      { noremap = true }
+    },
+    { '<leader>tf', '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', desc = 'Test File', { noremap = true } },
+    { '<leader>tl', '<cmd>lua require("neotest").run.run_last()<CR>',              desc = 'Test Last', { noremap = true } },
+    {
+      '<leader>td',
+      '<cmd>lua require("neotest").run.run({strategy = "dap"})<CR>',
+      desc = 'Test File with Debug',
+      { noremap = true }
+    },
+    {
+      '<leader>ts',
+      '<cmd>lua require("neotest").summary.toggle()<CR>',
+      desc = 'Test Summary',
+      { noremap = true }
+    },
   }
 }
 
@@ -34,11 +49,19 @@ M.config = function()
   local neotest = require('neotest')
 
   neotest.setup({
+    status = {
+      virtual_text = true,
+      signs = true,
+    },
+    icons = {
+      running_animated = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+    },
+    consumers = {
+      overseet = require("neotest.consumers.overseer"), 
+    },
     adapters = {
       require('neotest-jest')({
-        jestCommand = "npm test --",
-        jestConfigFile = "custom.jest.config.ts",
-        env = { CI = true },
+        jestCommand = 'yarn test',
         cwd = function(path)
           return vim.fn.getcwd()
         end,

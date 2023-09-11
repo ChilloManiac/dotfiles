@@ -4,6 +4,9 @@ local M = {
   config = function()
     require('lualine').setup({
       theme = 'tokyonight',
+      sections = {
+        lualine_x = {'overseer'}
+      }
     })
   end
 }
