@@ -108,6 +108,22 @@ M.config = function()
     ["<C-Space>"] = cmp.mapping.complete(),
   })
 
+  -- Dadbod stuff
+  local autocomplete_group = vim.api.nvim_create_augroup('vimrc_autocompletion', { clear = true })
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'sql', 'mysql', 'plsql' },
+    callback = function()
+      cmp.setup.buffer({
+        sources = {
+          { name = 'vim-dadbod-completion' },
+          { name = 'buffer' },
+          { name = 'vsnip' },
+        },
+      })
+    end,
+    group = autocomplete_group,
+  })
+
   cmp_mappings["<Tab>"] = nil
   cmp_mappings["<S-Tab>"] = nil
 
@@ -198,11 +214,11 @@ M.config = function()
     markdown = { "markdownlint" },
   }
 
-  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    callback = function()
-      require("lint").try_lint()
-    end,
-  })
+  -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  --   callback = function()
+  --     require("lint").try_lint()
+  --   end,
+  -- })
 
   -- -- Formatter
   -- require('formatter').setup({

@@ -4,6 +4,9 @@ local M = {
   dependencies = {
     "MunifTanjim/nui.nvim",
     "rcarriga/nvim-notify",
+  },
+  keys = {
+    { '<leader>nd', '<cmd>NoiceDismiss<CR>', 'Noice dismiss' }
   }
 }
 

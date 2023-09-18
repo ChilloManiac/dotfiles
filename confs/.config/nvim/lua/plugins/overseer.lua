@@ -9,7 +9,11 @@ local M = {
 }
 
 M.config = function()
-  require('overseer').setup()
+  require('overseer').setup({
+    task_list = {
+      direction = 'right'
+    }
+  })
 end
 
 return M
