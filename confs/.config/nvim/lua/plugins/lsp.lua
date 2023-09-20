@@ -105,7 +105,22 @@ M.config = function()
     ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
     ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-.>"] = cmp.mapping({
+      i = function()
+        if cmp.visible() then
+          cmp.abort()
+        else
+          cmp.complete()
+        end
+      end,
+      c = function()
+        if cmp.visible() then
+          cmp.close()
+        else
+          cmp.complete()
+        end
+      end,
+    }),
   })
 
   -- Dadbod stuff
