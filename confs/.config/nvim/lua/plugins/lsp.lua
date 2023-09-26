@@ -1,10 +1,8 @@
 local M = {
-  "VonHeikemen/lsp-zero.nvim",
-  branch = "v2.x",
+  "neovim/nvim-lspconfig",
   lazy = false,
   dependencies = {
     -- LSP Support
-    { "neovim/nvim-lspconfig" },
     { "williamboman/mason-lspconfig.nvim" },
     { "williamboman/mason.nvim" },
 
@@ -28,99 +26,190 @@ local M = {
 
     -- Lint
     { "mfussenegger/nvim-lint" },
-
-    -- -- Formatter
-    -- { "mhartington/formatter.nvim" },
   },
 }
 
-
-
+local ensure_installed = {
+  'cssls',
+  'dockerls',
+  'elixirls',
+  --'eslint',
+  'html',
+  'jsonls',
+  'lua_ls',
+  'marksman',
+  'powershell_es',
+  'pyright',
+  'spectral',
+  'sqlls',
+  'tailwindcss',
+  'terraformls',
+  'tflint',
+  'tsserver',
+  'vimls',
+}
 
 M.config = function()
-  require("mason").setup({
-    ui = {
-      keymaps = {
-        apply_language_filter = "<C-l>",
-      },
-    }
-  })
   require("neodev").setup()
-  require("luasnip").setup({})
-
-  local lsp = require("lsp-zero").preset({})
   local lspconfig = require("lspconfig")
+  local lsp_defaults = lspconfig.util.default_config
 
-  lsp.ensure_installed({
-    'cssls',
-    'dockerls',
-    'elixirls',
-    --'eslint',
-    'html',
-    'jsonls',
-    'lua_ls',
-    'marksman',
-    'powershell_es',
-    'pyright',
-    'spectral',
-    'sqlls',
-    'tailwindcss',
-    'terraformls',
-    'tflint',
-    'tsserver',
-    'vimls',
+  local root_dir = lspconfig.util.root_pattern(
+    "package.json",
+    "yarn.lock",
+    ".git"
+  )
+
+  lsp_defaults.capabilities = vim.tbl_deep_extend("force",
+    lsp_defaults.capabilities,
+    require('cmp_nvim_lsp').default_capabilities()
+  )
+
+  local on_attach = function(client, bufnr)
+    local opts = { buffer = bufnr, remap = false }
+
+    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+    vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+    vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+    vim.keymap.set("n", "<leader>fb", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
+    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+    vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+    vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+    vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
+    vim.keymap.set("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
+    vim.keymap.set("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
+
+    if client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint(bufnr, true)
+    end
+  end
+
+  local default_setup = function(server)
+    lspconfig[server].setup({
+      root_dir = root_dir,
+      on_attach = on_attach,
+    })
+  end
+
+  local lua_setup = function()
+    lspconfig.lua_ls.setup({
+      root_dir = root_dir,
+      on_attach = on_attach,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+          hint = { enable = true }
+        },
+      },
+    })
+  end
+
+  local tsserver_setup = function()
+    lspconfig.tsserver.setup({
+      root_dir = root_dir,
+      on_attach = on_attach,
+      init_options = {
+        preferences = {
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+          importModuleSpecifierPreference = 'non-relative'
+        },
+      },
+    })
+  end
+
+  local eslint_setup = function()
+    lspconfig.eslint.setup({
+      root_dir = root_dir,
+      flags = {
+        debounce_text_changes = 500,
+      },
+      on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = true
+        if client.server_capabilities.documentFormattingProvider then
+          local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "*",
+            callback = function()
+              vim.lsp.buf.format({ async = false })
+            end,
+            group = au_lsp,
+          })
+        end
+      end
+    })
+  end
+
+  require("mason").setup({
+    ensure_installed = ensure_installed,
+  })
+  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup_handlers({
+    default_setup,
+    ["lua_ls"] = lua_setup,
+    ["eslint"] = eslint_setup,
+    ["tsserver"] = tsserver_setup,
   })
 
   require("mason-nvim-dap").setup({
     ensure_installed = {
       "js",
       "python",
-    }
-  })
-
-
-  -- Fix Undefined global 'vim'
-  lsp.configure("lua_ls", {
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
-        },
-      },
     },
+    automatic_installation = false
   })
 
+  require("luasnip").setup({})
 
-  lsp.configure("graphql", {
-    root_dir = lspconfig.util.root_pattern(
-      "package.json",
-      "yarn.lock",
-      ".git"
-    ),
-  })
+  vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
   local cmp = require("cmp")
   local cmp_select = { behavior = cmp.SelectBehavior.Select }
-  local cmp_mappings = lsp.defaults.cmp_mappings({
-    ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-    ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    ["<C-.>"] = cmp.mapping({
-      i = function()
-        if cmp.visible() then
-          cmp.abort()
-        else
-          cmp.complete()
-        end
-      end,
-      c = function()
-        if cmp.visible() then
-          cmp.close()
-        else
-          cmp.complete()
-        end
-      end,
+  cmp.setup({
+    sources = {
+      { name = 'path' },
+      { name = 'nvim_lsp', keyword_length = 1 },
+      { name = 'buffer',   keyword_length = 3 },
+      { name = 'luasnip',  keyword_length = 2 },
+    },
+    mapping = cmp.mapping.preset.insert({
+      ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+      ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+      ["<CR>"] = cmp.mapping.confirm({ select = true }),
+      ["<Tab>"] = nil,
+      ["<S-Tab>"] = nil,
+      ["<C-.>"] = cmp.mapping({
+        i = function()
+          if cmp.visible() then
+            cmp.abort()
+          else
+            cmp.complete()
+          end
+        end,
+        c = function()
+          if cmp.visible() then
+            cmp.close()
+          else
+            cmp.complete()
+          end
+        end,
+      }),
     }),
+    snippet = {
+      expand = function(args)
+        require("luasnip").lsp_expand(args.body)
+      end,
+    },
+    window = {
+      documentation = cmp.config.window.bordered()
+    }
   })
 
   -- Dadbod stuff
@@ -139,122 +228,16 @@ M.config = function()
     group = autocomplete_group,
   })
 
-  cmp_mappings["<Tab>"] = nil
-  cmp_mappings["<S-Tab>"] = nil
-
-  lsp.setup_nvim_cmp({
-    mapping = cmp_mappings,
-  })
-
-
-
-  lsp.set_preferences({
-    set_lsp_keymaps = true,
-    manage_nvim_cmp = true,
-    suggest_lsp_servers = false,
-    sign_icons = {
-      error = "E",
-      warn = "W",
-      hint = "H",
-      info = "I",
-    },
-  })
-
-  lsp.on_attach(function(client, bufnr)
-    local opts = { buffer = bufnr, remap = false }
-
-    vim.keymap.set("n", "gd", function()
-      vim.lsp.buf.definition()
-    end, opts)
-    vim.keymap.set("n", "gi", function()
-      vim.lsp.buf.implementation()
-    end, opts)
-    vim.keymap.set("n", "gr", function()
-      vim.lsp.buf.references()
-    end, opts)
-    vim.keymap.set("n", "<leader>fb", function()
-      vim.lsp.buf.format()
-    end, opts)
-    vim.keymap.set("n", "K", function()
-      vim.lsp.buf.hover()
-    end, opts)
-    vim.keymap.set("n", "<leader>rn", function()
-      vim.lsp.buf.rename()
-    end, opts)
-    vim.keymap.set("n", "<leader>ca", function()
-      vim.lsp.buf.code_action()
-    end, opts)
-    vim.keymap.set("n", "<leader>e", function()
-      vim.diagnostic.open_float()
-    end, opts)
-    vim.keymap.set("n", "]g", function()
-      vim.diagnostic.goto_next()
-    end, opts)
-    vim.keymap.set("n", "[g", function()
-      vim.diagnostic.goto_prev()
-    end, opts)
-  end)
-
-  lsp.configure("eslint", {
-    root_dir = lspconfig.util.root_pattern(
-      "package.json",
-      "yarn.lock",
-      ".git"
-    ),
-    flags = {
-      debounce_text_changes = 500,
-    },
-    on_attach = function(client, bufnr)
-      client.server_capabilities.documentFormattingProvider = true
-      if client.server_capabilities.documentFormattingProvider then
-        local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          pattern = "*",
-          callback = function()
-            vim.lsp.buf.format({ async = false })
-          end,
-          group = au_lsp,
-        })
-      end
-    end
-  })
-
-  -- (Optional) Configure lua language server for neovim
-  require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-
-  lsp.setup()
-
   -- Lint
   require("lint").linters_by_ft = {
     markdown = { "markdownlint" },
   }
 
-  -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  --   callback = function()
-  --     require("lint").try_lint()
-  --   end,
-  -- })
-
-  -- -- Formatter
-  -- require('formatter').setup({
-  --   filetype = {
-  --     ["*"] = {
-  --       -- "formatter.filetypes.any" defines default configurations for any
-  --       -- filetype
-  --       require("formatter.filetypes.any").remove_trailing_whitespace
-  --     }
-  --   }
-  -- })
-  --
-  -- vim.keymap.set("n", "<leader>fb", function()
-  --   vim.cmd("FormatWrite")
-  -- end, { remap = false })
-  --
-  -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  --   callback = function()
-  --     vim.cmd("FormatWrite")
-  --   end,
-  -- })
+  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    callback = function()
+      require("lint").try_lint()
+    end,
+  })
 end
 
 return M
