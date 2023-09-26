@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local M = {
   "neovim/nvim-lspconfig",
   lazy = false,
@@ -54,12 +55,6 @@ M.config = function()
   local lspconfig = require("lspconfig")
   local lsp_defaults = lspconfig.util.default_config
 
-  local root_dir = lspconfig.util.root_pattern(
-    "package.json",
-    "yarn.lock",
-    ".git"
-  )
-
   lsp_defaults.capabilities = vim.tbl_deep_extend("force",
     lsp_defaults.capabilities,
     require('cmp_nvim_lsp').default_capabilities()
@@ -86,14 +81,12 @@ M.config = function()
 
   local default_setup = function(server)
     lspconfig[server].setup({
-      root_dir = root_dir,
       on_attach = on_attach,
     })
   end
 
   local lua_setup = function()
     lspconfig.lua_ls.setup({
-      root_dir = root_dir,
       on_attach = on_attach,
       settings = {
         Lua = {
@@ -108,7 +101,11 @@ M.config = function()
 
   local tsserver_setup = function()
     lspconfig.tsserver.setup({
-      root_dir = root_dir,
+      root_dir = lspconfig.util.root_pattern(
+        "package.json",
+        "yarn.lock",
+        ".git"
+      ),
       on_attach = on_attach,
       init_options = {
         preferences = {
@@ -127,7 +124,11 @@ M.config = function()
 
   local eslint_setup = function()
     lspconfig.eslint.setup({
-      root_dir = root_dir,
+      root_dir = lspconfig.util.root_pattern(
+        "package.json",
+        "yarn.lock",
+        ".git"
+      ),
       flags = {
         debounce_text_changes = 500,
       },
