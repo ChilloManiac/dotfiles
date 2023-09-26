@@ -34,7 +34,7 @@ local ensure_installed = {
   'cssls',
   'dockerls',
   'elixirls',
-  --'eslint',
+  'eslint',
   'html',
   'jsonls',
   'lua_ls',
@@ -148,15 +148,15 @@ M.config = function()
     })
   end
 
-  require("mason").setup({
+  require("mason").setup({})
+  require("mason-lspconfig").setup({
     ensure_installed = ensure_installed,
-  })
-  require("mason-lspconfig").setup()
-  require("mason-lspconfig").setup_handlers({
-    default_setup,
-    ["lua_ls"] = lua_setup,
-    ["eslint"] = eslint_setup,
-    ["tsserver"] = tsserver_setup,
+    handlers = {
+      default_setup,
+      ["lua_ls"] = lua_setup,
+      ["eslint"] = eslint_setup,
+      ["tsserver"] = tsserver_setup,
+    },
   })
 
   require("mason-nvim-dap").setup({
