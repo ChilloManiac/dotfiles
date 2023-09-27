@@ -35,6 +35,7 @@ local ensure_installed = {
   'dockerls',
   'elixirls',
   'eslint',
+  'eslint_d',
   'html',
   'jsonls',
   'lua_ls',
@@ -48,6 +49,17 @@ local ensure_installed = {
   'tflint',
   'tsserver',
   'vimls',
+}
+
+local border = {
+    { '┌', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '┐', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+    { '┘', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '└', 'FloatBorder' },
+    { '│', 'FloatBorder' },
 }
 
 M.config = function()
@@ -79,15 +91,30 @@ M.config = function()
     end
   end
 
+  local handlers = {
+      ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+      ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+  }
+
+  -- Add border to the diagnostic popup window
+  vim.diagnostic.config({
+      virtual_text = {
+          prefix = '■ ',
+      },
+      float = { border = border },
+  })
+
   local default_setup = function(server)
     lspconfig[server].setup({
       on_attach = on_attach,
+      handlers = handlers,
     })
   end
 
   local lua_setup = function()
     lspconfig.lua_ls.setup({
       on_attach = on_attach,
+      handlers = handlers,
       settings = {
         Lua = {
           diagnostics = {
@@ -106,6 +133,7 @@ M.config = function()
         "yarn.lock",
         ".git"
       ),
+      handlers = handlers,
       on_attach = on_attach,
       init_options = {
         preferences = {
@@ -129,6 +157,7 @@ M.config = function()
         "yarn.lock",
         ".git"
       ),
+      handlers = handlers,
       flags = {
         debounce_text_changes = 500,
       },
@@ -209,6 +238,7 @@ M.config = function()
       end,
     },
     window = {
+      completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered()
     }
   })
