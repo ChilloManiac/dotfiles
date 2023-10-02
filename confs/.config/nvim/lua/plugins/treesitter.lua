@@ -1,6 +1,7 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  event = "BufReadPre",
   opts = {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {

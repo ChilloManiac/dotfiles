@@ -1,5 +1,10 @@
 local M = {
   'vinnymeller/swagger-preview.nvim',
+  cmd = {
+    "SwaggerPreview",
+    "SwaggerPreviewStop",
+    "SwaggerPreviewToggle"
+  },
   config = function()
     require("swagger-preview").setup({
       -- The port to run the preview server on

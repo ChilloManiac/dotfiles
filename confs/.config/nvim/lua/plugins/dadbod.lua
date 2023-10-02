@@ -1,7 +1,7 @@
-local M =  {
+local M = {
   'kristijanhusak/vim-dadbod-ui',
   dependencies = {
-    { 'tpope/vim-dadbod', lazy = true },
+    { 'tpope/vim-dadbod',                     lazy = true },
     { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
   },
   cmd = {
@@ -11,7 +11,7 @@ local M =  {
     'DBUIFindBuffer',
   },
   keys = {
-    {'<leader>dbui', '<cmd>DBUIToggle<CR>', 'DBUI Toggle'},
+    { '<leader>dbui', '<cmd>DBUIToggle<CR>', 'DBUI Toggle' },
   },
   init = function()
     -- Your DBUI configuration

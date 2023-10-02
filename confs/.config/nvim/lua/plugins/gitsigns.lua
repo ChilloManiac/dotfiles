@@ -1,5 +1,5 @@
 return {
     'lewis6991/gitsigns.nvim',
-    event = "VeryLazy",
+    event = "BufReadPre",
     opts = {} -- this is equalent to setup({}) function
 }

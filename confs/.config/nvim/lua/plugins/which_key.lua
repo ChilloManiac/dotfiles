@@ -1,5 +1,7 @@
 local M = {
 	"folke/which-key.nvim",
+  event = 'BufReadPre',
+  cmd = 'WhichKey',
 	config = function()
 		vim.o.timeout = true
 		vim.o.timeoutlen = 300

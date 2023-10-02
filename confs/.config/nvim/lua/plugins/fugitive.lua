@@ -20,7 +20,7 @@ local M = {
     { '<leader>gnb', newBranch,              desc = "New branch" },
     { '<leader>gp',  "<cmd>Git pull<CR>",    desc = "Git pull" },
   },
-  lazy = false,
+  cmd = "Git"
 }
 
 

@@ -1,5 +1,6 @@
 local M = {
   'thePrimeagen/harpoon',
+  enabled = false,
   keys = {
     { '<leader>hh', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = "Harpoon Ui" },
     { '<leader>ha', '<cmd>lua require("harpoon.mark").add_file()<cr>',        desc = "Harpoon Add File" },

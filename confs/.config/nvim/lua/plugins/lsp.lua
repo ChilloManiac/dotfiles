@@ -1,7 +1,7 @@
 ---@diagnostic disable: missing-fields
 local M = {
   "neovim/nvim-lspconfig",
-  lazy = false,
+  event = { 'BufReadPre' },
   dependencies = {
     -- LSP Support
     { "williamboman/mason-lspconfig.nvim" },
@@ -35,7 +35,6 @@ local ensure_installed = {
   'dockerls',
   'elixirls',
   'eslint',
-  'eslint_d',
   'html',
   'jsonls',
   'lua_ls',
@@ -52,14 +51,14 @@ local ensure_installed = {
 }
 
 local border = {
-    { '┌', 'FloatBorder' },
-    { '─', 'FloatBorder' },
-    { '┐', 'FloatBorder' },
-    { '│', 'FloatBorder' },
-    { '┘', 'FloatBorder' },
-    { '─', 'FloatBorder' },
-    { '└', 'FloatBorder' },
-    { '│', 'FloatBorder' },
+  { '┌', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '┐', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+  { '┘', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '└', 'FloatBorder' },
+  { '│', 'FloatBorder' },
 }
 
 M.config = function()
@@ -86,22 +85,22 @@ M.config = function()
     vim.keymap.set("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
     vim.keymap.set("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
 
-    if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint(bufnr, true)
-    end
+    -- if client.server_capabilities.inlayHintProvider then
+    --   vim.lsp.inlay_hint(bufnr, true)
+    -- end
   end
 
   local handlers = {
-      ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-      ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+    ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+    ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
   }
 
   -- Add border to the diagnostic popup window
   vim.diagnostic.config({
-      virtual_text = {
-          prefix = '■ ',
-      },
-      float = { border = border },
+    virtual_text = {
+      prefix = '■ ',
+    },
+    float = { border = border },
   })
 
   local default_setup = function(server)
@@ -205,6 +204,7 @@ M.config = function()
   cmp.setup({
     sources = {
       { name = 'path' },
+      { name = 'vim-dadbod-completion' },
       { name = 'nvim_lsp', keyword_length = 1 },
       { name = 'buffer',   keyword_length = 3 },
       { name = 'luasnip',  keyword_length = 2 },
@@ -241,22 +241,6 @@ M.config = function()
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered()
     }
-  })
-
-  -- Dadbod stuff
-  local autocomplete_group = vim.api.nvim_create_augroup('vimrc_autocompletion', { clear = true })
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'sql', 'mysql', 'plsql' },
-    callback = function()
-      cmp.setup.buffer({
-        sources = {
-          { name = 'vim-dadbod-completion' },
-          { name = 'buffer' },
-          { name = 'vsnip' },
-        },
-      })
-    end,
-    group = autocomplete_group,
   })
 
   -- Lint

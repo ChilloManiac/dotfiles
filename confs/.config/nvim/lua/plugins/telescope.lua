@@ -20,7 +20,6 @@ local M = {
     { '<leader>fp', '<cmd>Telescope project<cr>',                desc = "Find Projects" },
     { '<leader>fr', '<cmd>Telescope oldfiles<cr>',               desc = "Find Recent files" },
   },
-  lazy = false,
 }
 
 M.config = function()

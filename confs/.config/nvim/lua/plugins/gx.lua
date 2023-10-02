@@ -1,8 +1,8 @@
 local M = {
   'chrishrb/gx.nvim',
-  event = { "BufEnter" },
+  event = { "BufReadPre" },
   dependencies = { "nvim-lua/plenary.nvim" },
-  config = true, -- default settings
+  opts = {}
 }
 
 return M

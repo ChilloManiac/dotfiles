@@ -1,12 +1,30 @@
 local M = {
-  "github/copilot.vim",
-  config = function()
-    -- disallow github copilot on telescope prompt
-    vim.g.copilot_filetypes = {
+  "zbirenbaum/copilot.lua",
+  dependencies = {
+     -- { "zbirenbaum/copilot-cmp" },
+  },
+  event = { 'InsertEnter' },
+  opts = {
+    suggestion = {
+      enabled = true,
+      auto_trigger = true,
+      keymap = {
+        accept = "<C-CR>"
+      }
+    },
+    panel = {
+      enabled = true,
+      auto_refresh = true,
+      layout = {
+        position = "right"
+      }
+    },
+    filetypes = {
       TelescopePrompt = false,
       ["dap-repl"] = false,
     }
-  end,
+  }
+
 }
 
 return M
