@@ -246,6 +246,7 @@ M.config = function()
   -- Lint
   require("lint").linters_by_ft = {
     markdown = { "markdownlint" },
+    python = { "flake8" }
   }
 
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {

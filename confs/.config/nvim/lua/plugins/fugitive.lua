@@ -1,13 +1,23 @@
 local resetSoft = function()
-  vim.fn.system('git reset --soft $(git merge-base --fork-point origin/main)')
+  local merge_base = vim.fn.system('git merge-base --fork-point origin/main')
+  vim.cmd('Git reset --soft ' .. merge_base)
 end
 
 local newBranch = function()
   vim.ui.input({ prompt = "Branch name: " }, function(newBranchName)
     if newBranchName ~= nil then
-      vim.fn.system('git switch -c ' .. newBranchName)
+      vim.cmd('Git switch -c ' .. newBranchName)
     end
   end)
+end
+
+local stashAndNewBranch = function()
+  vim.cmd('Git add -A')
+  vim.cmd('Git stash')
+
+  newBranch()
+
+  vim.cmd('Git stash pop')
 end
 
 local M = {
@@ -18,6 +28,7 @@ local M = {
     { '<leader>gs',  "<cmd>Git<CR>",         desc = "Git status" },
     { '<leader>gr',  resetSoft,              desc = "Reset soft" },
     { '<leader>gnb', newBranch,              desc = "New branch" },
+    { '<leader>gsb', stashAndNewBranch,      desc = "Stash and new branch" },
     { '<leader>gp',  "<cmd>Git pull<CR>",    desc = "Git pull" },
   },
   cmd = "Git"
