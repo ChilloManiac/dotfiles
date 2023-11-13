@@ -11,27 +11,49 @@ local M = {
   keys = {
     {
       '<leader>tn',
-      '<cmd>lua require("neotest").run.run()<CR>',
+      function()
+        require('neotest').run.run()
+      end,
       desc = 'Test Nearest',
       { noremap = true }
     },
-    { '<leader>tf', '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', desc = 'Test File', { noremap = true } },
+    {
+      '<leader>tf',
+      function()
+        require('neotest').run.run({ vim.fn.expand("%")})
+      end,
+      desc = 'Test File',
+      { noremap = true }
+    },
     {
       '<leader>ta',
-      '<cmd>lua require("neotest").run.run({ suite = true})<CR>',
+      function()
+        require('neotest').run.run({ suite = true })
+      end,
       desc = 'Test Suite',
       { noremap = true }
     },
-    { '<leader>tl', '<cmd>lua require("neotest").run.run_last()<CR>',              desc = 'Test Last', { noremap = true } },
+    {
+      '<leader>tl',
+      function()
+        require('neotest').run.run_last()
+      end,
+      desc = 'Test Last',
+      { noremap = true }
+    },
     {
       '<leader>td',
-      '<cmd>lua require("neotest").run.run({strategy = "dap"})<CR>',
+      function()
+        require('neotest').run.run({ strategy = 'dap' })
+      end,
       desc = 'Test File with Debug',
       { noremap = true }
     },
     {
       '<leader>ts',
-      '<cmd>lua require("neotest").summary.toggle()<CR>',
+      function()
+        require('neotest').summary.toggle()
+      end,
       desc = 'Test Summary',
       { noremap = true }
     },
@@ -40,6 +62,8 @@ local M = {
 
 M.config = function()
   local neotest = require('neotest')
+
+  require('neotest-jest')
 
   neotest.setup({
     status = {
@@ -55,7 +79,7 @@ M.config = function()
     adapters = {
       require('neotest-jest')({
         jestCommand = 'yarn test',
-        --jestConfigFile = 'jest.integration.config.js',
+        jestConfigFile = 'jest.integration.config.js',
         cwd = function(path)
           return vim.fn.getcwd()
         end,

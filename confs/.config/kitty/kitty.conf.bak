@@ -1,6 +1,6 @@
 font_family JetBrainsMono Nerd Font
 font_size 15
-adjust_line_height 100%
+adjust_line_height 125%
 
 cursor_blink_interval 0
 window_padding_width 0
@@ -20,6 +20,6 @@ sync_to_monitor no
 
 
 # BEGIN_KITTY_THEME
-# Tokyo Night
+# Gruvbox Light
 include current-theme.conf
 # END_KITTY_THEME

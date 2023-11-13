@@ -5,25 +5,25 @@ local M = {
   },
   keys = {
     {
-      "<leader>dc",
+      "<F5>",
       function() require("dap").continue() end,
       desc =
       "Continue"
     },
     {
-      "<leader>dvo",
+      "<F10>",
       function() require("dap").step_over() end,
       desc =
       "Step Over"
     },
     {
-      "<leader>di",
+      "<F11>",
       function() require("dap").step_into() end,
       desc =
       "Step Into"
     },
     {
-      "<leader>do",
+      "<F12>",
       function() require("dap").step_out() end,
       desc =
       "Step Out"

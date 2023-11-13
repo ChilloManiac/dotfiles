@@ -68,7 +68,7 @@ function set-dotnet-vars {
 export GIT_EDITOR=nvim
 export GPG_TTY=$(tty)
 
-export PATH="$HOME/.local/bin:$HOME/.local/share/bob/nvim-bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/bob/nvim-bin:$HOME/.yarn/bin:$PATH"
 
 PATH="/home/cnor/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/cnor/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;

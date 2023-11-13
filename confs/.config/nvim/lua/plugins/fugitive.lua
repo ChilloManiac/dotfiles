@@ -15,6 +15,9 @@ local stashAndNewBranch = function()
   vim.cmd('Git add -A')
   vim.cmd('Git stash')
 
+  vim.cmd('Git switch main')
+  vim.cmd('Git pull')
+
   newBranch()
 
   vim.cmd('Git stash pop')

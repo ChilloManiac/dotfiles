@@ -7,26 +7,17 @@ local M = {
     { "williamboman/mason-lspconfig.nvim" },
     { "williamboman/mason.nvim" },
 
-    -- Autocompletion
-    { "hrsh7th/nvim-cmp", },
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-path" },
-    { "saadparwaiz1/cmp_luasnip" },
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "hrsh7th/cmp-nvim-lua" },
-
     -- Neodev
     { "folke/neodev.nvim" },
-
-    -- Snippet engine
-    { "L3MON4D3/LuaSnip" },
-    { "rafamadriz/friendly-snippets" },
 
     -- Dap
     { "jay-babu/mason-nvim-dap.nvim" },
 
     -- Lint
     { "mfussenegger/nvim-lint" },
+
+    -- Format
+    { 'stevearc/conform.nvim' }
   },
 }
 
@@ -161,17 +152,12 @@ M.config = function()
         debounce_text_changes = 500,
       },
       on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = true
-        if client.server_capabilities.documentFormattingProvider then
-          local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            pattern = "*",
-            callback = function()
-              vim.lsp.buf.format({ async = false })
-            end,
-            group = au_lsp,
-          })
-        end
+        local au_eslint_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          command = "EslintFixAll",
+          group = au_eslint_lsp,
+        })
       end
     })
   end
@@ -195,64 +181,33 @@ M.config = function()
     automatic_installation = false
   })
 
-  require("luasnip").setup({})
-
-  vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-
-  local cmp = require("cmp")
-  local cmp_select = { behavior = cmp.SelectBehavior.Select }
-  cmp.setup({
-    sources = {
-      { name = 'path' },
-      { name = 'vim-dadbod-completion' },
-      { name = 'nvim_lsp', keyword_length = 1 },
-      { name = 'buffer',   keyword_length = 3 },
-      { name = 'luasnip',  keyword_length = 2 },
-    },
-    mapping = cmp.mapping.preset.insert({
-      ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-      ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-      ["<CR>"] = cmp.mapping.confirm({ select = true }),
-      ["<Tab>"] = nil,
-      ["<S-Tab>"] = nil,
-      ["<C-.>"] = cmp.mapping({
-        i = function()
-          if cmp.visible() then
-            cmp.abort()
-          else
-            cmp.complete()
-          end
-        end,
-        c = function()
-          if cmp.visible() then
-            cmp.close()
-          else
-            cmp.complete()
-          end
-        end,
-      }),
-    }),
-    snippet = {
-      expand = function(args)
-        require("luasnip").lsp_expand(args.body)
-      end,
-    },
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered()
-    }
-  })
-
   -- Lint
   require("lint").linters_by_ft = {
     markdown = { "markdownlint" },
-    python = { "flake8" }
+    python = { "flake8" },
+    yaml = { 'actionlint' },
+    typescript = nil,
+    javascript = nil,
   }
 
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     callback = function()
       require("lint").try_lint()
     end,
+  })
+
+  -- Format
+  require('conform').setup({
+    formatters_by_ft = {
+      lua = { "stylua" },
+      -- Conform will run multiple formatters sequentially
+      python = { "isort", "black" },
+      terraform = { "terraform_fmt" },
+    },
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_fallback = true,
+    }
   })
 end
 
