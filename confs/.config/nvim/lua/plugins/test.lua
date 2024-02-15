@@ -20,7 +20,7 @@ local M = {
     {
       '<leader>tf',
       function()
-        require('neotest').run.run({ vim.fn.expand("%")})
+        require('neotest').run.run({ vim.fn.expand("%") })
       end,
       desc = 'Test File',
       { noremap = true }
@@ -79,7 +79,7 @@ M.config = function()
     adapters = {
       require('neotest-jest')({
         jestCommand = 'yarn test',
-        jestConfigFile = 'jest.integration.config.js',
+        -- jestConfigFile = 'jest.integration.config.js',
         cwd = function(path)
           return vim.fn.getcwd()
         end,

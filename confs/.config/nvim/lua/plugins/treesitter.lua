@@ -5,7 +5,7 @@ local M = {
   opts = {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {
-      enable = true, -- false will disable the whole extension
+      enable = true,          -- false will disable the whole extension
     },
     incremental_selection = {
       enable = true,
@@ -25,7 +25,7 @@ local M = {
     local treesitter_au = vim.api.nvim_create_augroup("treesitter_au", { clear = true })
 
     print("treesitter_au", treesitter_au)
-    vim.api.nvim_create_autocmd("BufReadPost,FileReadPost", {
+    vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
       pattern = "*",
       callback = function()
         vim.cmd("normal zx")

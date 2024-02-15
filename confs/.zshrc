@@ -36,9 +36,9 @@ autoload -Uz compinit
 compinit
 unsetopt BEEP # remove beeps
 
-# Rtx
+# Mise
 # ================================
-eval "$(rtx activate -s zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
 
 # Asdf
 # =================================
@@ -49,6 +49,7 @@ eval "$(rtx activate -s zsh)"
 # =================================
 alias vim=nvim
 alias k='kubectl'
+alias vimconf='nvim ~/.config/nvim/init.lua'
 
 # Functions
 # =================================
@@ -67,6 +68,7 @@ function set-dotnet-vars {
 # =================================
 export GIT_EDITOR=nvim
 export GPG_TTY=$(tty)
+export EMMA_ENV=dev
 
 export PATH="$HOME/.local/bin:$HOME/.local/share/bob/nvim-bin:$HOME/.yarn/bin:$PATH"
 
@@ -77,4 +79,3 @@ PERL_MB_OPT="--install_base \"/home/cnor/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/cnor/perl5"; export PERL_MM_OPT;
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/dk8ChNoe/.local/share/rtx/installs/terraform/1.3.9/bin/terraform terraform

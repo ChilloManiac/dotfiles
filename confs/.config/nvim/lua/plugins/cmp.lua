@@ -13,7 +13,7 @@ local M = {
   },
 }
 
-M.config = function ()
+M.config = function()
   require("luasnip").setup({})
 
   vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
@@ -24,9 +24,9 @@ M.config = function ()
     sources = {
       { name = 'path' },
       { name = 'vim-dadbod-completion' },
-      { name = 'nvim_lsp', keyword_length = 1 },
-      { name = 'buffer',   keyword_length = 3 },
-      { name = 'luasnip',  keyword_length = 2 },
+      { name = 'nvim_lsp',             keyword_length = 1 },
+      { name = 'buffer',               keyword_length = 4 },
+      { name = 'luasnip',              keyword_length = 2 },
     },
     mapping = cmp.mapping.preset.insert({
       ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
