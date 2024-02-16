@@ -20,6 +20,6 @@ sync_to_monitor no
 
 
 # BEGIN_KITTY_THEME
-# Gruvbox Light
+# Sea Shells
 include current-theme.conf
 # END_KITTY_THEME

@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/github/stars/streetturtle/awesome-wm-widgets.svg">
   <img src="https://img.shields.io/github/forks/streetturtle/awesome-wm-widgets.svg">
   <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/streetturtle/awesome-wm-widgets">
-  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/streetturtle/awesome-wm-widgets/luacheck">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/streetturtle/awesome-wm-widgets/build.yml?branch=main">
   <a href="https://www.buymeacoffee.com/streetturtle"><img src="https://img.shields.io/badge/-buy%20me%20a%20coffee-3B4252?style=flat&logo=Buy-Me-A-Coffee"></a>
   <a href="https://twitter.com/intent/tweet?text=Check%20out%20these%20awesome%20widgets%20for%20Awesome Window Manager%20&url=https://github.com/streetturtle/awesome-wm-widgets">
  <img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social">
@@ -46,7 +46,7 @@ Clone the repo under **~/.config/awesome/**, then follow an Installation section
 In case of any doubts/questions/problems:
  - create an [issue](https://github.com/streetturtle/awesome-wm-widgets/issues/new/choose)
  - raise a question on [Discussions](https://github.com/streetturtle/awesome-wm-widgets/discussions)!
- - ping me on  AwesomeWM's discord, here's an [invite](https://discord.gg/XYvn8R5)  
+ - ping me on AwesomeWM's discord, here's an [invite](https://discord.gg/BPat4F87dg)
 
 # Support
 

@@ -73,6 +73,7 @@ local function launch(args)
     local phrases = args.phrases or {'Goodbye!'}
     local icon_size = args.icon_size or 40
     local icon_margin = args.icon_margin or 16
+    local hide_on_leave = args.hide_on_leave or false
 
     local onlogout = args.onlogout or function () awesome.quit() end
     local onlock = args.onlock or function() awful.spawn.with_shell("i3lock") end
@@ -105,7 +106,7 @@ local function launch(args)
                     spacing = 8,
                     layout = wibox.layout.fixed.horizontal
                 },
-                valigh = 'center',
+                valign = 'center',
                 layout = wibox.container.place
             },
             {
@@ -118,12 +119,19 @@ local function launch(args)
         },
         id = 'a',
         shape_border_width = 1,
-        valigh = 'center',
+        valign = 'center',
         layout = wibox.container.place
     }
 
     w.screen = mouse.screen
     w.visible = true
+    if hide_on_leave then
+        w:connect_signal("mouse::leave", function()
+            phrase_widget:set_text('')
+            capi.keygrabber.stop()
+            w.visible = false
+        end)
+    end
 
     awful.placement.centered(w)
     capi.keygrabber.run(function(_, key, event)

@@ -38,7 +38,7 @@ unsetopt BEEP # remove beeps
 
 # Mise
 # ================================
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$(~/.cargo/bin/mise activate zsh)"
 
 # Asdf
 # =================================
@@ -70,7 +70,7 @@ export GIT_EDITOR=nvim
 export GPG_TTY=$(tty)
 export EMMA_ENV=dev
 
-export PATH="$HOME/.local/bin:$HOME/.local/share/bob/nvim-bin:$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.local/share/bob/nvim-bin:$HOME/.yarn/bin:$PATH"
 
 PATH="/home/cnor/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/cnor/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
