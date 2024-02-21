@@ -204,7 +204,7 @@ M.config = function()
       -- Conform will run multiple formatters sequentially
       python = { "isort", "black" },
       terraform = { "terraform_fmt" },
-      typescript = nil -- using biome now  { "prettier" },
+      typescript = { "biome" } -- using biome now  { "prettier" },
     },
     format_on_save = {
       timeout_ms = 500,
