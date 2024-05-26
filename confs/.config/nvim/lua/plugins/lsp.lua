@@ -117,6 +117,14 @@ M.config = function()
     })
   end
 
+  local elixirls_setup = function()
+    lspconfig.elixirls.setup({
+      on_attach = on_attach,
+      handlers = handlers,
+      cmd = { "/home/cnor/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" }
+    })
+  end
+
   local tsserver_setup = function()
     lspconfig.tsserver.setup({
       root_dir = lspconfig.util.root_pattern(
@@ -171,6 +179,7 @@ M.config = function()
       ["lua_ls"] = lua_setup,
       -- ["eslint"] = eslint_setup,
       ["tsserver"] = tsserver_setup,
+      ["elixirls"] = elixirls_setup,
     },
   })
 
