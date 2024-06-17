@@ -29,6 +29,7 @@ local function worker(user_args)
     local size = args.size or 18
     local timeout = args.timeout or 10
     local show_notification_mode = args.show_notification_mode or 'on_hover' -- on_hover / on_click
+    local notification_position = args.notification_position or 'top_right' -- see naughty.notify position argument
 
     local main_color = args.main_color or beautiful.fg_color
     local bg_color = args.bg_color or '#ffffff11'
@@ -89,7 +90,7 @@ local function worker(user_args)
         local charge = 0
         local status
         for s in stdout:gmatch("[^\r\n]+") do
-            local cur_status, charge_str, _ = string.match(s, '.+: (%a+), (%d?%d?%d)%%,?(.*)')
+            local cur_status, charge_str, _ = string.match(s, '.+: ([%a%s]+), (%d?%d?%d)%%,?(.*)')
             if cur_status ~= nil and charge_str ~=nil then
                 local cur_charge = tonumber(charge_str)
                 if cur_charge > charge then
@@ -118,7 +119,7 @@ local function worker(user_args)
             text.text = ''
         end
 
-        if charge < 15 then
+        if charge < 15 and charge > 0 then
             widget.colors = { low_level_color }
             if enable_battery_warning and status ~= 'Charging' and os.difftime(os.time(), last_battery_check) > 300 then
                 -- if 5 minutes have elapsed since the last warning
@@ -146,6 +147,7 @@ local function worker(user_args)
                         title = "Battery status",
                         timeout = 5,
                         width = 200,
+                        position = notification_position,
                     }
                 end)
     end

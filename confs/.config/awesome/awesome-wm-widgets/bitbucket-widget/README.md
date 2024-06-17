@@ -15,8 +15,8 @@ It is possible to customize widget by providing a table with all or some of the 
 | Name | Default | Description |
 |---|---|---|
 | `icon` | `~/.config/awesome/awesome-wm-widgets/bitbucket-widget/bitbucket-icon-gradient-blue.svg` | Path to the icon |
-| `host` | Required | e.g _http://api.bitbucket.org_ |
-| `uuid` | Required | e.g _{123e4567-e89b-12d3-a456-426614174000}_ |
+| `host` | Required | e.g. _http://api.bitbucket.org_ |
+| `uuid` | Required | e.g. _{123e4567-e89b-12d3-a456-426614174000}_ |
 | `workspace` | Required | Workspace ID|
 | `repo_slug` | Required | Repository slug |
 | `timeout` | 60 | How often in seconds the widget refreshes |
@@ -46,7 +46,7 @@ And test if it works by calling the API:
 curl -s -n 'https://api.bitbucket.org/2.0/repositories/'
 ```
 
-Also to properly setup required parameters you can use `test_bitbucket_api.sh` script - it uses the same curl call as widget.
+Also, to properly setup required parameters you can use `test_bitbucket_api.sh` script - it uses the same curl call as widget.
 
 Then clone/download repo and use widget in **rc.lua**:
 

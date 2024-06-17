@@ -60,7 +60,7 @@ local function worker(user_args)
             widget = wibox.widget.imagebox,
             resize = false
         },
-        valigh = 'center',
+        valign = 'center',
         layout = wibox.container.place,
     }
     local level_widget = wibox.widget {
@@ -125,20 +125,25 @@ local function worker(user_args)
         local battery_info = {}
         local capacities = {}
         for s in stdout:gmatch("[^\r\n]+") do
-            local status, charge_str, _ = string.match(s, '.+: (%a+), (%d?%d?%d)%%,?(.*)')
+            -- Match a line with status and charge level
+            local status, charge_str, _ = string.match(s, '.+: ([%a%s]+), (%d?%d?%d)%%,?(.*)')
             if status ~= nil then
+                -- Enforce that for each entry in battery_info there is an
+                -- entry in capacities of zero. If a battery has status
+                -- "Unknown" then there is no capacity reported and we treat it
+                -- as zero capactiy for later calculations.
                 table.insert(battery_info, {status = status, charge = tonumber(charge_str)})
-            else
-                local cap_str = string.match(s, '.+:.+last full capacity (%d+)')
-                table.insert(capacities, tonumber(cap_str))
+                table.insert(capacities, 0)
+            end
+
+            -- Match a line where capacity is reported
+            local cap_str = string.match(s, '.+:.+last full capacity (%d+)')
+            if cap_str ~= nil then
+                capacities[#capacities] = tonumber(cap_str) or 0
             end
         end
 
         local capacity = 0
-        for _, cap in ipairs(capacities) do
-            capacity = capacity + cap
-        end
-
         local charge = 0
         local status
         for i, batt in ipairs(battery_info) do
@@ -148,7 +153,11 @@ local function worker(user_args)
                     -- this is arbitrary, and maybe another metric should be used
                 end
 
+                -- Adds up total (capacity-weighted) charge and total capacity.
+                -- It effectively ignores batteries with status "Unknown" as we
+                -- treat them with capacity zero.
                 charge = charge + batt.charge * capacities[i]
+                capacity = capacity + capacities[i]
             end
         end
         charge = charge / capacity
@@ -157,7 +166,7 @@ local function worker(user_args)
             level_widget.text = string.format('%d%%', charge)
         end
 
-        if (charge >= 0 and charge < 15) then
+        if (charge >= 1 and charge < 15) then
             batteryType = "battery-empty%s-symbolic"
             if enable_battery_warning and status ~= 'Charging' and os.difftime(os.time(), last_battery_check) > 300 then
                 -- if 5 minutes have elapsed since the last warning

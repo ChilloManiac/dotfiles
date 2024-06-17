@@ -9,13 +9,15 @@ It is possible to customize widget by providing a table with all or some of the 
 | Name | Default | Description |
 |---|---|---|
 | `type`| `arc` | The widget type. Could be `arc` or `icon_and_text` |
-| `program` | `light` | The program used to control the brightness, either 'light' or 'xbacklight'. |
+| `program` | `light` | The program used to control the brightness, either `light`, `xbacklight`, or `brightnessctl`. |
 | `step` | 5 | Step |
 | `base` | 20 | Base level to set brightness to on left click. |
 | `path_to_icon` | `/usr/share/icons/Arc/status/symbolic/display-brightness-symbolic.svg` | Path to the icon |
-| `font` | `Play 9` | Font |
+| `font` | `beautiful.font` | Font name and size, like `Play 12` |
 | `timeout` | 1 | How often in seconds the widget refreshes. Check the note below |
 | `tooltip` | false | Display brightness level in a tooltip when the mouse cursor hovers the widget |
+| `percentage` | false | Display a '%' character after the brightness level |
+| `rmb_set_max` | false | Right mouse click sets the brightness level to maximum |
 
 _Note:_ If brightness is controlled only by the widget (either by a mouse, or by a shortcut, then the `timeout` could be quite big, as there is no reason to synchronize the brightness level).
 
@@ -33,7 +35,7 @@ To choose the right `program` argument, first you need to check which of them wo
 
     If there is no output it means that it doesn't work, you can either try to fix it, or try to use `light`.
 
- - using `light` command
+ - using `light` command:
  
     Install (on Ubuntu it's available in the apt repository) from the repo: [github.com/haikarainen/light](https://github.com/haikarainen/light) and check if it works by running
 
@@ -43,6 +45,13 @@ To choose the right `program` argument, first you need to check which of them wo
     light -A 5
     ```
     If you're on Ubuntu/debian and if the brightness level doesn't change, try to do this: https://github.com/haikarainen/light/issues/113#issuecomment-632638436.
+
+  - using `brightnessctl`:
+
+    On Ubuntu it is available in the apt repository. Install and check the ouptut of the following command.
+    ```bash
+    brightnessctl --list
+    ```
 
 Then clone this repo under **~/.config/awesome/**:
 

@@ -18,6 +18,10 @@ local WIDGET_DIR = HOME_DIR .. '/.config/awesome/awesome-wm-widgets/weather-widg
 local GET_FORECAST_CMD = [[bash -c "curl -s --show-error -X GET '%s'"]]
 
 local SYS_LANG = os.getenv("LANG"):sub(1, 2)
+if SYS_LANG == "C" or SYS_LANG == "C." then
+    -- C-locale is a common fallback for simple English
+    SYS_LANG = "en"
+end
 -- default language is ENglish
 local LANG = gears.filesystem.file_readable(WIDGET_DIR .. "/" .. "locale/" ..
                                       SYS_LANG .. ".lua") and SYS_LANG or "en"
@@ -51,6 +55,7 @@ local weather_popup = awful.popup {
     border_color = beautiful.bg_focus,
     maximum_width = 400,
     offset = {y = 5},
+    hide_on_right_click = true,
     widget = {}
 }
 
