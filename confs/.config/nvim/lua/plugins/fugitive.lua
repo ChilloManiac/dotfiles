@@ -32,7 +32,8 @@ local M = {
     { '<leader>gsb', stashAndNewBranch,   desc = "Stash and new branch" },
     { '<leader>gp',  "<cmd>Git pull<CR>", desc = "Git pull" },
   },
-  cmd = "Git"
+  cmd = "Git",
+  enabled = false
 }
 
 
