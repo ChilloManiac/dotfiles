@@ -149,6 +149,28 @@ M.config = function()
     })
   end
 
+  local tailwindcss_setup = function()
+    lspconfig.tailwindcss.setup({
+      init_options = {
+        userLanguages = {
+          elixir = "html-eex",
+          eelixir = "html-eex",
+          heex = "html-eex",
+        },
+      },
+      settings = {
+        tailwindCSS = {
+          experimental = {
+            classRegex = {
+              'class[:]\\s*"([^"]*)"',
+            },
+          },
+        },
+      },
+    })
+  end
+
+
   -- local eslint_setup = function()
   --   lspconfig.eslint.setup({
   --     root_dir = lspconfig.util.root_pattern(
@@ -180,6 +202,7 @@ M.config = function()
       -- ["eslint"] = eslint_setup,
       ["tsserver"] = tsserver_setup,
       ["elixirls"] = elixirls_setup,
+      ["tailwindcss"] = tailwindcss_setup,
     },
   })
 
