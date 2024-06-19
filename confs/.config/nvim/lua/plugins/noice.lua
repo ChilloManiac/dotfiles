@@ -4,7 +4,25 @@ local M = {
   dependencies = {
     "MunifTanjim/nui.nvim",
     "rcarriga/nvim-notify",
-  }
+  },
+  lazy = false,
+  keys = {
+    {
+      "<leader>pp",
+      ":Noice dismiss<CR>",
+      desc = "Dismiss"
+    },
+    {
+      "<leader>pe",
+      ":Noice enable<CR>",
+      desc = "Enable"
+    },
+    {
+      "<leader>pd",
+      ":Noice disable<CR>",
+      desc = "Disable"
+    },
+  },
 }
 
 M.config = function()
@@ -20,11 +38,12 @@ M.config = function()
       },
     },
     messages = {
-      enabled = false
+      enabled = true
     },
     notify = {
-      enabled = false
+      enabled = true
     },
+
     -- you can enable a preset for easier configuration
     presets = {
       bottom_search = true,         -- use a classic bottom cmdline for search

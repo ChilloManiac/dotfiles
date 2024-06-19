@@ -24,6 +24,7 @@ M.config = function()
     sources = {
       { name = 'path' },
       { name = 'vim-dadbod-completion' },
+      { name = 'neorg' },
       { name = 'nvim_lsp',             keyword_length = 1 },
       { name = 'buffer',               keyword_length = 4 },
       { name = 'luasnip',              keyword_length = 2 },

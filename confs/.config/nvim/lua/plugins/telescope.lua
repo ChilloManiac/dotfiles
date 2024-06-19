@@ -27,14 +27,14 @@ local M = {
 M.config = function()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
-  local trouble = require("trouble.providers.telescope")
+  local trouble = require("trouble.sources.telescope")
 
   telescope.setup({
     defaults = {
       preview = false,
       mappings = {
-        i = { ["<c-t>"] = trouble.open_with_trouble },
-        n = { ["<c-t>"] = trouble.open_with_trouble },
+        i = { ["<c-t>"] = trouble.open },
+        n = { ["<c-t>"] = trouble.open },
       }
     },
     extensions = {

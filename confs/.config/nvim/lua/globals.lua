@@ -28,6 +28,7 @@ vim.opt.swapfile = false
 -- Key maps
 --------------------------------------------------------------------------
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 vim.api.nvim_set_keymap("n", "<leader>ve", ":edit ~/.config/nvim/init.lua<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>vl", ":edit ~/.config/nvim/lua/plugins/lsp.lua<CR>", { noremap = true })
