@@ -79,7 +79,7 @@ M.config = function()
     adapters = {
       require('neotest-jest')({
         jestCommand = 'yarn test',
-        -- jestConfigFile = 'jest.integration.config.js',
+        jestConfigFile = 'jest.integration.config.js',
         cwd = function(path)
           return vim.fn.getcwd()
         end,

@@ -22,11 +22,11 @@ local M = {
 }
 
 local ensure_installed = {
-  'biome',
+  --'biome',
   'cssls',
   'dockerls',
   'elixirls',
-  -- 'eslint',
+  'eslint',
   'html',
   'jsonls',
   'lua_ls',
@@ -171,27 +171,27 @@ M.config = function()
   end
 
 
-  -- local eslint_setup = function()
-  --   lspconfig.eslint.setup({
-  --     root_dir = lspconfig.util.root_pattern(
-  --       "package.json",
-  --       "yarn.lock",
-  --       ".git"
-  --     ),
-  --     handlers = handlers,
-  --     flags = {
-  --       debounce_text_changes = 500,
-  --     },
-  --     on_attach = function(client, bufnr)
-  --       local au_eslint_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
-  --       vim.api.nvim_create_autocmd("BufWritePre", {
-  --         buffer = bufnr,
-  --         command = "EslintFixAll",
-  --         group = au_eslint_lsp,
-  --       })
-  --     end
-  --   })
-  -- end
+  local eslint_setup = function()
+    lspconfig.eslint.setup({
+      root_dir = lspconfig.util.root_pattern(
+        "package.json",
+        "yarn.lock",
+        ".git"
+      ),
+      handlers = handlers,
+      flags = {
+        debounce_text_changes = 500,
+      },
+      on_attach = function(client, bufnr)
+        local au_eslint_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          command = "EslintFixAll",
+          group = au_eslint_lsp,
+        })
+      end
+    })
+  end
 
   require("mason").setup({})
   require("mason-lspconfig").setup({
@@ -199,7 +199,7 @@ M.config = function()
     handlers = {
       default_setup,
       ["lua_ls"] = lua_setup,
-      -- ["eslint"] = eslint_setup,
+      ["eslint"] = eslint_setup,
       ["tsserver"] = tsserver_setup,
       ["elixirls"] = elixirls_setup,
       ["tailwindcss"] = tailwindcss_setup,
@@ -236,7 +236,7 @@ M.config = function()
       -- Conform will run multiple formatters sequentially
       python = { "isort", "black" },
       terraform = { "terraform_fmt" },
-      typescript = { "biome" } -- using biome now  { "prettier" },
+      typescript = { "prettier" }
     },
     format_on_save = {
       timeout_ms = 500,
