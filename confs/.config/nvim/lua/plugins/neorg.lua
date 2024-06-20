@@ -51,10 +51,14 @@ return {
         }
       }
 
-      vim.api.nvim_set_keymap("n", "<leader>mt", "<cmd>Neorg journal today<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>my", "<cmd>Neorg journal yesterday<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>mo", "<cmd>Neorg journal tomorrow<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>mc", "<cmd>Neorg journal custom<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>mt", "<cmd>tabnew<CR><cmd>Neorg journal today<CR>",
+        { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>my", "<cmd>tabnew<CR><cmd>Neorg journal yesterday<CR>",
+        { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>mo", "<cmd>tabnew<CR><cmd>Neorg journal tomorrow<CR>",
+        { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>mc", "<cmd>tabnew<CR><cmd>Neorg journal custom<CR>",
+        { noremap = true, silent = true })
     end
   }
 }
