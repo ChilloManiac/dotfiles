@@ -111,10 +111,10 @@ return {
   ntree,
   swagger_preview,
   whichkey,
-  { 'numToStr/Comment.nvim',                event = { "BufReadPre" } },
-  { 'davidgranstrom/nvim-markdown-preview', cmd = { 'MarkdownPreview' } },
-  { 'windwp/nvim-autopairs',                event = { "InsertEnter" } },
-  { 'smoka7/hop.nvim',                      keys = { { 'mm', '<cmd>HopWord<CR>', "Hop Word" } } },
-  { "kylechui/nvim-surround",               event = { "BufReadPre" },                           opts = {} },
-  { 'tummetott/unimpaired.nvim',            event = { "BufReadPre" },                           opts = {} }
+  { 'numToStr/Comment.nvim',                event = { "BufReadPre" },                            opts = {} },
+  { 'davidgranstrom/nvim-markdown-preview', cmd = { 'MarkdownPreview' },                         opts = {} },
+  { 'windwp/nvim-autopairs',                event = { "InsertEnter" },                           opts = {} },
+  { 'smoka7/hop.nvim',                      keys = { { 'mm', '<cmd>HopWord<CR>', "Hop Word" } }, opts = {} },
+  { "kylechui/nvim-surround",               event = { "BufReadPre" },                            opts = {} },
+  { 'tummetott/unimpaired.nvim',            event = { "BufReadPre" },                            opts = {} }
 }

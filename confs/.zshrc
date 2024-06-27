@@ -37,20 +37,16 @@ autoload -Uz compinit
 compinit
 unsetopt BEEP # remove beeps
 
-# Mise
-# ================================
-eval "$(~/.cargo/bin/mise activate zsh)"
-
-# Asdf
-# =================================
-#. ~/.asdf/plugins/java/set-java-home.zsh
-# . ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
 
 # Aliases
 # =================================
 alias vim=nvim
 alias k='kubectl'
 alias vimconf='nvim ~/.config/nvim/init.lua'
+
+# Mise
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+eval "$(zoxide init zsh)"
 
 # Functions
 # =================================
@@ -77,5 +73,12 @@ PERL5LIB="/home/cnor/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/cnor/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/cnor/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/cnor/perl5"; export PERL_MM_OPT;
+
+
+# LEGO
+# ==========
+if [ -f "$HOME/.config/lego/accounts.sh" ]; then
+  source "$HOME/.config/lego/accounts.sh"
+fi
 
 autoload -U +X bashcompinit && bashcompinit

@@ -31,6 +31,10 @@ return {
             config = {
               hook = function(keybinds)
                 keybinds.remap_key("norg", "n", "<C-Space>", "<C-.>")
+                keybinds.map("norg", "n", "mt", "<cmd>Neorg journal today<CR>")
+                keybinds.map("norg", "n", "my", "<cmd>Neorg journal yesterday<CR>")
+                keybinds.map("norg", "n", "mo", "<cmd>Neorg journal tomorrow<CR>")
+                keybinds.map("norg", "n", "mc", "<cmd>Neorg journal custom<CR>")
               end,
             }
           },
@@ -51,13 +55,7 @@ return {
         }
       }
 
-      vim.api.nvim_set_keymap("n", "<leader>mt", "<cmd>tabnew<CR><cmd>Neorg journal today<CR>",
-        { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>my", "<cmd>tabnew<CR><cmd>Neorg journal yesterday<CR>",
-        { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>mo", "<cmd>tabnew<CR><cmd>Neorg journal tomorrow<CR>",
-        { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>mc", "<cmd>tabnew<CR><cmd>Neorg journal custom<CR>",
+      vim.api.nvim_set_keymap("n", "<leader>mm", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>",
         { noremap = true, silent = true })
     end
   }
