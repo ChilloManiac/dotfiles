@@ -15,5 +15,5 @@ ls.add_snippets("norg", {
   {}
   ]], { i(1, 'language'), i(2, "code goes here"), i(0) })),
 
-  s("chechbox", fmt("- ( ) {}", { i(1, 'todo...') }))
+  s("td", fmt("- ( ) {}", { i(1, 'todo...') }))
 })

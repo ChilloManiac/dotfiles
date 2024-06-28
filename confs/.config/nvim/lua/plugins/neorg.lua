@@ -31,10 +31,11 @@ return {
             config = {
               hook = function(keybinds)
                 keybinds.remap_key("norg", "n", "<C-Space>", "<C-.>")
-                keybinds.map("norg", "n", "mt", "<cmd>Neorg journal today<CR>")
-                keybinds.map("norg", "n", "my", "<cmd>Neorg journal yesterday<CR>")
-                keybinds.map("norg", "n", "mo", "<cmd>Neorg journal tomorrow<CR>")
-                keybinds.map("norg", "n", "mc", "<cmd>Neorg journal custom<CR>")
+                keybinds.map("norg", "n", "nt", "<cmd>Neorg journal today<CR>")
+                keybinds.map("norg", "n", "ny", "<cmd>Neorg journal yesterday<CR>")
+                keybinds.map("norg", "n", "no", "<cmd>Neorg journal tomorrow<CR>")
+                keybinds.map("norg", "n", "nc", "<cmd>Neorg journal custom<CR>")
+                keybinds.map("norg", "n", "<leader>fn", "<cmd>Telescope find_files cwd=~/notes<CR>")
               end,
             }
           },
@@ -55,7 +56,7 @@ return {
         }
       }
 
-      vim.api.nvim_set_keymap("n", "<leader>mm", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>",
+      vim.api.nvim_set_keymap("n", "<leader>nn", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>",
         { noremap = true, silent = true })
     end
   }

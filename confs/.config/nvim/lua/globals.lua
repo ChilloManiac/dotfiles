@@ -30,10 +30,6 @@ vim.opt.swapfile = false
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-vim.api.nvim_set_keymap("n", "<leader>ve", ":edit ~/.config/nvim/init.lua<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>vl", ":edit ~/.config/nvim/lua/plugins/lsp.lua<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>vr", ":luafile ~/.config/nvim/init.lua<CR>", { noremap = true })
-
 vim.api.nvim_set_keymap("n", "<leader>k", ":nohlsearch<CR>", { noremap = true })
 
 vim.api.nvim_set_keymap("v", "y", "myy`y", { noremap = true })
