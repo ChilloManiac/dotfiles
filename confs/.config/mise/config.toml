@@ -1,0 +1,12 @@
+[tools]
+python = "3.11.1"
+lua = "5.2.4"
+node = "18"
+zoxide = "latest"
+awscli = "latest"
+"cargo:starship" = "latest"
+"cargo:bob-nvim" = "latest"
+"npm:neovim" = "latest"
+
+[settings]
+experimental = true
