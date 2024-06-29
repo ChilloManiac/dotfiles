@@ -52,7 +52,7 @@ fi
 
 # Tools
 # =================================
-eval "$(zoxide init zsh)" # Install by Mise
+eval "$(zoxide init zsh --cmd cd)" # Install by Mise
 eval "$(starship init zsh)" # `cargo install starship --locked`
 
 autoload -U +X bashcompinit && bashcompinit

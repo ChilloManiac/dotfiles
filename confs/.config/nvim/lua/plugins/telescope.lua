@@ -9,7 +9,6 @@ local M = {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'debugloop/telescope-undo.nvim' },
     { 'nvim-telescope/telescope-project.nvim' },
-    { 'folke/trouble.nvim' }
   },
   keys = {
     { '<leader>ff', '<cmd>Telescope find_files hidden=true<cr>',        desc = "Find Files" },
@@ -28,15 +27,10 @@ local M = {
 M.config = function()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
-  local trouble = require("trouble.sources.telescope")
 
   telescope.setup({
     defaults = {
       preview = false,
-      mappings = {
-        i = { ["<c-t>"] = trouble.open },
-        n = { ["<c-t>"] = trouble.open },
-      }
     },
     extensions = {
       ["ui-select"] = {
