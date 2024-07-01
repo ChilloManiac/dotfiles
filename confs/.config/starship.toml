@@ -9,6 +9,7 @@ $directory\
 [](fg:color_yellow bg:color_aqua)\
 $git_branch\
 $git_status\
+$git_state\
 [](fg:color_aqua bg:color_blue)\
 $c\
 $rust\
@@ -21,7 +22,8 @@ $kotlin\
 $haskell\
 $python\
 [](fg:color_blue bg:color_bg1)\
-$time\
+$memory_usage\
+$cmd_duration\
 [ ](fg:color_bg1)\
 $line_break$character"""
 
@@ -78,6 +80,7 @@ ssh_only = false
 ssh_symbol = " "
 format = '[@$ssh_symbol$hostname ]($style)'
 
+
 [directory]
 style = "fg:color_fg0 bg:color_yellow"
 format = "[ $path ]($style)"
@@ -100,6 +103,10 @@ format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
 [git_status]
 style = "bg:color_aqua"
 format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+
+[git_state]
+style = "bg:color_aqua"
+format = '[[ $state( $progress_current/$progress_total) ](fg:color_fg0 bg:color_aqua)]($style)'
 
 [nodejs]
 symbol = ""
@@ -159,6 +166,18 @@ format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
 [conda]
 style = "bg:color_bg3"
 format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[cmd_duration]
+min_time = 0
+format = "[ $duration ]($style)"
+style = "bg:color_bg1 fg:color_fg0"
+
+[memory_usage]
+disabled = false
+threshold = 0
+style = "bg:color_bg1 fg:color_fg0"
+format = '[ $symbol${ram_pct} ]($style)'
+symbol = " "
 
 [time]
 disabled = false
