@@ -7,6 +7,9 @@ return {
   {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
+    keys = {
+      { "<leader>nn", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>", "Open Neorg" },
+    },
     config = function()
       require("neorg").setup {
         load = {
@@ -55,9 +58,6 @@ return {
           },
         }
       }
-
-      vim.api.nvim_set_keymap("n", "<leader>nn", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>",
-        { noremap = true, silent = true })
     end
   }
 }

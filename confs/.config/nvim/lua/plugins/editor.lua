@@ -46,7 +46,16 @@ local lualine = {
   'nvim-lualine/lualine.nvim',
   dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   events = { 'VimEnter' },
-  opts = {}
+  opts = {
+    sections = {
+      lualine_a = { 'filename', 'filesize' },
+      lualine_b = { 'branch', 'diff' },
+      lualine_c = { 'diagnostics', 'searchcount' },
+      lualine_x = {},
+      lualine_y = { 'encoding' },
+      lualine_z = { 'location' }
+    },
+  }
 }
 
 local oil = {
@@ -92,6 +101,16 @@ local whichkey = {
   end
 }
 
+local cokeline = {
+  "willothy/nvim-cokeline",
+  dependencies = {
+    "nvim-lua/plenary.nvim",       -- Required for v0.4.0+
+    "nvim-tree/nvim-web-devicons", -- If you want devicons
+    "stevearc/resession.nvim"      -- Optional, for persistent history
+  },
+  config = true
+}
+
 
 return {
   colorizer,
@@ -100,6 +119,7 @@ return {
   oil,
   swagger_preview,
   whichkey,
+  cokeline,
   { 'numToStr/Comment.nvim',                event = { "BufReadPre" },                            opts = {} },
   { 'davidgranstrom/nvim-markdown-preview', cmd = { 'MarkdownPreview' },                         opts = {} },
   { 'windwp/nvim-autopairs',                event = { "InsertEnter" },                           opts = {} },

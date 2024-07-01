@@ -9,6 +9,12 @@ local _M = {
       return
     end
 
+    if #zoxide_result == 1 then
+      print('Found only one result, changing directory to "' .. zoxide_result[1] .. '"')
+      vim.fn.chdir(zoxide_result[1])
+      return
+    end
+
     vim.ui.select(zoxide_result, { title = "zoxide" }, function(selected)
       vim.fn.chdir(selected)
     end)
