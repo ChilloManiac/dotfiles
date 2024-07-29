@@ -55,6 +55,7 @@ local lualine = {
       lualine_y = { 'encoding' },
       lualine_z = { 'location' }
     },
+    theme = "auto",
   }
 }
 

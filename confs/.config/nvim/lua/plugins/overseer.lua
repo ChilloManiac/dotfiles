@@ -10,9 +10,10 @@ local M = {
 M.config = function()
   local overseer = require('overseer')
 
+
   overseer.setup({
     task_list = {
-      direction = 'right'
+      direction = 'left'
     }
   })
 
@@ -26,6 +27,37 @@ M.config = function()
     })
     lualine.setup(withSections)
   end
+
+  -- Setup custom exercism tasks
+  local exercism_dir = vim.fn.expand('$HOME/exercism')
+
+  overseer.register_template({
+    name = "Exercism Submit",
+    builder = function()
+      return {
+        cmd = "exercism",
+        args = { "submit" },
+        name = "Exercism Submit",
+      }
+    end,
+    condition = {
+      dir = exercism_dir
+    }
+  })
+
+  overseer.register_template({
+    name = "Exercism Test",
+    builder = function()
+      return {
+        cmd = "exercism",
+        args = { "test" },
+        name = "Exercism Test",
+      }
+    end,
+    condition = {
+      dir = exercism_dir
+    }
+  })
 end
 
 return M

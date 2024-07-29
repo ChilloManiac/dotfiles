@@ -27,6 +27,7 @@ local ensure_installed = {
   'dockerls',
   'elixirls',
   'eslint',
+  'gopls',
   'html',
   'jsonls',
   'lua_ls',

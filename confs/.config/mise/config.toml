@@ -11,6 +11,7 @@ terraform = "latest"
 "cargo:starship" = "latest"
 "cargo:bob-nvim" = "latest"
 "npm:neovim" = "latest"
+go = "1.22.4"
 
 [settings]
 experimental = true

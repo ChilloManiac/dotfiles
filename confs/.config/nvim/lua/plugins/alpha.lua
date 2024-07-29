@@ -54,7 +54,7 @@ end
 
 return {
   "goolord/alpha-nvim",
-  event = "VimEnter",
+  lazy = false,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local alpha = require("alpha")
@@ -67,11 +67,7 @@ return {
     -- TODO: Add projects and Frecency?
     dashboard.section.buttons.val = {
       dashboard.button("e", "  New file", ":ene <BAR> startinsert<CR>"),
-      dashboard.button("LDR f f", "  Find files", "<cmd>Telescope find_files<CR>"),
-      dashboard.button("LDR f r", "󰔠  Recent files", "<cmd>Telescope oldfiles<CR>"),
-      dashboard.button("LDR f p", "󱠏  Projects", "<cmd>Telescope projects<CR>"),
-      dashboard.button("LDR v e", "  Config", "<cmd>:edit ~/.config/nvim/init.lua<CR>"),
-      dashboard.button("LDR p l", "  Plugins", "<cmd>Lazy<CR>"),
+      dashboard.button("LDR p l", "  Lazy", "<cmd>Lazy<CR>"),
       dashboard.button("LDR q", "  Quit", "<cmd>qa<CR>"),
     }
 

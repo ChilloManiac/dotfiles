@@ -121,7 +121,7 @@ format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 [elixir]
 symbol = " "
 style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+format = '[[ $symbol($version-$otp_version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [rust]
 symbol = ""

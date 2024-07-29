@@ -8,6 +8,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 COMPLETION_WAITING_DOTS="false"
 HIST_STAMPS="dd-mm-yyyy"
 
+
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
@@ -15,7 +16,6 @@ plugins=(
   fzf
   docker
   rust
-  ripgrep
   terraform
   mise
   zsh-syntax-highlighting # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
