@@ -1,7 +1,7 @@
 ---@diagnostic disable: missing-fields
 local M = {
   "neovim/nvim-lspconfig",
-  event = { 'BufReadPre' },
+  lazy = false,
   dependencies = {
     -- LSP Support
     { "williamboman/mason-lspconfig.nvim" },
@@ -32,6 +32,7 @@ local ensure_installed = {
   'jsonls',
   'lua_ls',
   'marksman',
+  -- 'pbls', Not in mason-lspconfig??
   'powershell_es',
   'pyright',
   'spectral',
@@ -122,7 +123,7 @@ M.config = function()
     lspconfig.elixirls.setup({
       on_attach = on_attach,
       handlers = handlers,
-      cmd = { "/home/cnor/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" }
+      cmd = { "$HOME/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" }
     })
   end
 
@@ -199,6 +200,7 @@ M.config = function()
     ensure_installed = ensure_installed,
     handlers = {
       default_setup,
+      ["pbls"] = default_setup, -- Not setup otherwise it seems
       ["lua_ls"] = lua_setup,
       ["eslint"] = eslint_setup,
       ["tsserver"] = tsserver_setup,
@@ -237,7 +239,8 @@ M.config = function()
       -- Conform will run multiple formatters sequentially
       python = { "isort", "black" },
       terraform = { "terraform_fmt" },
-      typescript = { "prettier" }
+      typescript = { "prettier" },
+      markdown = { "prettier" }
     },
     format_on_save = {
       timeout_ms = 500,

@@ -112,6 +112,15 @@ local cokeline = {
   config = true
 }
 
+local markview = {
+  "OXY2DEV/markview.nvim",
+  ft = "markdown",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-tree/nvim-web-devicons"
+  },
+}
+
 
 return {
   colorizer,
@@ -121,10 +130,12 @@ return {
   swagger_preview,
   whichkey,
   cokeline,
-  { 'numToStr/Comment.nvim',                event = { "BufReadPre" },                            opts = {} },
-  { 'davidgranstrom/nvim-markdown-preview', cmd = { 'MarkdownPreview' },                         opts = {} },
-  { 'windwp/nvim-autopairs',                event = { "InsertEnter" },                           opts = {} },
-  { 'smoka7/hop.nvim',                      keys = { { 'mm', '<cmd>HopWord<CR>', "Hop Word" } }, opts = {} },
-  { "kylechui/nvim-surround",               event = { "BufReadPre" },                            opts = {} },
-  { 'tummetott/unimpaired.nvim',            event = { "BufReadPre" },                            opts = {} }
+  markview,
+  { 'numToStr/Comment.nvim',                  event = { "BufReadPre" },                            opts = {} },
+  { 'davidgranstrom/nvim-markdown-preview',   cmd = { 'MarkdownPreview' },                         opts = {} },
+  { 'windwp/nvim-autopairs',                  event = { "InsertEnter" },                           opts = {} },
+  { 'smoka7/hop.nvim',                        keys = { { 'mm', '<cmd>HopWord<CR>', "Hop Word" } }, opts = {} },
+  { "kylechui/nvim-surround",                 event = { "BufReadPre" },                            opts = {} },
+  { 'tummetott/unimpaired.nvim',              event = { "BufReadPre" },                            opts = {} },
+  { "rachartier/tiny-inline-diagnostic.nvim", event = "BufReadPre",                                opts = {} },
 }

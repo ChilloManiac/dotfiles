@@ -12,6 +12,7 @@ terraform = "latest"
 "cargo:bob-nvim" = "latest"
 "npm:neovim" = "latest"
 go = "1.22.4"
+protoc = "latest"
 
 [settings]
 experimental = true
