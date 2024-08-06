@@ -23,6 +23,8 @@ vim.opt.updatetime = 300
 vim.opt.redrawtime = 10000
 vim.opt.encoding = "UTF-8"
 vim.opt.swapfile = false
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
 
 --------------------------------------------------------------------------
 -- Key maps

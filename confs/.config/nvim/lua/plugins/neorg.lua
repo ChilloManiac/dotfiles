@@ -11,6 +11,20 @@ return {
       { "<leader>nn", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>", "Open Neorg" },
     },
     config = function()
+      local au_group = vim.api.nvim_create_augroup("Neorg", {})
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "norg",
+        group = au_group,
+        callback = function()
+          vim.keymap.set("n", "<C-.>", "<Plug>(neorg.qol.todo-items.todo.task-cycle)", { buffer = true })
+          vim.keymap.set("n", "nt", "<cmd>Neorg journal today<CR>", { buffer = true })
+          vim.keymap.set("n", "ny", "<cmd>Neorg journal yesterday<CR>", { buffer = true })
+          vim.keymap.set("n", "no", "<cmd>Neorg journal tomorrow<CR>", { buffer = true })
+          vim.keymap.set("n", "nc", "<cmd>Neorg journal custom<CR>", { buffer = true })
+          vim.keymap.set("n", "<leader>fn", "<cmd>Telescope find_files cwd=~/notes<CR>", { buffer = true })
+        end
+      })
+
       require("neorg").setup {
         load = {
           ["core.defaults"] = {},
@@ -30,18 +44,7 @@ return {
               type = "auto"
             }
           },
-          ["core.keybinds"] = {
-            config = {
-              hook = function(keybinds)
-                keybinds.remap_key("norg", "n", "<C-Space>", "<C-.>")
-                keybinds.map("norg", "n", "nt", "<cmd>Neorg journal today<CR>")
-                keybinds.map("norg", "n", "ny", "<cmd>Neorg journal yesterday<CR>")
-                keybinds.map("norg", "n", "no", "<cmd>Neorg journal tomorrow<CR>")
-                keybinds.map("norg", "n", "nc", "<cmd>Neorg journal custom<CR>")
-                keybinds.map("norg", "n", "<leader>fn", "<cmd>Telescope find_files cwd=~/notes<CR>")
-              end,
-            }
-          },
+          ["core.keybinds"] = {},
           ["core.dirman"] = {
             config = {
               workspaces = {

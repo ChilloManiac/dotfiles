@@ -1,18 +1,19 @@
 [tools]
 python = "3.11.1"
 lua = "5.2.4"
-node = "18"
+node = "20.12"
 zoxide = "latest"
 awscli = "latest"
 ripgrep = "latest"
-fzf = "latest"
-cmake = "latest"
 terraform = "latest"
 "cargo:starship" = "latest"
 "cargo:bob-nvim" = "latest"
 "npm:neovim" = "latest"
 go = "latest"
 protoc = "latest"
+github-cli = "latest"
+yarn = "1"
+pnpm = "9.5.0"
 
 [settings]
 experimental = true
