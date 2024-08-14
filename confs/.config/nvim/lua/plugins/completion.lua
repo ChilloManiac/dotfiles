@@ -39,7 +39,7 @@ M.config = function()
 			["<CR>"] = cmp.mapping.confirm({ select = true }),
 			["<Tab>"] = nil,
 			["<S-Tab>"] = nil,
-			["<C-Space>"] = cmp.mapping({
+			["<C-.>"] = cmp.mapping({
 				i = function()
 					if cmp.visible() then
 						cmp.abort()

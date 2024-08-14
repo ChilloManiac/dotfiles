@@ -63,7 +63,11 @@ return {
 	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
+		opts = {
+			view_options = {
+				show_hidden = true,
+			},
+		},
 		keys = {
 			{ "-", "<cmd>Oil<CR>", desc = "Oil" },
 		},
@@ -112,7 +116,6 @@ return {
 	{ "numToStr/Comment.nvim", event = { "VeryLazy" }, opts = {} },
 	{ "davidgranstrom/nvim-markdown-preview", cmd = { "MarkdownPreview" }, opts = {} },
 	{ "windwp/nvim-autopairs", event = { "InsertEnter" }, opts = {} },
-	{ "smoka7/hop.nvim", keys = { { "mm", "<cmd>HopWord<CR>", "Hop Word" } }, opts = {} },
 	{ "kylechui/nvim-surround", event = { "VeryLazy" }, opts = {} },
 	{ "tummetott/unimpaired.nvim", event = { "VeryLazy" }, opts = {} },
 }
