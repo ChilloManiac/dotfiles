@@ -34,6 +34,7 @@ autoload -Uz compinit
 compinit
 unsetopt BEEP # remove beeps
 
+complete -C aws_completer aws
 
 # Aliases
 # =================================
@@ -45,11 +46,12 @@ alias k='kubectl'
 # =================================
 export GIT_EDITOR=nvim
 export GPG_TTY=$(tty)
-export EMMA_ENV=dev
 export EDITOR=nvim
 
 # LEGO
 # ==========
+export EMMA_ENV=dev
+export EMMA_DEFAULT_WORKSPACE=139
 if [ -f "$HOME/.config/lego/accounts.sh" ]; then
   source "$HOME/.config/lego/accounts.sh"
 fi

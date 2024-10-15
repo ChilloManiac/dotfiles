@@ -39,7 +39,8 @@ local ensure_installed = {
   "tailwindcss",
   "terraformls",
   "tflint",
-  "tsserver",
+  "ts_ls",
+  "yamlls",
   "vimls",
 }
 
@@ -98,6 +99,19 @@ M.config = function()
     lspconfig[server].setup({
       on_attach = on_attach,
       handlers = handlers,
+    })
+  end
+
+  local spectral_setup = function()
+    lspconfig.spectral.setup({
+      on_attach = on_attach,
+      handlers = handlers,
+      settings = {
+        enable = true,
+        run = "onType",
+        rulesetFile = "./.spectral.yaml",
+        validateFiles = "**/*-api.yaml"
+      }
     })
   end
 
@@ -194,6 +208,7 @@ M.config = function()
       ["tsserver"] = tsserver_setup,
       ["elixirls"] = elixirls_setup,
       ["tailwindcss"] = tailwindcss_setup,
+      ["spectral"] = spectral_setup,
     },
   })
 
@@ -209,9 +224,10 @@ M.config = function()
   require("lint").linters_by_ft = {
     markdown = { "markdownlint" },
     python = { "flake8" },
-    yaml = { "actionlint" },
+    -- yaml = { "prettier " },
     typescript = nil,
-    javascript = nil
+    javascript = nil,
+    go = { "revive" }
   }
 
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -234,6 +250,7 @@ M.config = function()
       sql = { "sqlfluff" },
       markdown = { "prettier" },
       go = { "gofmt" },
+      -- yaml = { "prettier" },
     },
     format_on_save = {
       timeout_ms = 1000,
