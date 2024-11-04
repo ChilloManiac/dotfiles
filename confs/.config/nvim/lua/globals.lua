@@ -23,8 +23,19 @@ vim.opt.updatetime = 300
 vim.opt.redrawtime = 10000
 vim.opt.encoding = "UTF-8"
 vim.opt.swapfile = false
-vim.opt.foldenable = false
+vim.opt.foldenable = true
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 4
+vim.opt.foldmethod = "expr"
+vim.opt.foldnestmax = 4
+
+function FoldText()
+  local line = vim.fn.getline(vim.v.foldstart)
+  return line .. " "
+end
+
+vim.o.foldtext = "v:lua.FoldText()"
 
 --------------------------------------------------------------------------
 -- Key maps
@@ -44,10 +55,15 @@ vim.api.nvim_set_keymap("n", "J", "mzJ`z", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zzzv", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zzzv", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>", { noremap = true })
+vim.api.nvim_set_keymap("n", "z1", ":set foldlevel=1<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-j>", ":norm! zo<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-k>", ":norm! zc<CR>", { noremap = true })
+
 
 vim.api.nvim_set_keymap("i", "jj", "<esc>", { noremap = true })
 vim.api.nvim_set_keymap("i", "KK", "<esc>>>A", { noremap = true })
 vim.api.nvim_set_keymap("i", "HH", "<esc><<A", { noremap = true })
+
 
 vim.api.nvim_set_keymap("n", "<leader>q", ":q<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>cd", "<cmd>lua require('./functions').picker()<CR>", { noremap = true })
