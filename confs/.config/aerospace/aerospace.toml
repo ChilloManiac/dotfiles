@@ -172,6 +172,6 @@ run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
-run = 'move-node-to-workspace 2'
+run = 'move-node-to-workspace 4'
 
 
