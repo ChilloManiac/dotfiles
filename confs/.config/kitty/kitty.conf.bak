@@ -1,5 +1,5 @@
-font_family JetBrainsMono Nerd Font
-font_size 12
+font_family JetBrainsMono
+font_size 15
 adjust_line_height 125%
 
 cursor_blink_interval 0
@@ -15,11 +15,14 @@ enabled_layouts tall
 
 sync_to_monitor no
 
+# Cursor stuff
+cursor_trail 3
+
 # symbol_map U+2714 DejaVu Sans Mono for Powerline
 
 
 
 # BEGIN_KITTY_THEME
-# Gruvbox Material Dark Soft
+# Tokyo Night
 include current-theme.conf
 # END_KITTY_THEME

@@ -73,13 +73,17 @@ M.config = function()
     icons = {
       running_animated = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
     },
+    quickfix = {
+      open = true,
+      enabled = true,
+    },
     consumers = {
       overseer = require("neotest.consumers.overseer"),
     },
     adapters = {
       require("neotest-jest")({
         jestCommand = "npm test --",
-        jestConfigFile = 'jest.integration.config.js',
+        -- jestConfigFile = 'jest.integration.config.js',
         cwd = function(path)
           return vim.fn.getcwd()
         end,

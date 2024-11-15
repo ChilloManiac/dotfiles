@@ -10,7 +10,8 @@ return {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
     keys = {
-      { "<leader>mm", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>", "Open Neorg" },
+      { "<leader>mm", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>",        "Open Neorg" },
+      { "<leader>fn", "<cmd>Telescope find_files cwd=" .. notesDir .. "<CR>", "Find notes" },
     },
     config = function()
       local au_group = vim.api.nvim_create_augroup("Neorg", {})
@@ -24,7 +25,6 @@ return {
           vim.keymap.set("n", "mo", "<cmd>Neorg journal tomorrow<CR>", { buffer = true })
           vim.keymap.set("n", "mc", "<cmd>Neorg journal custom<CR>", { buffer = true })
           vim.keymap.set("n", "md", "<cmd>e " .. notesDir .. "/todo.norg<CR>", { buffer = true })
-          vim.keymap.set("n", "<leader>fn", "<cmd>Telescope find_files cwd=" .. notesDir .. "<CR>", { buffer = true })
         end,
       })
 

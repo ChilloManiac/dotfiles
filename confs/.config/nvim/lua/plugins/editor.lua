@@ -99,9 +99,10 @@ return {
     },
     opts = { width = 200 }
   },
-  { "numToStr/Comment.nvim",                event = { "VeryLazy" },      opts = {} },
-  { "davidgranstrom/nvim-markdown-preview", cmd = { "MarkdownPreview" }, opts = {} },
-  { "windwp/nvim-autopairs",                event = { "InsertEnter" },   opts = {} },
-  { "kylechui/nvim-surround",               event = { "VeryLazy" },      opts = {} },
-  { "tummetott/unimpaired.nvim",            event = { "VeryLazy" },      opts = {} },
+  { "numToStr/Comment.nvim",                event = { "VeryLazy" },    opts = {} },
+  { "davidgranstrom/nvim-markdown-preview", lazy = false },
+  { "windwp/nvim-autopairs",                event = { "InsertEnter" }, opts = {} },
+  { "kylechui/nvim-surround",               event = { "VeryLazy" },    opts = {} },
+  { "tummetott/unimpaired.nvim",            event = { "VeryLazy" },    opts = {} },
+  { "dmmulroy/tsc.nvim",                    ft = { 'typescript' },     opts = {} }
 }

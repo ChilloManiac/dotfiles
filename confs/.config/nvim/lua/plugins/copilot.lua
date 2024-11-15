@@ -39,6 +39,10 @@ local M = {
       debug = false,         -- Enable debugging
       -- See Configuration section for rest
     },
+    keys = {
+      { '<leader>cc', "<cmd>CopilotChatToggle<CR>", desc = "Toggle Copilot Chat" },
+      { '<leader>cr', "<cmd>CopilotChatReview<CR>", desc = "Toggle Copilot Review", mode = "v" },
+    }
     -- See Commands section for default commands if you want to lazy load on them
   },
 }

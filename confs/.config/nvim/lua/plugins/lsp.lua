@@ -39,7 +39,7 @@ local ensure_installed = {
   "tailwindcss",
   "terraformls",
   "tflint",
-  "ts_ls",
+  "vtsls",
   "yamlls",
   "vimls",
 }
