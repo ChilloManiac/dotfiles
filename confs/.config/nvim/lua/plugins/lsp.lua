@@ -58,10 +58,12 @@ local border = {
 M.config = function()
   require("neodev").setup()
   local lspconfig = require("lspconfig")
-  local lsp_defaults = lspconfig.util.default_config
+  local lsp_defaults_config = lspconfig.util.default_config
 
-  lsp_defaults.capabilities =
-      vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+  local extend_config = function(config)
+    config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+    return config
+  end
 
   local on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
@@ -96,14 +98,14 @@ M.config = function()
   })
 
   local default_setup = function(server)
-    lspconfig[server].setup({
+    lspconfig[server].setup(extend_config({
       on_attach = on_attach,
       handlers = handlers,
-    })
+    }))
   end
 
   local spectral_setup = function()
-    lspconfig.spectral.setup({
+    lspconfig.spectral.setup(extend_config( {
       on_attach = on_attach,
       handlers = handlers,
       settings = {
@@ -112,11 +114,11 @@ M.config = function()
         rulesetFile = "./.spectral.yaml",
         validateFiles = "**/*-api.yaml"
       }
-    })
+    } ))
   end
 
   local lua_setup = function()
-    lspconfig.lua_ls.setup({
+    lspconfig.lua_ls.setup(extend_config( {
       on_attach = on_attach,
       handlers = handlers,
       settings = {
@@ -127,39 +129,19 @@ M.config = function()
           hint = { enable = true },
         },
       },
-    })
+    } ))
   end
 
   local elixirls_setup = function()
-    lspconfig.elixirls.setup({
+    lspconfig.elixirls.setup(extend_config( {
       on_attach = on_attach,
       handlers = handlers,
       cmd = { "$HOME/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
-    })
-  end
-
-  local tsserver_setup = function()
-    lspconfig.tsserver.setup({
-      root_dir = lspconfig.util.root_pattern("package.json", "yarn.lock", ".git"),
-      handlers = handlers,
-      on_attach = on_attach,
-      init_options = {
-        preferences = {
-          includeInlayParameterNameHints = "all",
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayVariableTypeHints = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayEnumMemberValueHints = true,
-          importModuleSpecifierPreference = "non-relative",
-        },
-      },
-    })
+    } ))
   end
 
   local tailwindcss_setup = function()
-    lspconfig.tailwindcss.setup({
+    lspconfig.tailwindcss.setup(extend_config({
       init_options = {
         userLanguages = {
           elixir = "html-eex",
@@ -176,11 +158,11 @@ M.config = function()
           },
         },
       },
-    })
+    }))
   end
 
   local eslint_setup = function()
-    lspconfig.eslint.setup({
+    lspconfig.eslint.setup(extend_config({
       root_dir = lspconfig.util.root_pattern("package.json", "yarn.lock", ".git"),
       handlers = handlers,
       flags = {
@@ -194,7 +176,7 @@ M.config = function()
           group = au_eslint_lsp,
         })
       end,
-    })
+    }))
   end
 
   require("mason").setup({})
@@ -205,7 +187,6 @@ M.config = function()
       ["pbls"] = default_setup, -- Not setup otherwise it seems
       ["lua_ls"] = lua_setup,
       ["eslint"] = eslint_setup,
-      ["tsserver"] = tsserver_setup,
       ["elixirls"] = elixirls_setup,
       ["tailwindcss"] = tailwindcss_setup,
       ["spectral"] = spectral_setup,

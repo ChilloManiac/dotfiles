@@ -92,6 +92,14 @@ return {
     end,
   },
   {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {
+      open_mapping = "§",
+      direction = "float"
+    }
+  },
+  {
     "shortcuts/no-neck-pain.nvim",
     cmd = { "NoNeckPain" },
     keys = {
@@ -104,5 +112,5 @@ return {
   { "windwp/nvim-autopairs",                event = { "InsertEnter" }, opts = {} },
   { "kylechui/nvim-surround",               event = { "VeryLazy" },    opts = {} },
   { "tummetott/unimpaired.nvim",            event = { "VeryLazy" },    opts = {} },
-  { "dmmulroy/tsc.nvim",                    ft = { 'typescript' },     opts = {} }
+  { "dmmulroy/tsc.nvim",                    ft = { 'typescript' },     cmd = "TSC", opts = {} }
 }

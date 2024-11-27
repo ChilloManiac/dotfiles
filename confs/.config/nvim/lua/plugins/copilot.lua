@@ -23,6 +23,8 @@ local M = {
       filetypes = {
         TelescopePrompt = false,
         ["dap-repl"] = false,
+        markdown = true,
+        yaml = true,
       }
     }
   },
