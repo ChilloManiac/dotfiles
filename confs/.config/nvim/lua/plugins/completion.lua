@@ -56,7 +56,11 @@ local M = {
   'saghen/blink.cmp',
   lazy = false, -- lazy loading handled internally
   -- optional: provides snippets for the snippet source
-  dependencies = { 'rafamadriz/friendly-snippets', LuaSnip, 'saghen/blink.compat' },
+  dependencies = {
+    LuaSnip,
+    'saghen/blink.compat',
+    'saadparwaiz1/cmp_luasnip',
+  },
 
   build = 'cargo build --release',
   config = function()
@@ -68,7 +72,7 @@ local M = {
         ['<C-n>'] = { 'select_next', 'fallback' },
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },
-        ['<CR>'] = { 'select_and_accept', 'fallback' },
+        ['<CR>'] = { 'accept', 'fallback' },
         ['<C-.>'] = { 'hide', 'show', 'fallback' }
       },
 
@@ -76,18 +80,33 @@ local M = {
         expand_snippet = require('luasnip').lsp_expand
       },
 
+      trigger = {
+        completion = {
+          show_on_insert_on_trigger_character = false,
+        }
+      },
+
       windows = {
         autocomplete = {
           border = 'single',
           auto_show = true,
+          selection = 'auto_insert'
         },
         documentation = {
           border = 'single',
-          auto_show = true
+          auto_show = true,
         }
       },
 
       sources = {
+        completion = {
+          sources = {
+            "lsp",
+            "path",
+            "buffer",
+            "luasnip"
+          },
+        },
         providers = {
           buffer = {
             min_keyword_length = 4
@@ -95,7 +114,17 @@ local M = {
 
           snippets = {
             min_keyword_length = 2
-          }
+          },
+
+          luasnip = {
+            name = 'luasnip',
+            module = 'blink.compat.source',
+
+            opts = {
+              use_show_condition = false,
+              show_autosnippets = true,
+            },
+          },
         },
       },
 
