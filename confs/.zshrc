@@ -41,7 +41,10 @@ complete -C aws_completer aws
 # =================================
 alias vim=nvim
 alias k='kubectl'
-alias ghid='gh issue develop -c'
+
+GH_PREFIX="IS_GH_CLI=1 gh"
+alias gh="$GH_PREFIX"
+alias ghid="$GH_PREFIX issue develop -c"
 
 
 # Exports

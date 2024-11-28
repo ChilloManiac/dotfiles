@@ -8,6 +8,7 @@ local M = {
     { "hrsh7th/cmp-nvim-lsp" },
     { "hrsh7th/cmp-nvim-lua" },
     { "onsails/lspkind.nvim" },
+    { "petertriho/cmp-git" },
 
     -- Snippet engine
     { "L3MON4D3/LuaSnip" },
@@ -24,6 +25,15 @@ M.config = function()
   local lspkind = require("lspkind")
   local ls = require("luasnip")
 
+  local is_github_cli = vim.fn.environ()["IS_GH_CLI"] == "1"
+
+  if (is_github_cli) then
+    require("cmp_git").setup({
+      -- Include markdown only if started through github cli
+      filetypes = { "markdown", "gitcommit" }
+    })
+  end
+
   cmp.setup({
     sources = {
       { name = "luasnip",              keyword_length = 2 },
@@ -32,6 +42,7 @@ M.config = function()
       { name = "buffer",               keyword_length = 4 },
       { name = "vim-dadbod-completion" },
       { name = "neorg" },
+      { name = "git",                  keyword_length = 3 }
     },
     mapping = cmp.mapping.preset.insert({
       ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
