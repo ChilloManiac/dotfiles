@@ -45,27 +45,23 @@ M.config = function()
       { name = "git",                  keyword_length = 3 }
     },
     mapping = cmp.mapping.preset.insert({
-      ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-      ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
       ["<CR>"] = cmp.mapping.confirm({ select = true }),
-      ["<Tab>"] = nil,
-      ["<S-Tab>"] = nil,
-      ["<C-.>"] = cmp.mapping({
-        i = function()
-          if cmp.visible() then
-            cmp.abort()
-          else
-            cmp.complete()
-          end
-        end,
-        c = function()
-          if cmp.visible() then
-            cmp.close()
-          else
-            cmp.complete()
-          end
-        end,
-      }),
+      -- ["<C-.>"] = cmp.mapping({
+      --   i = function()
+      --     if cmp.visible() then
+      --       cmp.abort()
+      --     else
+      --       cmp.complete()
+      --     end
+      --   end,
+      --   c = function()
+      --     if cmp.visible() then
+      --       cmp.close()
+      --     else
+      --       cmp.complete()
+      --     end
+      --   end,
+      -- }),
     }),
     snippet = {
       expand = function(args)

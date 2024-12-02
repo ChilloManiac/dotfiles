@@ -130,11 +130,11 @@ M.config = function()
     })
   end
 
+
   local elixirls_setup = function()
     lspconfig.elixirls.setup({
       on_attach = on_attach,
       handlers = handlers,
-      cmd = { "$HOME/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
     })
   end
 
