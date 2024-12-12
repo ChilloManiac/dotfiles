@@ -74,8 +74,7 @@ M.config = function()
       running_animated = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
     },
     quickfix = {
-      open = true,
-      enabled = true,
+      enabled = false,
     },
     consumers = {
       overseer = require("neotest.consumers.overseer"),

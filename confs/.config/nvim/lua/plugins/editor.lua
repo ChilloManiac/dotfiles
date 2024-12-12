@@ -1,36 +1,4 @@
 return {
-  -- nvim-colorizer
-  {
-    "NvChad/nvim-colorizer.lua",
-    event = { "VeryLazy" },
-    opts = {
-      filetypes = { "*" },
-      user_default_options = {
-        RGB = true,          -- #RGB hex codes
-        RRGGBB = true,       -- #RRGGBB hex codes
-        names = true,        -- "Name" codes like Blue or blue
-        RRGGBBAA = false,    -- #RRGGBBAA hex codes
-        AARRGGBB = false,    -- 0xAARRGGBB hex codes
-        rgb_fn = false,      -- CSS rgb() and rgba() functions
-        hsl_fn = false,      -- CSS hsl() and hsla() functions
-        css = false,         -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = false,      -- Enable all CSS *functions*: rgb_fn, hsl_fn
-        -- Available modes for `mode`: foreground, background,  virtualtext
-        mode = "background", -- Set the display mode.
-        -- Available methods are false / true / "normal" / "lsp" / "both"
-        -- True is same as normal
-        tailwind = true,                                -- Enable tailwind colors
-        -- parsers can contain values used in |user_default_options|
-        sass = { enable = false, parsers = { "css" } }, -- Enable sass colors
-        virtualtext = "■",
-        -- update color values even if buffer is not focused
-        -- example use: cmp_menu, cmp_docs
-        always_update = false,
-      },
-      -- all the sub-options of filetypes apply to buftypes
-      buftypes = {},
-    },
-  },
   -- gx
   {
     "chrishrb/gx.nvim",
@@ -45,8 +13,8 @@ return {
   -- lualine
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { { "nvim-tree/nvim-web-devicons" } },
-    events = { "VimEnter" },
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
+    lazy = false,
     opts = {
       sections = {
         lualine_a = { "filename", "filesize" },
@@ -85,19 +53,8 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
       require("which-key").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
       })
     end,
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    opts = {
-      open_mapping = "§",
-      direction = "float"
-    }
   },
   {
     "shortcuts/no-neck-pain.nvim",
@@ -107,10 +64,65 @@ return {
     },
     opts = { width = 200 }
   },
+  {
+    "dmmulroy/tsc.nvim",
+    cmd = { "TSC", "TSCOpen" },
+    opts = {}
+  },
+  {
+    "folke/trouble.nvim",
+    config = function()
+      require("trouble").setup({
+        auto_preview = true,
+        modes = {
+          diagnostics = {
+            filter = {
+              severity = vim.diagnostic.severity.ERROR
+            },
+            {
+              severity = vim.diagnostic.severity.WARN
+            }
+          }
+        }
+      })
+    end,
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+  },
   { "numToStr/Comment.nvim",                event = { "VeryLazy" },    opts = {} },
-  { "davidgranstrom/nvim-markdown-preview", lazy = false },
+  { "davidgranstrom/nvim-markdown-preview", cmd = "MarkdownPreview" },
   { "windwp/nvim-autopairs",                event = { "InsertEnter" }, opts = {} },
   { "kylechui/nvim-surround",               event = { "VeryLazy" },    opts = {} },
   { "tummetott/unimpaired.nvim",            event = { "VeryLazy" },    opts = {} },
-  { "dmmulroy/tsc.nvim",                    ft = { 'typescript' },     cmd = "TSC", opts = {} }
 }

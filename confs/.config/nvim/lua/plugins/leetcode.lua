@@ -16,7 +16,7 @@ local M = {
     -- optional
     "nvim-treesitter/nvim-treesitter",
     "rcarriga/nvim-notify",
-    "nvim-tree/nvim-web-devicons",
+    { 'nvim-tree/nvim-web-devicons' }
   },
 }
 

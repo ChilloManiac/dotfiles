@@ -1,10 +1,8 @@
 local M = {
   {
     "zbirenbaum/copilot.lua",
-    dependencies = {
-      -- { "zbirenbaum/copilot-cmp" },
-    },
-    lazy = false,
+    dependencies = {},
+    event = { "InsertEnter" },
     opts = {
       suggestion = {
         enabled = true,
@@ -32,20 +30,15 @@ local M = {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
     dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+      { "zbirenbaum/copilot.lua" },
+      { "nvim-lua/plenary.nvim" },
     },
-    lazy = false,
     build = "make tiktoken", -- Only on MacOS or Linux
-    opts = {
-      debug = false,         -- Enable debugging
-      -- See Configuration section for rest
-    },
+    opts = {},
     keys = {
       { '<leader>cc', "<cmd>CopilotChatToggle<CR>", desc = "Toggle Copilot Chat" },
       { '<leader>cr', "<cmd>CopilotChatReview<CR>", desc = "Toggle Copilot Review", mode = "v" },
     }
-    -- See Commands section for default commands if you want to lazy load on them
   },
 }
 

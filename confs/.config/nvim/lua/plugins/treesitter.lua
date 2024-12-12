@@ -1,11 +1,11 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  event = { "VeryLazy", "BufNewFile" },
+  event = { "BufEnter" },
   opts = {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {
-      enable = true,        -- false will disable the whole extension
+      enable = true,          -- false will disable the whole extension
     },
     incremental_selection = {
       enable = true,

@@ -29,6 +29,7 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 4
 vim.opt.foldmethod = "expr"
 vim.opt.foldnestmax = 4
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 function FoldText()
   local line = vim.fn.getline(vim.v.foldstart)
@@ -36,6 +37,8 @@ function FoldText()
 end
 
 vim.o.foldtext = "v:lua.FoldText()"
+
+vim.g.is_github_cli = vim.fn.environ()["IS_GH_CLI"] == "1"
 
 --------------------------------------------------------------------------
 -- Key maps

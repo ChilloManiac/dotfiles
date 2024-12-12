@@ -1,6 +1,6 @@
 local M = {
   "neovim/nvim-lspconfig",
-  events = { "VeryLazy" },
+  events = { "InsertEnter" },
   dependencies = {
     -- LSP Support
     { "williamboman/mason-lspconfig.nvim" },
@@ -8,9 +8,6 @@ local M = {
 
     -- Neodev
     { "folke/neodev.nvim" },
-
-    -- Dap
-    { "jay-babu/mason-nvim-dap.nvim" },
 
     -- Lint
     { "mfussenegger/nvim-lint" },
@@ -25,13 +22,11 @@ local ensure_installed = {
   "cssls",
   "dockerls",
   "elixirls",
-  -- 'eslint',
   "gopls",
   "html",
   "jsonls",
   "lua_ls",
   "marksman",
-  -- 'pbls', Not in mason-lspconfig??
   "powershell_es",
   "pyright",
   "spectral",
@@ -76,10 +71,6 @@ M.config = function()
     vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
     vim.keymap.set("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
     vim.keymap.set("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
-
-    -- if client.server_capabilities.inlayHintProvider then
-    --   vim.lsp.inlay_hint(bufnr, true)
-    -- end
   end
 
   local handlers = {
@@ -92,6 +83,7 @@ M.config = function()
     virtual_text = {
       prefix = "■ ",
     },
+    ---@diagnostic disable-next-line: assign-type-mismatch
     float = { border = border },
   })
 
@@ -212,21 +204,12 @@ M.config = function()
     },
   })
 
-  require("mason-nvim-dap").setup({
-    ensure_installed = {
-      "js",
-      "python",
-    },
-    automatic_installation = false,
-  })
-
   -- Lint
   require("lint").linters_by_ft = {
     markdown = { "markdownlint" },
     python = { "flake8" },
-    -- yaml = { "prettier " },
-    typescript = nil,
-    javascript = nil,
+    typescript = {},
+    javascript = {},
     go = { "revive" }
   }
 
@@ -250,13 +233,25 @@ M.config = function()
       sql = { "sqlfluff" },
       markdown = { "prettier" },
       go = { "gofmt" },
-      -- yaml = { "prettier" },
+      yaml = { "prettier" },
     },
-    format_on_save = {
-      timeout_ms = 1000,
-      lsp_fallback = true,
-    },
+    format_on_save = function(bufnr)
+      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+      return { timeout_ms = 1000, lsp_fallback = true }
+    end,
   })
+
+  vim.keymap.set('n', '<leader>fdb', function()
+    vim.b.disable_autoformat = not vim.b.disable_autoformat
+    if vim.b.disable_autoformat then return vim.notify("Disabled automatic formatting for buffer") end
+    vim.notify("Enabled automatic formatting enabled for buffer")
+  end)
+
+  vim.keymap.set('n', '<leader>fdd', function()
+    vim.g.disable_autoformat = not vim.g.disable_autoformat
+    if vim.g.disable_autoformat then return vim.notify("Disabled automatic formatting for all buffers") end
+    vim.notify("Enabled automatic formatting for all buffers")
+  end)
 end
 
 return M

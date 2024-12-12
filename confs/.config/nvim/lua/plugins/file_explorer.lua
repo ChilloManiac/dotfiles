@@ -1,23 +1,10 @@
 return {
   {
-    "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    enabled = false,
-    opts = {
-      view_options = {
-        show_hidden = true,
-      },
-    },
-    keys = {
-      { "-", "<cmd>Oil<CR>", desc = "Oil" },
-    },
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      { 'nvim-tree/nvim-web-devicons' },
       "MunifTanjim/nui.nvim",
     },
     cmd = {

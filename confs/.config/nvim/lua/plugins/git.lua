@@ -26,6 +26,13 @@ end
 return {
   {
     "tpope/vim-fugitive",
+    dependencies = {
+      "sindrets/diffview.nvim",
+      keys = {
+        { "<leader>dvo", "<cmd>DiffviewOpen<CR>",  desc = "Diffview Open" },
+        { "<leader>dvc", "<cmd>DiffviewClose<CR>", desc = "Diffview Close" }
+      },
+    },
     keys = {
       { "<leader>gs",  "<cmd>Git<CR>",      desc = "Git status" },
       { "<leader>gr",  resetSoft,           desc = "Reset soft" },
@@ -34,14 +41,6 @@ return {
       { "<leader>gp",  "<cmd>Git pull<CR>", desc = "Git pull" },
     },
     cmd = "Git",
-  },
-  {
-    "sindrets/diffview.nvim",
-    event = "VeryLazy",
-    keys = {
-      { "<leader>dvo", "<cmd>DiffviewOpen<CR>",  desc = "Diffview Open" },
-      { "<leader>dvc", "<cmd>DiffviewClose<CR>", desc = "Diffview Close" }
-    },
     config = function()
       require("diffview").setup()
 
@@ -93,50 +92,5 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
     opts = {},
-  },
-  {
-    "pwntester/octo.nvim",
-    cmd = "Octo",
-    config = function()
-      require("octo").setup()
-
-      local augroup = vim.api.nvim_create_augroup("octo-create-branch", {})
-
-      local create_branch_for_issue = function()
-        if vim.bo.ft ~= "octo" then
-          vim.notify("Not in octo buffer")
-          return
-        end
-
-        local current_buffer = vim.api.nvim_get_current_buf()
-
-        local this_octo_buffer = octo_buffers[current_buffer]
-
-        if this_octo_buffer["kind"] ~= "issue" then
-          vim.notify("Not in issue buffer")
-          return
-        end
-
-        local title = this_octo_buffer["titleMetadata"]["body"]
-        local strippedTitle = title:gsub("%s+", "-"):gsub("[^%w%-]", ""):lower()
-
-        vim.cmd("Git switch main")
-        vim.cmd("Git pull")
-        vim.cmd("Git switch -c " .. strippedTitle)
-      end
-
-      vim.api.nvim_create_autocmd("FileType", {
-        group = augroup,
-        pattern = "octo",
-        callback = function(ctx)
-          vim.keymap.set(
-            "n",
-            "<leader>gcb",
-            create_branch_for_issue,
-            { buffer = ctx.buf, desc = "Create branch from issue" }
-          )
-        end,
-      })
-    end,
   },
 }
