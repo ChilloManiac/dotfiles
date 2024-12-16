@@ -81,8 +81,7 @@ M.config = function()
     },
     adapters = {
       require("neotest-jest")({
-        jestCommand = "npm test --",
-        -- jestConfigFile = 'jest.integration.config.js',
+        jestCommand = "npm test --ignore-scripts --",
         cwd = function(path)
           return vim.fn.getcwd()
         end,

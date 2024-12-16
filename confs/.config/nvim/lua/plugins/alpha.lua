@@ -1,5 +1,20 @@
 -- # https://manytools.org/hacker-tools/ascii-banner/
 -- Header
+
+local function file_to_table(file_path)
+  local lines = {}
+  local file = io.open(file_path, "r")
+  if file then
+    for line in file:lines() do
+      table.insert(lines, line)
+    end
+    file:close()
+  else
+    print("Could not open file: " .. file_path)
+  end
+  return lines
+end
+
 local function header()
   local banner_small = {
     "                                                                                 ",
@@ -37,6 +52,8 @@ local function header()
     "",
     "",
   }
+
+  -- local banner_3 = file_to_table(vim.fn.stdpath("config") .. "/images/me")
 
   return banner_2
 end
