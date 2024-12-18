@@ -54,7 +54,6 @@ vim.api.nvim_set_keymap("v", "<leader>p", "\"_dP", { noremap = true })
 
 vim.api.nvim_set_keymap("n", "n", "nzzzv", { noremap = true })
 vim.api.nvim_set_keymap("n", "N", "Nzzzv", { noremap = true })
-vim.api.nvim_set_keymap("n", "J", "mzJ`z", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zzzv", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zzzv", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>", { noremap = true })
