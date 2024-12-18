@@ -68,3 +68,16 @@ vim.api.nvim_set_keymap("i", "HH", "<esc><<A", { noremap = true })
 
 
 vim.api.nvim_set_keymap("n", "<leader>q", ":q<CR>", { noremap = true })
+vim.keymap.set('n', '<leader>st', function()
+  vim.cmd.vnew()
+  vim.cmd.terminal()
+  vim.cmd.wincmd('J')
+  vim.api.nvim_win_set_height(0, 10)
+end, { noremap = true })
+
+vim.keymap.set("n", '<leader>§', function()
+  vim.cmd.vnew()
+  vim.cmd.terminal()
+end, { noremap = true })
+vim.api.nvim_set_keymap("t", "<esc>", "<C-\\><C-n>", { noremap = true })
+vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true })
