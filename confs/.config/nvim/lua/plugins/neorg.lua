@@ -2,13 +2,8 @@ local notesDir = "~/notes"
 
 return {
   {
-    "vhyrro/luarocks.nvim",
-    priority = 1000, -- We'd like this plugin to load first out of the rest
-    config = true,   -- This automatically runs `require("luarocks-nvim").setup()`
-  },
-  {
     "nvim-neorg/neorg",
-    dependencies = { "luarocks.nvim" },
+    lazy = false,
     keys = {
       { "<leader>mm", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>",        "Open Neorg" },
       { "<leader>fn", "<cmd>Telescope find_files cwd=" .. notesDir .. "<CR>", "Find notes" },

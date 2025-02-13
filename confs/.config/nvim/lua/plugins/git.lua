@@ -29,9 +29,10 @@ return {
     dependencies = {
       "sindrets/diffview.nvim",
       keys = {
-        { "<leader>dvo", "<cmd>DiffviewOpen<CR>",  desc = "Diffview Open" },
-        { "<leader>dvc", "<cmd>DiffviewClose<CR>", desc = "Diffview Close" }
+        { "<leader>dd", "<cmd>DiffviewOpen<CR>",  desc = "Diffview Open" },
+        { "<leader>dc", "<cmd>DiffviewClose<CR>", desc = "Diffview Close" }
       },
+      cmd = { 'DiffviewOpen', 'DiffviewClose', "DiffviewFileHistory" },
     },
     keys = {
       { "<leader>gs",  "<cmd>Git<CR>",      desc = "Git status" },

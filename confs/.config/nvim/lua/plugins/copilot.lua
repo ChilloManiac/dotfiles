@@ -28,7 +28,7 @@ local M = {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    branch = "main",
     dependencies = {
       { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim" },
@@ -36,7 +36,7 @@ local M = {
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {},
     keys = {
-      { '<leader>cc', "<cmd>CopilotChatToggle<CR>", desc = "Toggle Copilot Chat" },
+      { '<leader>cc', "<cmd>CopilotChatToggle<CR>", desc = "Toggle Copilot Chat",   mode = { "v", "n" } },
       { '<leader>cr', "<cmd>CopilotChatReview<CR>", desc = "Toggle Copilot Review", mode = "v" },
     }
   },

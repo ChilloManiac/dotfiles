@@ -28,7 +28,6 @@ source $ZSH/oh-my-zsh.sh
 # Shell
 # =================================
 bindkey -v # vi mode
-bindkey '^R' history-incremental-search-backward
 autoload bashcompinit
 bashcompinit
 autoload -Uz compinit
@@ -46,11 +45,20 @@ GH_PREFIX="IS_GH_CLI=1 gh"
 alias gh="$GH_PREFIX"
 
 
+# Functions
+# =================================
+function gnb() {
+  git fetch -a
+  git switch -c $1
+  git rebase origin/main --force
+}
+
 # Exports
 # =================================
 export GIT_EDITOR=nvim
 export GPG_TTY=$(tty)
 export EDITOR=nvim
+export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH" # image.nvim
 
 # LEGO
 # ==========
@@ -59,6 +67,7 @@ export EMMA_DEFAULT_WORKSPACE=139
 if [ -f "$HOME/.config/lego/accounts.sh" ]; then
   source "$HOME/.config/lego/accounts.sh"
 fi
+export EMMA_SKIP_POST_CHECKOUT_INSTALL="true"
 
 
 # Tools
@@ -67,3 +76,5 @@ eval "$(zoxide init zsh --cmd cd)" # Install by Mise
 eval "$(starship init zsh)" # `cargo install starship --locked`
 
 autoload -U +X bashcompinit && bashcompinit
+
+

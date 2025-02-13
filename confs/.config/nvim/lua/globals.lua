@@ -46,38 +46,34 @@ vim.g.is_github_cli = vim.fn.environ()["IS_GH_CLI"] == "1"
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-vim.api.nvim_set_keymap("n", "<leader>k", ":nohlsearch<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>k", ":nohlsearch<CR>", { noremap = true, desc = "Clear search highlight" })
 
-vim.api.nvim_set_keymap("v", "y", "myy`y", { noremap = true })
-vim.api.nvim_set_keymap("v", "Y", "myY`y", { noremap = true })
-vim.api.nvim_set_keymap("v", "<leader>p", "\"_dP", { noremap = true })
+vim.keymap.set("v", "<leader>p", "\"_dP", { noremap = true, desc = "Paste without overwriting register" })
 
-vim.api.nvim_set_keymap("n", "n", "nzzzv", { noremap = true })
-vim.api.nvim_set_keymap("n", "N", "Nzzzv", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zzzv", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zzzv", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>", { noremap = true })
-vim.api.nvim_set_keymap("n", "z1", ":set foldlevel=1<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-j>", ":norm! zo<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-k>", ":norm! zc<CR>", { noremap = true })
+vim.keymap.set("n", "n", "nzzzv", { noremap = true, desc = "Next search result and center" })
+vim.keymap.set("n", "N", "Nzzzv", { noremap = true, desc = "Previous search result and center" })
+vim.keymap.set("n", "<C-d>", "<C-d>zzzv", { noremap = true, desc = "Scroll down and center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zzzv", { noremap = true, desc = "Scroll up and center" })
+vim.keymap.set("n", "<leader>w", "<C-w>", { noremap = true, desc = "Window commands" })
+vim.keymap.set("n", "z1", ":set foldlevel=1<CR>", { noremap = true, desc = "Set fold level to 1" })
+vim.keymap.set("n", "<leader>sf", ":source %<CR>", { noremap = true, desc = "Source current file" })
 
+vim.keymap.set("i", "jj", "<esc>", { noremap = true, desc = "Escape insert mode" })
+vim.keymap.set("i", "KK", "<esc>>>A", { noremap = true, desc = "Indent line and append" })
+vim.keymap.set("i", "HH", "<esc><<A", { noremap = true, desc = "Unindent line and append" })
 
-vim.api.nvim_set_keymap("i", "jj", "<esc>", { noremap = true })
-vim.api.nvim_set_keymap("i", "KK", "<esc>>>A", { noremap = true })
-vim.api.nvim_set_keymap("i", "HH", "<esc><<A", { noremap = true })
-
-
-vim.api.nvim_set_keymap("n", "<leader>q", ":q<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>q", ":q<CR>", { noremap = true, desc = "Quit" })
 vim.keymap.set('n', '<leader>st', function()
   vim.cmd.vnew()
   vim.cmd.terminal()
   vim.cmd.wincmd('J')
   vim.api.nvim_win_set_height(0, 10)
-end, { noremap = true })
+end, { noremap = true, desc = "Open terminal in new split" })
 
 vim.keymap.set("n", '<leader>§', function()
   vim.cmd.vnew()
   vim.cmd.terminal()
-end, { noremap = true })
-vim.api.nvim_set_keymap("t", "<esc>", "<C-\\><C-n>", { noremap = true })
-vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true })
+end, { noremap = true, desc = "Open terminal in new vertical split" })
+
+vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { noremap = true, desc = "Escape terminal mode" })
+vim.keymap.set("t", "jj", "<C-\\><C-n>", { noremap = true, desc = "Escape terminal mode with jj" })

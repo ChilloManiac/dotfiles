@@ -1,6 +1,6 @@
 [tools]
 python = "3.11.1"
-lua = "5.2.4"
+lua = "5.1"
 node = "20.17.0"
 zoxide = "latest"
 awscli = "latest"
@@ -21,3 +21,4 @@ bun = "latest"
 
 [settings]
 experimental = true
+python_compile = true

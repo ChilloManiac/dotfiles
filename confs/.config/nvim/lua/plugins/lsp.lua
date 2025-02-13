@@ -25,6 +25,7 @@ local ensure_installed = {
   "gopls",
   "html",
   "jsonls",
+  "java_language_server",
   "lua_ls",
   "marksman",
   "powershell_es",

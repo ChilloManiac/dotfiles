@@ -11,14 +11,15 @@ local M = {
       enable = true,
       keymaps = {
         init_selection = "gnn",
-        node_incremental = "grn",
-        scope_incremental = "grc",
-        node_decremental = "grm",
+        node_incremental = "+",
+        scope_incremental = "gnn",
+        node_decremental = "-",
       },
     },
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
+    vim.keymap.set("n", "+", "v", { noremap = true, silent = true })
   end,
 }
 
