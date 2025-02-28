@@ -1,106 +1,45 @@
 local M = {
   "mfussenegger/nvim-dap",
   dependencies = {
-    { "nvim-neotest/nvim-nio" },
     { "rcarriga/nvim-dap-ui" },
+    { "theHamsta/nvim-dap-virtual-text" },
   },
   keys = {
-    {
-      "<F5>",
-      function() require("dap").continue() end,
-      desc =
-      "Continue"
-    },
-    {
-      "<F10>",
-      function() require("dap").step_over() end,
-      desc =
-      "Step Over"
-    },
-    {
-      "<F11>",
-      function() require("dap").step_into() end,
-      desc =
-      "Step Into"
-    },
-    {
-      "<F12>",
-      function() require("dap").step_out() end,
-      desc =
-      "Step Out"
-    },
-    {
-      "<leader>b",
-      function() require("dap").toggle_breakpoint() end,
-      desc =
-      "Toggle Breakpoint"
-    },
-    {
-      "<leader>dsc",
-      function() require("dap.ui.variables").scopes() end,
-      desc =
-      "Scopes"
-    },
-    {
-      "<leader>dhh",
-      function() require("dap.ui.variables").hover() end,
-      desc =
-      "Hover Variables"
-    },
-    {
-      "<leader>dhv",
-      function() require("dap.ui.variables").visual_hover() end,
-      desc =
-      "Visual Hover Variables"
-    },
-    {
-      "<leader>duh",
-      function() require("dap.ui.widgets").hover() end,
-      desc =
-      "Hover"
-    },
-    {
-      "<leader>duf",
-      function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end,
-      desc =
-      "Float Scopes"
-    },
-    {
-      "<leader>dsbr",
-      function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
-      desc =
-      "Set Breakpoint with Condition"
-    },
-    {
-      "<leader>dsbm",
-      function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end,
-      desc =
-      "Set Log Point Message"
-    },
-    {
-      "<leader>dro",
-      function() require("dap").repl.open() end,
-      desc =
-      "Open REPL"
-    },
-    {
-      "<leader>drl",
-      function() require("dap").repl.run_last() end,
-      desc =
-      "Run Last"
-    },
-    {
-      "<leader>dui",
-      function() require("dapui").toggle() end,
-      desc = "Toggle Dap UI"
-    }
+    { "<F5>",        function() require("dap").continue() end,                                                    desc = "Continue" },
+    { "<F10>",       function() require("dap").step_over() end,                                                   desc = "Step Over" },
+    { "<F11>",       function() require("dap").step_into() end,                                                   desc = "Step Into" },
+    { "<F12>",       function() require("dap").step_out() end,                                                    desc = "Step Out" },
+    { "<leader>b",   function() require("dap").toggle_breakpoint() end,                                           desc = "Toggle Breakpoint" },
+    { "<leader>dbc", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,        desc = "Set Breakpoint with Condition" },
+    { "<leader>dbl", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "Set Log Point Message" },
+    { "<leader>dui", function() require("dapui").toggle() end,                                                    desc = "Toggle Dap UI" },
+    { "<leader>dbh", function() require("dap").run_to_cursor() end,                                               desc = "Run to Cursor" },
+    { "<leader>dbe", function() require("dapui").eval(nil, { enter = true }) end,                                 desc = "Evaluate under cursor" }
   }
 }
 
 M.config = function()
   local dap = require('dap')
   require('dapui').setup()
+
+  require("nvim-dap-virtual-text").setup({
+    display_callback = function(variable, buf, stackframe, node, options)
+      if #variable.value > 25 then
+        return " " .. string.sub(variable.value, 1, 25) .. "... "
+      end
+
+      return " " .. variable.value
+    end,
+  })
+
   vim.fn.sign_define('DapBreakpoint', { text = '👉', texthl = '', linehl = '', numhl = '' })
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "dap-repl",
+    callback = function()
+      require('dap.ext.autocompl').attach()
+    end,
+  })
 
   -- Adapters
   dap.adapters["pwa-node"] = {

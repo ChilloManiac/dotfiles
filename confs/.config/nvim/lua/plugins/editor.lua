@@ -17,14 +17,13 @@ return {
     lazy = false,
     opts = {
       sections = {
-        lualine_a = { "filename", "filesize" },
+        lualine_a = { "mode", "filename" },
         lualine_b = { "branch", "diff" },
         lualine_c = { "diagnostics", "searchcount" },
         lualine_x = {},
-        lualine_y = { "encoding" },
-        lualine_z = { "location" },
+        lualine_y = { "location", },
+        lualine_z = { "encoding", "filetype" },
       },
-      theme = "auto",
     },
   },
   -- swagger-preview
@@ -153,7 +152,8 @@ return {
       disable_filetype = { "markdown" }
     }
   },
-  { "kylechui/nvim-surround",    event = { "VeryLazy" }, opts = {} },
-  { "tummetott/unimpaired.nvim", event = { "VeryLazy" }, opts = {} },
-  { "3rd/image.nvim",            opts = {} },
+  { "kylechui/nvim-surround",                  event = { "VeryLazy" }, opts = {} },
+  { "tummetott/unimpaired.nvim",               event = { "VeryLazy" }, opts = {} },
+  { "3rd/image.nvim",                          opts = {} },
+  { "nvim-treesitter/nvim-treesitter-context", event = { "VeryLazy" }, opts = {} }
 }

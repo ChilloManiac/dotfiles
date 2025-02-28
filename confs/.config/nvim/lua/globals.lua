@@ -30,6 +30,9 @@ vim.opt.foldlevelstart = 4
 vim.opt.foldmethod = "expr"
 vim.opt.foldnestmax = 4
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.winwidth = 120
+vim.opt.winminwidth = 30
+vim.opt.background = "dark"
 
 function FoldText()
   local line = vim.fn.getline(vim.v.foldstart)
@@ -63,17 +66,13 @@ vim.keymap.set("i", "KK", "<esc>>>A", { noremap = true, desc = "Indent line and 
 vim.keymap.set("i", "HH", "<esc><<A", { noremap = true, desc = "Unindent line and append" })
 
 vim.keymap.set("n", "<leader>q", ":q<CR>", { noremap = true, desc = "Quit" })
-vim.keymap.set('n', '<leader>st', function()
-  vim.cmd.vnew()
-  vim.cmd.terminal()
-  vim.cmd.wincmd('J')
-  vim.api.nvim_win_set_height(0, 10)
-end, { noremap = true, desc = "Open terminal in new split" })
 
-vim.keymap.set("n", '<leader>§', function()
-  vim.cmd.vnew()
-  vim.cmd.terminal()
-end, { noremap = true, desc = "Open terminal in new vertical split" })
+
+--- terminal
+local terminal = require("custom.terminal")
+vim.keymap.set("n", "<leader>tt", terminal.toggle_term, { noremap = true, desc = "Toggle terminal" })
+
+vim.keymap.set("n", "<leader>TT", terminal.new_term, { noremap = true, desc = "New terminal" })
 
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { noremap = true, desc = "Escape terminal mode" })
-vim.keymap.set("t", "jj", "<C-\\><C-n>", { noremap = true, desc = "Escape terminal mode with jj" })
+vim.keymap.set("t", "jj", terminal.toggle_term, { noremap = true, desc = "Toggle term" })

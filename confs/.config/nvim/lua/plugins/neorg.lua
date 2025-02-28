@@ -3,6 +3,8 @@ local notesDir = "~/notes"
 return {
   {
     "nvim-neorg/neorg",
+
+    enabled = false,
     lazy = false,
     keys = {
       { "<leader>mm", "<cmd>tabnew<CR><cmd>Neorg workspace notes<CR>",        "Open Neorg" },
