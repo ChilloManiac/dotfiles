@@ -32,7 +32,6 @@ local ensure_installed = {
   "pyright",
   "spectral",
   "sqlls",
-  "tailwindcss",
   "terraformls",
   "tflint",
   "vtsls",
@@ -40,20 +39,11 @@ local ensure_installed = {
   "vimls",
 }
 
-local border = {
-  { "┌", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "┐", "FloatBorder" },
-  { "│", "FloatBorder" },
-  { "┘", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "└", "FloatBorder" },
-  { "│", "FloatBorder" },
-}
 
 M.config = function()
   require("neodev").setup()
   local lspconfig = require("lspconfig")
+  local lsp_configs = require("lspconfig.configs")
   local lsp_defaults = lspconfig.util.default_config
 
   lsp_defaults.capabilities =
@@ -69,32 +59,32 @@ M.config = function()
     vim.keymap.set("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
   end
 
-  local handlers = {
-    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-  }
+  if not lsp_configs.typescript_go then
+    lsp_configs.typescript_go = {
+      default_config = {
+        cmd = { "/Users/dkchrnor/cnor/typescript-go/built/local/tsgo", "lsp", "--stdio" },
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+        settings = {},
+      },
+    }
+  end
 
-
-  -- Add border to the diagnostic popup window
-  vim.diagnostic.config({
-    virtual_text = {
-      prefix = "■ ",
-    },
-    ---@diagnostic disable-next-line: assign-type-mismatch
-    float = { border = border },
+  lspconfig["typescript_go"].setup({
+    on_attach = on_attach,
   })
 
   local default_setup = function(server)
-    lspconfig[server].setup({
-      on_attach = on_attach,
-      handlers = handlers,
-    })
+    if not server == "vtsls" then
+      lspconfig[server].setup({
+        on_attach = on_attach,
+      })
+    end
   end
 
   local spectral_setup = function()
     lspconfig.spectral.setup({
       on_attach = on_attach,
-      handlers = handlers,
       settings = {
         enable = true,
         run = "onType",
@@ -107,7 +97,6 @@ M.config = function()
   local lua_setup = function()
     lspconfig.lua_ls.setup({
       on_attach = on_attach,
-      handlers = handlers,
       settings = {
         Lua = {
           diagnostics = {
@@ -118,6 +107,8 @@ M.config = function()
       },
     })
   end
+
+
   require("mason").setup({})
   require("mason-lspconfig").setup({
     ensure_installed = ensure_installed,

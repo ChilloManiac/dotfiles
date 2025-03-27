@@ -17,6 +17,8 @@ return {
       filesystem = {
         window = {
           mappings = {
+            ["z"] = "noop",
+            ["/"] = "noop",
             ["G"] = function(state)
               local node = state.tree:get_node()
               if node.type == "directory" then

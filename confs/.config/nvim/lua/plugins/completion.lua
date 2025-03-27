@@ -34,7 +34,7 @@ M.config = function()
 
   cmp.setup({
     sources = {
-      { name = "luasnip",              keyword_length = 2 },
+      { name = "luasnip" },
       { name = "nvim_lsp" },
       { name = "path" },
       { name = "buffer",               keyword_length = 4 },

@@ -10,18 +10,7 @@ $directory\
 $git_branch\
 $git_status\
 $git_state\
-[](fg:color_aqua bg:color_blue)\
-$c\
-$rust\
-$golang\
-$nodejs\
-$elixir\
-$php\
-$java\
-$kotlin\
-$haskell\
-$python\
-[](fg:color_blue bg:color_bg1)\
+[](fg:color_aqua bg:color_bg1)\
 $memory_usage\
 $cmd_duration\
 [ ](fg:color_bg1)\

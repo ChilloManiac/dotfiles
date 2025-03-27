@@ -7,6 +7,8 @@ export PATH="/opt/homebrew/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.local/sh
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 COMPLETION_WAITING_DOTS="false"
 HIST_STAMPS="dd-mm-yyyy"
+zstyle ':completion:*:*:make:*' tag-order 'targets'
+zstyle ':completion:*:*:make:*' call-command true 
 
 
 # Standard plugins can be found in $ZSH/plugins/
