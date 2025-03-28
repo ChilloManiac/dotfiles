@@ -69,57 +69,6 @@ return {
     opts = {}
   },
   {
-    "folke/trouble.nvim",
-    config = function()
-      require("trouble").setup({
-        auto_preview = true,
-        modes = {
-          diagnostics = {
-            filter = {
-              severity = vim.diagnostic.severity.ERROR
-            },
-            {
-              severity = vim.diagnostic.severity.WARN
-            }
-          }
-        }
-      })
-    end,
-    cmd = "Trouble",
-    keys = {
-      {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-      {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
-      },
-      {
-        "<leader>cs",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols (Trouble)",
-      },
-      {
-        "<leader>cl",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
-      },
-      {
-        "<leader>xL",
-        "<cmd>Trouble loclist toggle<cr>",
-        desc = "Location List (Trouble)",
-      },
-      {
-        "<leader>xQ",
-        "<cmd>Trouble qflist toggle<cr>",
-        desc = "Quickfix List (Trouble)",
-      },
-    },
-  },
-  {
     'aaronik/treewalker.nvim',
     lazy = false,
     config = function()
@@ -153,7 +102,6 @@ return {
     }
   },
   { "kylechui/nvim-surround",                  event = { "VeryLazy" }, opts = {} },
-  { "tummetott/unimpaired.nvim",               event = { "VeryLazy" }, opts = {} },
   { "3rd/image.nvim",                          opts = {} },
   { "nvim-treesitter/nvim-treesitter-context", event = { "VeryLazy" }, opts = {} }
 }

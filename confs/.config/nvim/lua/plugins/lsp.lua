@@ -59,27 +59,27 @@ M.config = function()
     vim.keymap.set("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
   end
 
-  if not lsp_configs.typescript_go then
-    lsp_configs.typescript_go = {
-      default_config = {
-        cmd = { "/Users/dkchrnor/cnor/typescript-go/built/local/tsgo", "lsp", "--stdio" },
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-        settings = {},
-      },
-    }
-  end
-
-  lspconfig["typescript_go"].setup({
-    on_attach = on_attach,
-  })
+  -- if not lsp_configs.typescript_go then
+  --   lsp_configs.typescript_go = {
+  --     default_config = {
+  --       cmd = { "/Users/dkchrnor/cnor/typescript-go/built/local/tsgo", "lsp", "--stdio" },
+  --       filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  --       root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+  --       settings = {},
+  --     },
+  --   }
+  -- end
+  --
+  -- lspconfig["typescript_go"].setup({
+  --   on_attach = on_attach,
+  -- })
 
   local default_setup = function(server)
-    if not server == "vtsls" then
-      lspconfig[server].setup({
-        on_attach = on_attach,
-      })
-    end
+    -- if not server == "vtsls" then
+    lspconfig[server].setup({
+      on_attach = on_attach,
+    })
+    -- end
   end
 
   local spectral_setup = function()

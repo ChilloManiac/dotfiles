@@ -33,6 +33,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.winwidth = 120
 vim.opt.winminwidth = 30
 vim.opt.background = "dark"
+vim.opt.winborder = "none"
 
 function FoldText()
   local line = vim.fn.getline(vim.v.foldstart)
