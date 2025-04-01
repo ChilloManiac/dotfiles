@@ -15,13 +15,13 @@ aliases:
     co: pr checkout
     id: issue develop -c $1
     ic: issue create
-    pc: pr create
     gcs: copilot suggest
     cps: copilot suggest
     disc: |
         api graphql --field query='query {
         }'
     wd: workflow view Deploy
+    pc: pr create -e
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
