@@ -43,9 +43,10 @@ complete -C aws_completer aws
 alias vim=nvim
 alias k='kubectl'
 
-GH_PREFIX="IS_GH_CLI=1 gh"
-alias gh="$GH_PREFIX"
-
+GH_PREFIX="IS_GH_CLI=1"
+GH_PR_PREFIX="IS_GH_PR=1"
+alias gh="$GH_PREFIX gh"
+alias ghpc="$GH_PREFIX $GH_PR_PREFIX gh pr create -e"
 
 # Functions
 # =================================
