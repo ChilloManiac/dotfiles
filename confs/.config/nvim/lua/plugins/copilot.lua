@@ -39,10 +39,14 @@ local M = {
       prompts = {
         GithubPR = {
           prompt =
-          "Create a PR description for the differences between main and HEAD. The first line should be a title, using a conventional commit style, such as 'feat: add new feature'. The rest of the PR description should be a detailed explanation of the changes. Focus on the logical changes, and not so much on how files have been moved around, or variables changed names",
-          context = "git:main..HEAD"
+          "Create a PR description for the differences between main and HEAD. The first line should be a title, using a conventional commit style, such as 'feat: add new feature'. The rest of the PR description should be a detailed explanation of the changes. Focus on the logical changes, and not so much on how files have been moved around, or variables changed names. Do not use any markdown styling",
+          context = "git:origin/main..HEAD"
         }
-      }
+      },
+      selection = function(source)
+        local select = require("CopilotChat.select")
+        return select.visual(source)
+      end,
     },
     keys = {
       { '<leader>cc',  "<cmd>CopilotChatToggle<CR>",   desc = "Toggle Copilot Chat",     mode = { "v", "n" } },

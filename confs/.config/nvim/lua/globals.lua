@@ -34,6 +34,21 @@ vim.opt.winwidth = 120
 vim.opt.winminwidth = 30
 vim.opt.background = "dark"
 vim.opt.winborder = "none"
+vim.diagnostic.config({
+  virtual_lines = false,
+  jump = {
+    float = {
+      enabled = true,
+    },
+  },
+  virtual_text = {
+    severity = {
+      min = vim.diagnostic.severity.ERROR,
+    },
+    prefix = "●",
+    spacing = 4,
+  },
+})
 
 function FoldText()
   local line = vim.fn.getline(vim.v.foldstart)
@@ -43,6 +58,7 @@ end
 vim.o.foldtext = "v:lua.FoldText()"
 
 vim.g.is_github_cli = vim.fn.environ()["IS_GH_CLI"] == "1"
+
 
 --------------------------------------------------------------------------
 -- Key maps

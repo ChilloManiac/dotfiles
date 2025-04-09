@@ -19,6 +19,7 @@ local M = {
 
 local ensure_installed = {
   "biome",
+  "bashls",
   "cssls",
   "dockerls",
   "elixirls",
@@ -43,20 +44,18 @@ local ensure_installed = {
 M.config = function()
   require("neodev").setup()
   local lspconfig = require("lspconfig")
-  local lsp_configs = require("lspconfig.configs")
+  -- local lsp_configs = require("lspconfig.configs")
   local lsp_defaults = lspconfig.util.default_config
 
   lsp_defaults.capabilities =
       vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-  local on_attach = function(client, bufnr)
+  local on_attach = function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", "grd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
     vim.keymap.set("n", "<leader>fb", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
     vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-    vim.keymap.set("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
-    vim.keymap.set("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
   end
 
   -- if not lsp_configs.typescript_go then
@@ -141,14 +140,16 @@ M.config = function()
       -- Conform will run multiple formatters sequentially
       python = { "isort", "black" },
       terraform = { "terraform_fmt" },
-      typescript = { "biome", },
-      javascript = { "biome" },
-      javascriptreact = { "biome" },
-      typescriptreact = { "biome" },
+      typescript = { "biome", "biome-check", },
+      javascript = { "biome", "biome-check" },
+      javascriptreact = { "biome", "biome-check" },
+      typescriptreact = { "biome", "biome-check" },
       sql = { "sqlfluff" },
       markdown = { "prettier" },
       go = { "gofmt" },
       yaml = { "prettier" },
+      bash = { "shfmt" },
+      shell = { "shfmt" },
     },
     format_on_save = function(bufnr)
       if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
