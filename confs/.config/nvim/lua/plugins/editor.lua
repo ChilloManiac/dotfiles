@@ -102,6 +102,5 @@ return {
     }
   },
   { "kylechui/nvim-surround",                  event = { "VeryLazy" }, opts = {} },
-  { "3rd/image.nvim",                          opts = {} },
   { "nvim-treesitter/nvim-treesitter-context", event = { "VeryLazy" }, opts = {} }
 }
