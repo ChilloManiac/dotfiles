@@ -61,7 +61,17 @@ return {
     keys = {
       { "<leader>nn", "<cmd>NoNeckPain<CR>", desc = "No Neck Pain" },
     },
-    opts = { width = 200 }
+    opts = {
+      width = 200,
+    }
+  },
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      window = {
+        width = 200
+      }
+    }
   },
   {
     "dmmulroy/tsc.nvim",

@@ -1,5 +1,6 @@
 local M = {
-  'stevearc/overseer.nvim',
+  --'stevearc/overseer.nvim',
+  dir = "~/cnor/overseer.nvim",
   keys = {
     { '<leader>ot',  ':OverseerToggle<CR>', desc = "Overseer Toggle" },
     { '<leader>orr', ':OverseerRun<CR>',    desc = "Overseer Run" },
@@ -27,6 +28,34 @@ M.config = function()
     })
     lualine.setup(withSections)
   end
+
+  overseer.register_template({
+    name = "Jest Test Quickfix",
+    builder = function()
+      return {
+        cmd = "pnpm",
+        args = { "exec", "jest", "--json", "--testLocationInResults", "|", "jq", "-r", [['.testResults[] | select(.status == "failed") | . as $file | .assertionResults[] as $results | select($results.status == "failed") | $results.location as $location | "\($file.name):\($location.line):\($location.column): \($results.fullName)"']] },
+        name = "Jest Test Quickfix",
+        components = {
+          { "on_output_quickfix", open_on_exit = "always", errorformat = [[%f:%l:%c:\ %m]], items_only = true },
+          { "on_complete_notify", },
+          "default"
+        },
+      }
+    end,
+    condition = {
+      callback = function()
+        local matches = vim.fs.find("package.json", {
+          upward = true,
+          type = "file",
+          path = vim.fn.getcwd(),
+          stop = vim.fn.getcwd() .. "/..",
+          limit = 1
+        })
+        return #matches > 0
+      end
+    },
+  })
 
   -- Setup custom exercism tasks
   local exercism_dir = vim.fn.expand('$HOME/exercism')
