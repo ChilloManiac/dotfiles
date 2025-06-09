@@ -26,23 +26,6 @@ return {
       },
     },
   },
-  -- swagger-preview
-  {
-    "vinnymeller/swagger-preview.nvim",
-    cmd = {
-      "SwaggerPreview",
-      "SwaggerPreviewStop",
-      "SwaggerPreviewToggle",
-    },
-    config = function()
-      require("swagger-preview").setup({
-        -- The port to run the preview server on
-        port = 8000,
-        -- The host to run the preview server on
-        host = "localhost",
-      })
-    end,
-  },
   -- which-key
   {
     "folke/which-key.nvim",
@@ -66,17 +49,12 @@ return {
     }
   },
   {
-    "folke/zen-mode.nvim",
-    opts = {
-      window = {
-        width = 200
-      }
-    }
-  },
-  {
     "dmmulroy/tsc.nvim",
     cmd = { "TSC", "TSCOpen" },
-    opts = {}
+    opts = {
+      bin_path = "/Users/dkchrnor/cnor/typescript-go/built/local/tsgo",
+      flags = "tsc --noEmit"
+    }
   },
   {
     'aaronik/treewalker.nvim',
@@ -102,8 +80,7 @@ return {
         { silent = true, desc = "Swap left in Treewalker" })
     end
   },
-  { "numToStr/Comment.nvim",                event = { "VeryLazy" }, opts = {} },
-  { "davidgranstrom/nvim-markdown-preview", cmd = "MarkdownPreview" },
+  { "davidgranstrom/nvim-markdown-preview",    cmd = "MarkdownPreview" },
   {
     "windwp/nvim-autopairs",
     event = { "InsertEnter" },
@@ -112,5 +89,6 @@ return {
     }
   },
   { "kylechui/nvim-surround",                  event = { "VeryLazy" }, opts = {} },
-  { "nvim-treesitter/nvim-treesitter-context", event = { "VeryLazy" }, opts = {} }
+  { "nvim-treesitter/nvim-treesitter-context", event = { "VeryLazy" }, opts = {} },
+  { "j-hui/fidget.nvim",                       event = { "VeryLazy" }, opts = {} },
 }

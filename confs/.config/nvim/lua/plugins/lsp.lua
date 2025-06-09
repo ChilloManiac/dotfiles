@@ -1,13 +1,13 @@
 local M = {
   "neovim/nvim-lspconfig",
-  events = { "InsertEnter" },
+  event = { "VeryLazy", },
+  cmd = { "LspInfo", "LspInstall", "LspUninstall" },
   dependencies = {
     -- LSP Support
     { "williamboman/mason-lspconfig.nvim" },
     { "williamboman/mason.nvim" },
 
-    -- Neodev
-    { "folke/neodev.nvim" },
+    { "folke/lazydev.nvim",               ft = "lua" },
 
     -- Lint
     { "mfussenegger/nvim-lint" },
@@ -42,7 +42,6 @@ local ensure_installed = {
 
 
 M.config = function()
-  require("neodev").setup()
   local lspconfig = require("lspconfig")
   -- local lsp_configs = require("lspconfig.configs")
   local lsp_defaults = lspconfig.util.default_config

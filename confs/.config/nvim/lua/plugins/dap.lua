@@ -41,6 +41,8 @@ M.config = function()
     end,
   })
 
+  dap.defaults.fallback.switchbuf = 'useopen,vsplit'
+
   -- Adapters
   dap.adapters["pwa-node"] = {
     type = "server",

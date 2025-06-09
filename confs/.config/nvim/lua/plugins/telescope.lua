@@ -45,6 +45,8 @@ M.config = function()
     { noremap = true, silent = true, desc = "Change Directory" })
   vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files hidden=true<cr>',
     { noremap = true, silent = true, desc = "Find Files" })
+  vim.keymap.set('n', '<leader>fc', '<cmd>Telescope git_status<cr>',
+    { noremap = true, silent = true, desc = "Find Changed Files" })
   vim.keymap.set('n', '<leader>fg', '<cmd>Telescope git_files<cr>',
     { noremap = true, silent = true, desc = "Find Git Files" })
   vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<cr>',

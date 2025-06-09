@@ -40,7 +40,8 @@ M.config = function()
       { name = "buffer",               keyword_length = 4 },
       { name = "vim-dadbod-completion" },
       { name = "neorg" },
-      { name = "git",                  keyword_length = 3 }
+      { name = "git",                  keyword_length = 3 },
+      { name = "lazydev" }
     },
     mapping = cmp.mapping.preset.insert({
       ["<CR>"] = cmp.mapping.confirm({ select = true }),
