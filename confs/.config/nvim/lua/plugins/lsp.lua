@@ -1,22 +1,3 @@
-local M = {
-  "neovim/nvim-lspconfig",
-  event = { "VeryLazy", },
-  cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-  dependencies = {
-    -- LSP Support
-    { "williamboman/mason-lspconfig.nvim" },
-    { "williamboman/mason.nvim" },
-
-    { "folke/lazydev.nvim",               ft = "lua", opts = {} },
-
-    -- Lint
-    { "mfussenegger/nvim-lint" },
-
-    -- Format
-    { "stevearc/conform.nvim" },
-  },
-}
-
 local ensure_installed = {
   "biome",
   "bashls",
@@ -40,145 +21,157 @@ local ensure_installed = {
   "vimls",
 }
 
+return {
+  {
+    "neovim/nvim-lspconfig",
+    event = { "VeryLazy", },
+    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+    dependencies = {
+      { "williamboman/mason.nvim",           opts = {} },
+      { "williamboman/mason-lspconfig.nvim", opts = {} },
+      { "folke/lazydev.nvim",                ft = "lua", opts = {} },
+    },
+    config = function()
+      local lspconfig = require("lspconfig")
+      -- local lsp_configs = require("lspconfig.configs")
+      local lsp_defaults = lspconfig.util.default_config
 
-M.config = function()
-  local lspconfig = require("lspconfig")
-  -- local lsp_configs = require("lspconfig.configs")
-  local lsp_defaults = lspconfig.util.default_config
+      lsp_defaults.capabilities =
+          vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-  lsp_defaults.capabilities =
-      vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+      local on_attach = function(_, bufnr)
+        local opts = { buffer = bufnr, remap = false }
 
-  local on_attach = function(_, bufnr)
-    local opts = { buffer = bufnr, remap = false }
+        vim.keymap.set("n", "grd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+        vim.keymap.set("n", "<leader>fb", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
+        vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
+      end
 
-    vim.keymap.set("n", "grd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-    vim.keymap.set("n", "<leader>fb", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
-    vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-  end
+      -- if not lsp_configs.typescript_go then
+      --   lsp_configs.typescript_go = {
+      --     default_config = {
+      --       cmd = { "/Users/dkchrnor/cnor/typescript-go/built/local/tsgo", "lsp", "--stdio" },
+      --       filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+      --       root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+      --       settings = {},
+      --     },
+      --   }
+      -- end
+      --
+      -- lspconfig["typescript_go"].setup({
+      --   on_attach = on_attach,
+      -- })
 
-  -- if not lsp_configs.typescript_go then
-  --   lsp_configs.typescript_go = {
-  --     default_config = {
-  --       cmd = { "/Users/dkchrnor/cnor/typescript-go/built/local/tsgo", "lsp", "--stdio" },
-  --       filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-  --       root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-  --       settings = {},
-  --     },
-  --   }
-  -- end
-  --
-  -- lspconfig["typescript_go"].setup({
-  --   on_attach = on_attach,
-  -- })
+      local default_setup = function(server)
+        -- if not server == "vtsls" then
+        lspconfig[server].setup({
+          on_attach = on_attach,
+        })
+        -- end
+      end
 
-  local default_setup = function(server)
-    -- if not server == "vtsls" then
-    lspconfig[server].setup({
-      on_attach = on_attach,
-    })
-    -- end
-  end
+      local spectral_setup = function()
+        lspconfig.spectral.setup({
+          on_attach = on_attach,
+          settings = {
+            enable = true,
+            run = "onType",
+            rulesetFile = "./.spectral.yaml",
+            validateFiles = "**/*-api.yaml"
+          }
+        })
+      end
 
-  local spectral_setup = function()
-    lspconfig.spectral.setup({
-      on_attach = on_attach,
-      settings = {
-        enable = true,
-        run = "onType",
-        rulesetFile = "./.spectral.yaml",
-        validateFiles = "**/*-api.yaml"
-      }
-    })
-  end
-
-  lspconfig["lua_ls"].setup({
-    on_attach = on_attach,
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim", "awesome" },
+      lspconfig["lua_ls"].setup({
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim", "awesome" },
+            },
+            hint = { enable = true }
+          },
         },
-        hint = { enable = true }
+      })
+
+      require("mason").setup({})
+      require("mason-lspconfig").setup({
+        ensure_installed = ensure_installed,
+        handlers = {
+          default_setup,
+          ["lua_ls"] = function()
+          end, -- lua_setup,
+          ["spectral"] = spectral_setup,
+        },
+      })
+    end
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufWritePre" },
+    config = function()
+      local lint = require("lint")
+      lint.linters_by_ft = {
+        markdown = { "markdownlint" },
+        python = { "flake8" },
+        lua = { "luacheck" },
+        typescript = {},
+        javascript = {},
+        go = { "revive" }
+      }
+
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          require("lint").try_lint()
+        end,
+      })
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    keys = {
+      {
+        "<leader>fdb",
+        function()
+          vim.b.disable_autoformat = not vim.b.disable_autoformat
+          if vim.b.disable_autoformat then return vim.notify("Disabled autoformat for buffer") end
+          vim.notify("Enabled autoformat for buffer")
+        end,
+        desc = "Toggle disable autoformat for buffer"
+      },
+      {
+        "<leader>fdd",
+        function()
+          vim.g.disable_autoformat = not vim.g.disable_autoformat
+          if vim.g.disable_autoformat then return vim.notify("Disabled autoformat for all buffers") end
+          vim.notify("Enabled autoformat for all buffers")
+        end,
+        desc = "Toggle disable autoformat for all buffers"
       },
     },
-  })
-
-  -- local lua_setup = function()
-  --   lspconfig.lua_ls.setup({
-  --     on_attach = on_attach,
-  --     settings = {
-  --       Lua = {
-  --         diagnostics = {
-  --           globals = { "vim", "awesome" },
-  --         },
-  --         hint = { enable = true }
-  --       },
-  --     },
-  --   })
-  -- end
-
-
-  require("mason").setup({})
-  require("mason-lspconfig").setup({
-    ensure_installed = ensure_installed,
-    handlers = {
-      default_setup,
-      ["lua_ls"] = nil, -- lua_setup,
-      ["spectral"] = spectral_setup,
-    },
-  })
-
-  -- Lint
-  require("lint").linters_by_ft = {
-    markdown = { "markdownlint" },
-    python = { "flake8" },
-    typescript = {},
-    javascript = {},
-    go = { "revive" }
-  }
-
-  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    callback = function()
-      require("lint").try_lint()
-    end,
-  })
-
-  -- Format
-  require("conform").setup({
-    formatters_by_ft = {
-      lua = { "stylua" },
-      -- Conform will run multiple formatters sequentially
-      python = { "isort", "black" },
-      terraform = { "terraform_fmt" },
-      typescript = { "biome", "biome-check", },
-      javascript = { "biome", "biome-check" },
-      javascriptreact = { "biome", "biome-check" },
-      typescriptreact = { "biome", "biome-check" },
-      sql = { "sqlfluff" },
-      markdown = { "prettier" },
-      go = { "gofmt" },
-      yaml = { "prettier" },
-      bash = { "shfmt" },
-      shell = { "shfmt" },
-    },
-    format_on_save = function(bufnr)
-      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
-      return { timeout_ms = 1000, lsp_fallback = true }
-    end,
-  })
-
-  vim.keymap.set('n', '<leader>fdb', function()
-    vim.b.disable_autoformat = not vim.b.disable_autoformat
-    if vim.b.disable_autoformat then return vim.notify("Disabled automatic formatting for buffer") end
-    vim.notify("Enabled automatic formatting enabled for buffer")
-  end)
-
-  vim.keymap.set('n', '<leader>fdd', function()
-    vim.g.disable_autoformat = not vim.g.disable_autoformat
-    if vim.g.disable_autoformat then return vim.notify("Disabled automatic formatting for all buffers") end
-    vim.notify("Enabled automatic formatting for all buffers")
-  end)
-end
-
-return M
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "isort", "black" },
+          terraform = { "terraform_fmt" },
+          typescript = { "biome", "biome-check", },
+          javascript = { "biome", "biome-check" },
+          javascriptreact = { "biome", "biome-check" },
+          typescriptreact = { "biome", "biome-check" },
+          sql = { "sqlfluff" },
+          markdown = { "prettier" },
+          go = { "gofmt" },
+          yaml = { "prettier" },
+          bash = { "shfmt" },
+          shell = { "shfmt" },
+        },
+        format_on_save = function(bufnr)
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+          return { timeout_ms = 1000, lsp_fallback = true }
+        end,
+      })
+    end
+  },
+}
