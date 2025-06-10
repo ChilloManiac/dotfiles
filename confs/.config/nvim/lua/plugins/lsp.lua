@@ -7,7 +7,7 @@ local M = {
     { "williamboman/mason-lspconfig.nvim" },
     { "williamboman/mason.nvim" },
 
-    { "folke/lazydev.nvim",               ft = "lua" },
+    { "folke/lazydev.nvim",               ft = "lua", opts = {} },
 
     -- Lint
     { "mfussenegger/nvim-lint" },
@@ -92,19 +92,31 @@ M.config = function()
     })
   end
 
-  local lua_setup = function()
-    lspconfig.lua_ls.setup({
-      on_attach = on_attach,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim", "awesome" },
-          },
-          hint = { enable = true },
+  lspconfig["lua_ls"].setup({
+    on_attach = on_attach,
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim", "awesome" },
         },
+        hint = { enable = true }
       },
-    })
-  end
+    },
+  })
+
+  -- local lua_setup = function()
+  --   lspconfig.lua_ls.setup({
+  --     on_attach = on_attach,
+  --     settings = {
+  --       Lua = {
+  --         diagnostics = {
+  --           globals = { "vim", "awesome" },
+  --         },
+  --         hint = { enable = true }
+  --       },
+  --     },
+  --   })
+  -- end
 
 
   require("mason").setup({})
@@ -112,7 +124,7 @@ M.config = function()
     ensure_installed = ensure_installed,
     handlers = {
       default_setup,
-      ["lua_ls"] = lua_setup,
+      ["lua_ls"] = nil, -- lua_setup,
       ["spectral"] = spectral_setup,
     },
   })
