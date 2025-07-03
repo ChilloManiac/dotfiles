@@ -1,31 +1,11 @@
-local ensure_installed = {
-  "biome",
-  "bashls",
-  "cssls",
-  "dockerls",
-  "elixirls",
-  "gopls",
-  "html",
-  "jsonls",
-  "java_language_server",
-  "lua_ls",
-  "marksman",
-  "powershell_es",
-  "pyright",
-  "spectral",
-  "sqlls",
-  "terraformls",
-  "tflint",
-  "vtsls",
-  "yamlls",
-  "vimls",
-}
-
 return {
   {
     "neovim/nvim-lspconfig",
     event = { "VeryLazy", },
     cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+    keys = {
+      "<leader>li", "<cmd>LspInfo<cr>", desc = "LSP Info",
+    },
     dependencies = {
       { "williamboman/mason.nvim",           opts = {} },
       { "williamboman/mason-lspconfig.nvim", opts = {} },
@@ -33,6 +13,7 @@ return {
     },
     config = function()
       local lspconfig = require("lspconfig")
+      require("mason").setup({})
       -- local lsp_configs = require("lspconfig.configs")
       local lsp_defaults = lspconfig.util.default_config
 
@@ -57,32 +38,35 @@ return {
       --     },
       --   }
       -- end
-      --
-      -- lspconfig["typescript_go"].setup({
-      --   on_attach = on_attach,
-      -- })
 
-      local default_setup = function(server)
-        -- if not server == "vtsls" then
+      local default_setup_lsps = {
+        "biome",
+        "bashls",
+        "cssls",
+        "dockerls",
+        "elixirls",
+        "gopls",
+        "html",
+        "jsonls",
+        "marksman",
+        "powershell_es",
+        "pyright",
+        "sqlls",
+        "terraformls",
+        "tflint",
+        "vtsls",
+        "yamlls",
+        "vimls",
+      }
+
+      for _, server in ipairs(default_setup_lsps) do
         lspconfig[server].setup({
           on_attach = on_attach,
         })
-        -- end
       end
 
-      local spectral_setup = function()
-        lspconfig.spectral.setup({
-          on_attach = on_attach,
-          settings = {
-            enable = true,
-            run = "onType",
-            rulesetFile = "./.spectral.yaml",
-            validateFiles = "**/*-api.yaml"
-          }
-        })
-      end
 
-      lspconfig["lua_ls"].setup({
+      lspconfig.lua_ls.setup({
         on_attach = on_attach,
         settings = {
           Lua = {
@@ -93,16 +77,14 @@ return {
           },
         },
       })
-
-      require("mason").setup({})
-      require("mason-lspconfig").setup({
-        ensure_installed = ensure_installed,
-        handlers = {
-          default_setup,
-          ["lua_ls"] = function()
-          end, -- lua_setup,
-          ["spectral"] = spectral_setup,
-        },
+      lspconfig.spectral.setup({
+        on_attach = on_attach,
+        settings = {
+          enable = true,
+          run = "onType",
+          rulesetFile = "./.spectral.yaml",
+          validateFiles = "**/*-api.yaml"
+        }
       })
     end
   },

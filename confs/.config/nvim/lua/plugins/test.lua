@@ -43,7 +43,7 @@ M.config = function()
     adapters = {
       require("neotest-jest")({
         jestCommand = "npm test --ignore-scripts --",
-        jest_test_discovery = false,
+        -- jest_test_discovery = false,
         cwd = function(path)
           return vim.fn.getcwd()
         end,

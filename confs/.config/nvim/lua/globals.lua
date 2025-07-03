@@ -76,6 +76,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zzzv", { noremap = true, desc = "Scroll down 
 vim.keymap.set("n", "<C-u>", "<C-u>zzzv", { noremap = true, desc = "Scroll up and center" })
 vim.keymap.set("n", "<leader>w", "<C-w>", { noremap = true, desc = "Window commands" })
 vim.keymap.set("n", "z1", ":set foldlevel=1<CR>", { noremap = true, desc = "Set fold level to 1" })
+vim.keymap.set("n", "z2", ":set foldlevel=2<CR>", { noremap = true, desc = "Set fold level to 2" })
 vim.keymap.set("n", "<leader>sf", ":source %<CR>", { noremap = true, desc = "Source current file" })
 
 vim.keymap.set("i", "jj", "<esc>", { noremap = true, desc = "Escape insert mode" })

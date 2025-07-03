@@ -7,7 +7,9 @@ return {
     debug = { enabled = true },
     dim = { enabled = true },
     image = { enabled = true },
-    indent = { enabled = true },
+    indent = {
+      enabled = false,
+    },
     words = { enabled = true },
   }
 }

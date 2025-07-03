@@ -2,6 +2,7 @@ local M = {
   {
     "zbirenbaum/copilot.lua",
     dependencies = {},
+    enabled = true,
     event = { "InsertEnter" },
     opts = {
       suggestion = {
@@ -29,6 +30,7 @@ local M = {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
+    enabled = true,
     dependencies = {
       { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim" },
