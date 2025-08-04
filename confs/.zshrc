@@ -49,20 +49,11 @@ GH_PR_PREFIX="IS_GH_PR=1"
 alias gh="$GH_PREFIX gh"
 alias ghpc="$GH_PREFIX $GH_PR_PREFIX gh pr create -e"
 
-# Functions
-# =================================
-function gnb() {
-  git fetch -a
-  git switch -c $1
-  git rebase origin/main --force
-}
-
 # Exports
 # =================================
 export GIT_EDITOR=nvim
 export GPG_TTY=$(tty)
 export EDITOR=nvim
-export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH" # image.nvim
 
 # LEGO
 # ==========

@@ -90,5 +90,16 @@ return {
   },
   { "kylechui/nvim-surround",                  event = { "VeryLazy" }, opts = {} },
   { "nvim-treesitter/nvim-treesitter-context", event = { "VeryLazy" }, opts = {} },
-  { "j-hui/fidget.nvim",                       event = { "VeryLazy" }, opts = {} },
+  {
+    "j-hui/fidget.nvim",
+    event = { "VeryLazy" },
+    opts = {
+      notification = {
+        override_vim_notify = true,
+        view = {
+          stack_upwards = true,
+        }
+      }
+    }
+  },
 }

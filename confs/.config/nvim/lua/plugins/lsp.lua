@@ -7,11 +7,13 @@ return {
       "<leader>li", "<cmd>LspInfo<cr>", desc = "LSP Info",
     },
     dependencies = {
-      { "williamboman/mason.nvim",           opts = {} },
-      { "williamboman/mason-lspconfig.nvim", opts = {} },
-      { "folke/lazydev.nvim",                ft = "lua", opts = {} },
+      { "williamboman/mason.nvim", opts = {} },
+      { "folke/lazydev.nvim",      ft = "lua", opts = {} },
     },
     config = function()
+      vim.keymap.set("n", "grd", "<cmd>lua vim.lsp.buf.definition()<cr>", { remap = false })
+      vim.keymap.set("n", "<leader>fb", "<cmd>lua vim.lsp.buf.format()<cr>", { remap = false })
+      vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", { remap = false })
       local lspconfig = require("lspconfig")
       require("mason").setup({})
       -- local lsp_configs = require("lspconfig.configs")
@@ -20,13 +22,7 @@ return {
       lsp_defaults.capabilities =
           vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-      local on_attach = function(_, bufnr)
-        local opts = { buffer = bufnr, remap = false }
 
-        vim.keymap.set("n", "grd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-        vim.keymap.set("n", "<leader>fb", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
-        vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-      end
 
       -- if not lsp_configs.typescript_go then
       --   lsp_configs.typescript_go = {
@@ -61,13 +57,12 @@ return {
 
       for _, server in ipairs(default_setup_lsps) do
         lspconfig[server].setup({
-          on_attach = on_attach,
+          on_attach = nil,
         })
       end
 
 
       lspconfig.lua_ls.setup({
-        on_attach = on_attach,
         settings = {
           Lua = {
             diagnostics = {
@@ -78,7 +73,6 @@ return {
         },
       })
       lspconfig.spectral.setup({
-        on_attach = on_attach,
         settings = {
           enable = true,
           run = "onType",
