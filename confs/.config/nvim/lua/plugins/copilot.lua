@@ -45,7 +45,7 @@ Create a PR description for the differences between main and HEAD. The first lin
 The rest of the PR description should be a detailed explanation of the changes. Imagine the reader being well experienced in the codebase and quite busy so focus on the logical changes and the important changes that needs to be highlighted for a glance view. Low to no focus on how files have been moved around, or variables changed names.
 Dont use any styling at all. Keep it as short as possible, but still informative.
           ]],
-          context = "git:origin/main..HEAD"
+          context = "gitdiff:origin/main"
         }
       },
       selection = function(source)
