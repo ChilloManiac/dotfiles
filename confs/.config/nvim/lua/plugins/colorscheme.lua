@@ -1,23 +1,17 @@
-local M = {
-  -- { "folke/tokyonight.nvim",         lazy = false, priority = 1000 },
-  -- { "Mofiqul/dracula.nvim",          lazy = false, priority = 1000 },
-  -- { "savq/melange-nvim",             lazy = false, priority = 1000 },
-  -- { "scottmckendry/cyberdream.nvim", lazy = false, priority = 1000, },
-  -- { "mhartington/oceanic-next",      lazy = false, priority = 1000 },
-  -- { "rose-pine/neovim",              lazy = false, priority = 1000, },
-  -- { "zenbones-theme/zenbones.nvim",  lazy = false, priority = 1000, dependencies = "rktjmp/lush.nvim", },
-  -- { "EdenEast/nightfox.nvim",        lazy = false, priority = 1000, },
-  {
-    "sainnhe/everforest",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.g.everforest_enable_italic = true
-      vim.g.everforest_background = "hard"
-      vim.cmd.colorscheme('everforest')
-    end
-  },
-}
+vim.pack.add({
+  "https://github.com/folke/tokyonight.nvim",
+  "https://github.com/Mofiqul/dracula.nvim",
+  "https://github.com/savq/melange-nvim",
+  "https://github.com/scottmckendry/cyberdream.nvim",
+  "https://github.com/mhartington/oceanic-next",
+  "https://github.com/rose-pine/neovim",
+  "https://github.com/zenbones-theme/zenbones.nvim",
+  "https://github.com/rktjmp/lush.nvim",
+  "https://github.com/EdenEast/nightfox.nvim",
+  "https://github.com/sainnhe/everforest",
+})
 
 
-return M
+vim.g.everforest_enable_italic = true
+vim.g.everforest_background = "hard"
+vim.cmd.colorscheme('everforest')

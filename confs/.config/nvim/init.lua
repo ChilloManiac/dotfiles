@@ -1,5 +1,21 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require("globals")
-require("lazy_packages")
+require("config.options")
+require("config.keymaps")
+require("plugins.neo-tree")
+require("plugins.colorscheme")
+require("plugins.lua-snip")
+require("plugins.nvim-treesitter")
+require("plugins.nvim-lint")
+require("plugins.conform")
+require("plugins.copilot")
+require("plugins.dadbod")
+require("plugins.dap")
+require("plugins.git")
+require("plugins.overseer")
+require("plugins.lualine")
+require("plugins.misc")
+require("plugins.test")
+require("plugins.cmp")
+require("plugins.lsp")
