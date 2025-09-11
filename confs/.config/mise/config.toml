@@ -24,6 +24,9 @@ helm = "latest"
 kubectl = "latest"
 argocd = "latest"
 maven = "3.9.9"
+coursier = "latest"
+scala = "latest"
+sbt = "latest"
 
 [settings]
 experimental = true
