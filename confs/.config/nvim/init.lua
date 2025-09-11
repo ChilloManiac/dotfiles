@@ -3,6 +3,7 @@ vim.g.loaded_netrwPlugin = 1
 
 require("config.options")
 require("config.keymaps")
+require("plugins.mini")
 require("plugins.neo-tree")
 require("plugins.colorscheme")
 require("plugins.lua-snip")
