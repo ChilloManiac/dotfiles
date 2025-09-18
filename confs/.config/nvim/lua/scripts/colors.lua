@@ -1,3 +1,8 @@
+local builtins = { "blue", "darkblue", "default", "delek", "desert", "elflord", "evening", "habamax", "industry",
+  "koehler", "lunaperche", "morning", "murphy", "pablo", "peachpuff", "quiet", "retrobox", "ron", "shine", "slate"
+, "sorbet", "torte", "unokai", "vim", "wildcharm", "zaibatsu", "zellner" }
+
+
 local function cycle_color(dir)
   local direction = dir or 1
   if not vim.g.color_cycle.enabled then
@@ -37,13 +42,20 @@ end
 local function start_color_cycle()
   local current_color = vim.g.colors_name
   local all_colors = vim.fn.getcompletion("", "color")
-  local current_index = vim.fn.index(all_colors, current_color) + 1
+  local all_colors_no_builtins = vim.tbl_filter(function(color)
+    return not vim.tbl_contains(builtins, color)
+  end, all_colors)
+  local current_index = vim.fn.index(all_colors_no_builtins, current_color)
+  if current_index == -1 then
+    current_index = 1
+  end
 
-  vim.notify("Starting color cycle from: " .. all_colors[current_index], vim.log.levels.INFO, { title = "Color Cycle" })
+  vim.notify("Starting color cycle from: " .. all_colors_no_builtins[current_index], vim.log.levels.INFO,
+    { title = "Color Cycle" })
 
   vim.g.color_cycle = {
     enabled = true,
-    colors = all_colors,
+    colors = all_colors_no_builtins,
     index = current_index
   }
 
