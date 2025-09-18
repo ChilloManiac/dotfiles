@@ -7,11 +7,6 @@ require("mini.extra").setup()
 require('mini.ai').setup()
 require("mini.align").setup()
 require("mini.comment").setup()
-require("mini.operators").setup({
-  replace = {
-    prefix = "gR",
-  },
-})
 require("mini.pairs").setup()
 require("mini.splitjoin").setup()
 require("mini.surround").setup()
@@ -34,6 +29,7 @@ require("mini.pick").setup({ window = { config = win_config }, mappings = { choo
 vim.ui.select = require("mini.pick").ui_select
 vim.keymap.set('n', '<leader>rg', ":Pick grep_live<CR>", { desc = "Grep" })
 vim.keymap.set('n', '<leader>ff', ":Pick files<CR>", { desc = "Find Files" })
+vim.keymap.set('n', '<leader>fg', ":Pick git_files<CR>", { desc = "Find Git files" })
 vim.keymap.set('n', '<leader>fh', ":Pick help<CR>", { desc = "Find Help" })
 vim.keymap.set('n', '<leader>tr', ":Pick resume<CR>", { desc = "Resume" })
 vim.keymap.set('n', '<leader>fr', ":Pick oldfiles<CR>", { desc = "Find Recent files" })

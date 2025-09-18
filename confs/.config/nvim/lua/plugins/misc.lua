@@ -7,3 +7,5 @@ require('which-key').setup({})
 require('no-neck-pain').setup({
   width = 200,
 })
+
+vim.keymap.set('n', '<leader>nn', ":NoNeckPain<CR>", { desc = "Toggle No Neck Pain" })
