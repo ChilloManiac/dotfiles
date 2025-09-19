@@ -6,20 +6,11 @@ vim.pack.add({
 
 require("mason").setup({})
 
-local lspconfig = require("lspconfig")
-local lsp_defaults = lspconfig.util.default_config
-
-lsp_defaults.capabilities =
-    vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-vim.lsp.config('copilot', {
-  cmd = { 'copilot-language-server', '--stdio', },
-  root_markers = { '.git' },
+vim.lsp.config('*', {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
-vim.lsp.enable('copilot')
 vim.lsp.inline_completion.enable()
 
-vim.keymap.set('i', '<C-CR>', vim.lsp.inline_completion.get, { desc = 'Accept LSP inline suggestion' })
 
 local default_setup_lsps = {
   "bashls",
@@ -43,7 +34,15 @@ local default_setup_lsps = {
 }
 
 for _, server in ipairs(default_setup_lsps) do
-  lspconfig[server].setup({
-    on_attach = nil,
-  })
+  vim.lsp.enable(server)
 end
+
+-- Copilot support
+
+vim.lsp.config('copilot', {
+  cmd = { 'copilot-language-server', '--stdio', },
+  root_markers = { '.git' },
+})
+vim.lsp.enable('copilot')
+
+vim.keymap.set('i', '<C-CR>', vim.lsp.inline_completion.get, { desc = 'Accept LSP inline suggestion' })
