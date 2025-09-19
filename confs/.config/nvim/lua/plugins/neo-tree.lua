@@ -1,5 +1,5 @@
 vim.pack.add({
-  { src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = "3.x" },
+  { src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = "v3.x" },
   "https://github.com/nvim-lua/plenary.nvim",
   'https://github.com/nvim-tree/nvim-web-devicons',
   "https://github.com/MunifTanjim/nui.nvim",
