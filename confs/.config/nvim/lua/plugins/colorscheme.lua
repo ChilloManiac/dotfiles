@@ -9,9 +9,9 @@ vim.pack.add({
   "https://github.com/rktjmp/lush.nvim",
   "https://github.com/EdenEast/nightfox.nvim",
   "https://github.com/sainnhe/everforest",
+  "https://github.com/rebelot/kanagawa.nvim"
 })
-
 
 vim.g.everforest_enable_italic = true
 vim.g.everforest_background = "hard"
-vim.cmd.colorscheme('everforest')
+vim.cmd.colorscheme('kanagawa-wave')
