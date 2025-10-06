@@ -4,6 +4,7 @@ vim.pack.add({
 })
 
 local lualine = require('lualine')
+local kanagawa = require("lualine.themes.kanagawa")
 lualine.setup({
   sections = {
     lualine_a = { "mode", "filename" },
@@ -13,4 +14,8 @@ lualine.setup({
     lualine_y = { "location", },
     lualine_z = { "encoding", "filetype" },
   },
+
+  options = {
+    theme = kanagawa
+  }
 })

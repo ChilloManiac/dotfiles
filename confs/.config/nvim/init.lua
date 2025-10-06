@@ -21,5 +21,6 @@ require("plugins.test")
 require("plugins.cmp")
 require("plugins.lsp")
 require("language-plugins.scala")
+require("language-plugins.go")
 
 require("scripts.colors")

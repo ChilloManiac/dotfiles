@@ -4,12 +4,12 @@ vim.pack.add({
 
 local lint = require("lint")
 lint.linters_by_ft = {
-  markdown = { "markdownlint" },
-  python = { "flake8" },
+  markdown = {}, -- { "markdownlint" },
+  python = {},   -- { "flake8" },
   lua = { "luacheck" },
   typescript = {},
   javascript = {},
-  go = { "revive" }
+  go = {}, -- { "revive" }
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {

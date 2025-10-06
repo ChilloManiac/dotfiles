@@ -4,7 +4,11 @@ vim.pack.add({
   "https://github.com/folke/lazydev.nvim"
 })
 
-require("mason").setup({})
+require("mason").setup({
+  ui = {
+    width = 0.5
+  }
+})
 require("lazydev").setup({})
 
 vim.lsp.config('*', {
@@ -14,24 +18,24 @@ vim.lsp.inline_completion.enable()
 
 
 local default_setup_lsps = {
-  "bashls",
-  "biome",
-  "cssls",
+  -- "bashls",
+  -- "biome",
+  -- "cssls",
   "dockerls",
-  "elixirls",
+  -- "elixirls",
   "gopls",
-  "html",
-  "jsonls",
+  -- "html",
+  -- "jsonls",
   "lua_ls",
   "marksman",
-  "powershell_es",
-  "pyright",
-  "sqlls",
-  "terraformls",
-  "tflint",
-  "vimls",
-  "vtsls",
-  "yamlls",
+  -- "powershell_es",
+  -- "pyright",
+  -- "sqlls",
+  -- "terraformls",
+  -- "tflint",
+  -- "vimls",
+  -- "vtsls",
+  -- "yamlls",
 }
 
 for _, server in ipairs(default_setup_lsps) do
