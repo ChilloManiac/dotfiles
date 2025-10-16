@@ -8,7 +8,7 @@ size = 15
 
 
 [window]
-opacity = 0.9
+opacity = 0.90
 option_as_alt = "Both"
 #decorations = "None"
 

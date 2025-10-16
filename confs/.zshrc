@@ -1,10 +1,10 @@
 # Path to your Oh My Zsh installation.
-# export ZSH="$HOME/.oh-my-zsh"
-export PATH="/opt/homebrew/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.local/share/bob/nvim-bin:$HOME/.yarn/bin:$HOME/.local/share/mise/shims:$HOME/scripts:$PATH"
+export ZSH="$HOME/.oh-my-zsh"
+export PATH="/opt/homebrew/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.local/share/bob/nvim-bin:$HOME/.yarn/bin:$HOME/.local/share/mise/shims:$HOME/scripts:$HOME/.local/share/nvim/mason/bin:$PATH"
 
 # ZSH settings
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 COMPLETION_WAITING_DOTS="false"
 HIST_STAMPS="dd-mm-yyyy"
 zstyle ':completion:*:*:make:*' tag-order 'targets'
@@ -13,24 +13,21 @@ zstyle ':completion:*:*:make:*' call-command true
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# plugins=(
-#   gh
-#   git
-#   fzf
-#   docker
-#   rust
-#   terraform
-#   mise
-#   kubectl
-#   zsh-syntax-highlighting # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# )
+plugins=(
+  git
+  brew
+  docker
+  golang
+  kubectl
+  zsh-syntax-highlighting # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+)
 
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # Shell
 # =================================
-# bindkey -v # vi mode
+bindkey '^R' history-incremental-search-backward
 autoload bashcompinit
 bashcompinit
 autoload -Uz compinit

@@ -3,6 +3,7 @@ vim.g.loaded_netrwPlugin = 1
 
 require("config.options")
 require("config.keymaps")
+
 require("plugins.mini")
 require("plugins.neo-tree")
 require("plugins.colorscheme")
@@ -20,7 +21,8 @@ require("plugins.misc")
 require("plugins.test")
 require("plugins.cmp")
 require("plugins.lsp")
-require("language-plugins.scala")
+
 require("language-plugins.go")
+require("language-plugins.scala")
 
 require("scripts.colors")

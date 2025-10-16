@@ -40,12 +40,12 @@ neotest.setup({
     enabled = false, -- disabled for jest
   },
   adapters = {
-    require("neotest-jest")({
-      jestCommand = "npm test --ignore-scripts --",
-      -- jest_test_discovery = false,
-      cwd = function()
-        return vim.fn.getcwd()
-      end,
-    }),
+    -- require("neotest-jest")({
+    --   jestCommand = "npm test --ignore-scripts --",
+    --   -- jest_test_discovery = false,
+    --   cwd = function()
+    --     return vim.fn.getcwd()
+    --   end,
+    -- }),
   },
 })

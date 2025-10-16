@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "LuaSnip": [],
+    "cyberdream.nvim": [],
+    "dracula.nvim": [],
+    "everforest": [],
+    "kanagawa.nvim": [],
+    "lush.nvim": [],
+    "melange-nvim": [],
+    "mini.nvim": [],
+    "neo-tree.nvim": {
+      "version": "'v3.x'"
+    },
+    "neovim": [],
+    "nightfox.nvim": [],
+    "nui.nvim": [],
+    "nvim-treesitter": {
+      "version": "'master'"
+    },
+    "nvim-treesitter-context": [],
+    "nvim-web-devicons": [],
+    "oceanic-next": [],
+    "plenary.nvim": [],
+    "tokyonight.nvim": [],
+    "treewalker.nvim": [],
+    "zenbones.nvim": []
+  }
+}

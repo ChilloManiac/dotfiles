@@ -4,8 +4,14 @@ vim.pack.add({
 })
 
 require("diffview").setup()
-require("gitsigns").setup()
 
 vim.keymap.set("n", "<leader>dd", "<cmd>DiffviewOpen<CR>", { desc = "Diffview Open" })
 vim.keymap.set("n", "<leader>dm", "<cmd>DiffviewOpen main<CR>", { desc = "Diffview Open main" })
 vim.keymap.set("n", "<leader>dc", "<cmd>DiffviewClose<CR>", { desc = "Diffview Close" })
+
+
+local gitsigns = require("gitsigns")
+gitsigns.setup()
+
+vim.keymap.set("n", "<leader>gb", gitsigns.blame, { desc = "Git blame" })
+vim.keymap.set("n", "<leader>gbl", gitsigns.blame_line, { desc = "Git blame line" })

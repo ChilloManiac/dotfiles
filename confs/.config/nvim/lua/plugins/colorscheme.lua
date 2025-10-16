@@ -15,8 +15,22 @@ vim.pack.add({
 vim.g.everforest_enable_italic = true
 vim.g.everforest_background = "hard"
 
-require("kanagawa").setup({
-  transparent = true
+local kanagawa = require("kanagawa")
+kanagawa.load()
+local kana_colors = require("kanagawa.colors").setup()
+kanagawa.setup({
+  compile = true,
+  transparent = true,
+  colors = {
+    theme = {
+      all = {
+        ui = {
+          bg_gutter = "none",
+          bg_visual = kana_colors.palette.waveAqua1
+        }
+      }
+    }
+  }
 })
 
 vim.cmd.colorscheme('kanagawa-wave')

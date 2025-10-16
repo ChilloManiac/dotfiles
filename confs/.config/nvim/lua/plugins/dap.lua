@@ -44,54 +44,54 @@ vim.api.nvim_create_autocmd("FileType", {
 dap.defaults.fallback.switchbuf = 'useopen,vsplit'
 
 -- Adapters
-dap.adapters["pwa-node"] = {
-  type = "server",
-  host = "localhost",
-  port = "${port}",
-  executable = {
-    command = "js-debug-adapter",
-    args = { "${port}" },
-  }
-}
+-- dap.adapters["pwa-node"] = {
+--   type = "server",
+--   host = "localhost",
+--   port = "${port}",
+--   executable = {
+--     command = "js-debug-adapter",
+--     args = { "${port}" },
+--   }
+-- }
 
 -- js/ts config
-for _, language in ipairs({ 'typescript', 'javascript' }) do
-  dap.configurations[language] = {
-    {
-      type = "pwa-node",
-      request = "launch",
-      name = "Debug Jest Test file",
-      runtimeExecutable = "node",
-      runtimeArgs = {
-        "./node_modules/jest/bin/jest.js",
-        "--runInBand",
-        "${file}",
-      },
-      rootPath = "${workspaceFolder}",
-      cwd = "${workspaceFolder}",
-      console = "integratedTerminal",
-      internalConsoleOptions = "neverOpen",
-    },
-    {
-      type = "pwa-node",
-      request = "launch",
-      name = "Debug Jest Tests",
-      runtimeExecutable = "node",
-      runtimeArgs = {
-        "./node_modules/jest/bin/jest.js",
-        "--runInBand",
-      },
-      rootPath = "${workspaceFolder}",
-      cwd = "${workspaceFolder}",
-      console = "integratedTerminal",
-      internalConsoleOptions = "neverOpen",
-    },
-    {
-      type = "pwa-node",
-      request = "launch",
-      name = "Launch file",
-      program = "${file}",
-      cwd = "${workspaceFolder}",
-    },
-  }
-end
+-- for _, language in ipairs({ 'typescript', 'javascript' }) do
+--   dap.configurations[language] = {
+--     {
+--       type = "pwa-node",
+--       request = "launch",
+--       name = "Debug Jest Test file",
+--       runtimeExecutable = "node",
+--       runtimeArgs = {
+--         "./node_modules/jest/bin/jest.js",
+--         "--runInBand",
+--         "${file}",
+--       },
+--       rootPath = "${workspaceFolder}",
+--       cwd = "${workspaceFolder}",
+--       console = "integratedTerminal",
+--       internalConsoleOptions = "neverOpen",
+--     },
+--     {
+--       type = "pwa-node",
+--       request = "launch",
+--       name = "Debug Jest Tests",
+--       runtimeExecutable = "node",
+--       runtimeArgs = {
+--         "./node_modules/jest/bin/jest.js",
+--         "--runInBand",
+--       },
+--       rootPath = "${workspaceFolder}",
+--       cwd = "${workspaceFolder}",
+--       console = "integratedTerminal",
+--       internalConsoleOptions = "neverOpen",
+--     },
+--     {
+--       type = "pwa-node",
+--       request = "launch",
+--       name = "Launch file",
+--       program = "${file}",
+--       cwd = "${workspaceFolder}",
+--     },
+--   }
+-- end

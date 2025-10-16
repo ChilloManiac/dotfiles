@@ -17,13 +17,16 @@ require("neo-tree").setup({
         ["/"] = "noop",
         ["G"] = function(state)
           local node = state.tree:get_node()
+          local path = nil
           if node.type == "directory" then
-            vim.cmd("Telescope live_grep cwd=" .. node.path)
+            path = node.path
           elseif node.type == "file" then
-            local path = node:get_parent_id();
-            vim.cmd("Telescope live_grep cwd=" .. path)
+            path = node:get_parent_id();
           else
             vim.notify("Unsupported type " .. node.type)
+          end
+          if path ~= nil then
+            _G.MiniPick.builtin.grep_live({}, { source = { cwd = path } })
           end
         end
       }
