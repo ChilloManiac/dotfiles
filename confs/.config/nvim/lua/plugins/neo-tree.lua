@@ -7,6 +7,12 @@ vim.pack.add({
 
 vim.keymap.set("n", "-", "<cmd>Neotree toggle current reveal<CR>", { desc = "Neotree" })
 require("neo-tree").setup({
+  nesting_rules = {
+    ["go"] = {
+      pattern = "(.*)%.go$",
+      files = { "%1_dependencies.go", "%1_dependencies_mock.go", "%1_mock.go" },
+    }
+  },
   filesystem = {
     filtered_items = {
       hide_dotfiles = false

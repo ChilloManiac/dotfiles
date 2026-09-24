@@ -1,12 +1,12 @@
+vim.opt.spell = true
 vim.opt.expandtab = true
 vim.opt.timeout = true
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 1500
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.signcolumn = "yes"
 vim.opt.relativenumber = true
 vim.opt.number = true
-vim.opt.spell = false
 vim.opt.termguicolors = true
 vim.opt.title = true
 vim.opt.ignorecase = true
@@ -29,8 +29,21 @@ vim.opt.foldlevelstart = 4
 vim.opt.foldmethod = "expr"
 vim.opt.foldnestmax = 4
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-vim.opt.winwidth = 120
-vim.opt.winminwidth = 30
+local function set_win_sizes()
+  if vim.o.columns < 200 then
+    vim.opt.winwidth = 80
+    vim.opt.winminwidth = 20
+  else
+    vim.opt.winwidth = 120
+    vim.opt.winminwidth = 30
+  end
+end
+
+set_win_sizes()
+
+vim.api.nvim_create_autocmd("VimResized", {
+  callback = set_win_sizes,
+})
 vim.opt.background = "dark"
 vim.opt.winborder = "none"
 vim.diagnostic.config({

@@ -9,8 +9,9 @@ lint.linters_by_ft = {
   lua = { "luacheck" },
   typescript = {},
   javascript = {},
-  go = {}, -- { "revive" }
+  go = { 'golangcilint' }, -- { "revive" }
 }
+
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()

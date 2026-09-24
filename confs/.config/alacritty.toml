@@ -6,15 +6,16 @@ bold_italic.family = "JetBrainsMono Nerd Font"
 
 size = 15
 
+[keyboard]
+
+# Shift+Return sends ESC+Enter (same as Option+Enter) to work in tmux (Claude)
+bindings = [{ key = "Return", mods = "Shift", chars = "\u001b\r" }]
+
 
 [window]
-opacity = 0.90
+opacity = 0.95
 option_as_alt = "Both"
 #decorations = "None"
-
-
-
-
 
 # Colors (Kanagawa Wave)
 # Source https//github.com/rebelot/kanagawa.nvim

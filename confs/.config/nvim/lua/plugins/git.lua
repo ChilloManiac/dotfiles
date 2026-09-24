@@ -6,7 +6,7 @@ vim.pack.add({
 require("diffview").setup()
 
 vim.keymap.set("n", "<leader>dd", "<cmd>DiffviewOpen<CR>", { desc = "Diffview Open" })
-vim.keymap.set("n", "<leader>dm", "<cmd>DiffviewOpen main<CR>", { desc = "Diffview Open main" })
+vim.keymap.set("n", "<leader>dm", "<cmd>DiffviewOpen origin/main<CR>", { desc = "Diffview Open main" })
 vim.keymap.set("n", "<leader>dc", "<cmd>DiffviewClose<CR>", { desc = "Diffview Close" })
 
 
@@ -15,3 +15,5 @@ gitsigns.setup()
 
 vim.keymap.set("n", "<leader>gb", gitsigns.blame, { desc = "Git blame" })
 vim.keymap.set("n", "<leader>gbl", gitsigns.blame_line, { desc = "Git blame line" })
+vim.keymap.set("n", "]g", function() gitsigns.nav_hunk("next") end, { desc = "Git next hunk" })
+vim.keymap.set("n", "[g", function() gitsigns.nav_hunk("prev") end, { desc = "Git prev hunk" })

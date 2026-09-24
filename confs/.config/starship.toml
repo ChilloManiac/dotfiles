@@ -20,6 +20,18 @@ $line_break$character"""
 
 palette = 'gruvbox_dark'
 
+[palettes.kanagawa_wave]
+color_fg0 = '#16161D'
+color_bg1 = '#54546D'
+color_bg3 = '#363646'
+color_blue = '#7e9cd8'
+color_aqua = '#7aa89f'
+color_green = '#98bb6c'
+color_orange = '#ffa066'
+color_purple = '#957fb8'
+color_red = '#e82424'
+color_yellow = '#dca561'
+
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'
 color_bg1 = '#3c3836'

@@ -13,13 +13,17 @@ local cmp = require("cmp")
 local lspkind = require("lspkind")
 
 cmp.setup({
+  preselect = cmp.PreselectMode.None,
+  completion = {
+    completeopt = "menu,menuone,noinsert",
+  },
   sources = {
-    { name = "luasnip",              max_item_count = 5 },
     { name = "nvim_lsp" },
+    -- { name = "luasnip",              max_item_count = 5 },
     { name = "path" },
     { name = "buffer",               keyword_length = 4 },
     { name = "vim-dadbod-completion" },
-    { name = "neorg" },
+    -- { name = "neorg" },
     { name = "lazydev",              group_index = 0 }
   },
   mapping = cmp.mapping.preset.insert({

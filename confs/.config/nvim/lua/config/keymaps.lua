@@ -14,9 +14,18 @@ vim.keymap.set("n", "z0", ":set foldlevel=0<CR>", { noremap = true, desc = "Set 
 vim.keymap.set("n", "z1", ":set foldlevel=1<CR>", { noremap = true, desc = "Set fold level to 1" })
 vim.keymap.set("n", "z2", ":set foldlevel=2<CR>", { noremap = true, desc = "Set fold level to 2" })
 vim.keymap.set("n", "<leader>sf", ":source %<CR>", { noremap = true, desc = "Source current file" })
+vim.keymap.set("n", "<leader>sl", "<CMD>.lua<CR>", { noremap = true, desc = "Execute current line" })
 
 
 vim.keymap.set("i", "jj", "<esc>", { noremap = true, desc = "Escape insert mode" })
+
+vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { noremap = true })
+vim.keymap.set("t", "jj", "<C-\\><C-n>", { noremap = true })
+vim.keymap.set("t", "<C-w>h", "<C-\\><C-n><C-w>h", { noremap = true, desc = "Move to left window" })
+vim.keymap.set("t", "<C-w>j", "<C-\\><C-n><C-w>j", { noremap = true, desc = "Move to below window" })
+vim.keymap.set("t", "<C-w>k", "<C-\\><C-n><C-w>k", { noremap = true, desc = "Move to above window" })
+vim.keymap.set("t", "<C-w>l", "<C-\\><C-n><C-w>l", { noremap = true, desc = "Move to right window" })
+
 vim.keymap.set("n", "<leader>q", ":q<CR>", { noremap = true, desc = "Quit" })
 
 vim.keymap.set("n", "grd", "<cmd>lua vim.lsp.buf.definition()<cr>", { remap = false })
@@ -27,10 +36,11 @@ vim.keymap.set("n", "<leader>di",
   function() vim.diagnostic.setqflist({ severity = { min = vim.diagnostic.severity.WARN } }) end,
   { desc = "Populate qf with diags" })
 
+pcall(function() vim.keymap.del("i", "<Tab>") end) -- Annoying with LuaSnip and jump list
 
 
 -- Permalink
-vim.keymap.set('v', '<leader>pl', function()
+vim.keymap.set('v', '<leader>ll', function()
   local start_line = vim.fn.line('v')
   local end_line = vim.fn.line('.')
 
@@ -52,12 +62,17 @@ vim.keymap.set('v', '<leader>pl', function()
 
   local permalink = string.format('%s#%d-%d', rel_path, start_line, end_line)
 
+  local org_manager_url = os.getenv("ORG_MAN_URL");
+  if org_manager_url then
+    permalink = string.format('%s/browse/%s', org_manager_url, permalink)
+  end
+
   vim.fn.setreg('+', permalink)
   vim.notify('Permalink copied: ' .. permalink)
 end, { desc = 'Copy permalink to selection' })
 
 -- Single line version
-vim.keymap.set('n', '<leader>pl', function()
+vim.keymap.set('n', '<leader>ll', function()
   local line = vim.fn.line('.')
   local filepath = vim.fn.expand('%:p')
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
@@ -69,6 +84,11 @@ vim.keymap.set('n', '<leader>pl', function()
 
   local rel_path = filepath:sub(#git_root + 2)
   local permalink = string.format('%s#%d', rel_path, line)
+
+  local org_manager_url = os.getenv("ORG_MAN_URL");
+  if org_manager_url then
+    permalink = string.format('%s/browse/%s', org_manager_url, permalink)
+  end
 
   vim.fn.setreg('+', permalink)
   vim.notify('Permalink copied: ' .. permalink)

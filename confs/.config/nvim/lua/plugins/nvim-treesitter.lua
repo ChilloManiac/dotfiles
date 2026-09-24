@@ -1,45 +1,33 @@
 vim.pack.add({
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
-    version = "master",
+    version = "main",
   },
   "https://github.com/aaronik/treewalker.nvim",
   "https://github.com/nvim-treesitter/nvim-treesitter-context",
 })
 
-require("nvim-treesitter.configs").setup({
-  auto_install = true,
-  ensure_installed = {},
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "+",
-      scope_incremental = "gnn",
-      node_decremental = "-",
-    }
-  }
-})
 
 vim.keymap.set("n", "+", "v", { noremap = true, silent = true })
 
-vim.api.nvim_create_autocmd('PackChanged', {
-  desc = 'Handle nvim-treesitter updates',
-  group = vim.api.nvim_create_augroup('nvim-treesitter-pack-changed-update-handler', { clear = true }),
-  callback = function(event)
-    if event.data.kind == 'update' and event.data.spec.name == 'nvim-treesitter' then
-      vim.notify('nvim-treesitter updated, running TSUpdate...', vim.log.levels.INFO)
-      ---@diagnostic disable-next-line: param-type-mismatch
-      local ok = pcall(vim.cmd, 'TSUpdate')
-      if ok then
-        vim.notify('TSUpdate completed successfully!', vim.log.levels.INFO)
-      else
-        vim.notify('TSUpdate command not available yet, skipping', vim.log.levels.WARN)
-      end
-    end
+local treesitter = require("nvim-treesitter")
+
+local langs = { "json", "lua", "go", "markdown", "html", "latex", "yaml", "javascript" }
+local additional = { "comment", "markdown_inline", "diff" }
+
+treesitter.install(langs)
+treesitter.install(additional)
+treesitter.update()
+
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup("treesitter-setup", {}),
+  pattern = langs,
+  callback = function()
+    -- syntax highlighting, provided by Neovim
+    vim.treesitter.start()
+    -- indentation, provided by nvim-treesitter
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
 
@@ -63,4 +51,6 @@ vim.keymap.set('n', '<C-S-l>', '<cmd>Treewalker SwapRight<CR>zz',
 vim.keymap.set('n', '<C-S-h>', '<cmd>Treewalker SwapLeft<CR>zz',
   { silent = true, desc = "Swap left in Treewalker" })
 
-require("treesitter-context").setup({})
+require("treesitter-context").setup({
+  max_lines = 4
+})

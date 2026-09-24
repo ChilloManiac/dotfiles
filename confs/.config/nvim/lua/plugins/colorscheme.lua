@@ -19,7 +19,7 @@ local kanagawa = require("kanagawa")
 kanagawa.load()
 local kana_colors = require("kanagawa.colors").setup()
 kanagawa.setup({
-  compile = true,
+  compile = false,
   transparent = true,
   colors = {
     theme = {
@@ -27,7 +27,7 @@ kanagawa.setup({
         ui = {
           bg_gutter = "none",
           bg_visual = kana_colors.palette.waveAqua1
-        }
+        },
       }
     }
   }
